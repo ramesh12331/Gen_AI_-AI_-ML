@@ -317,3 +317,11 @@ for i in range(rows,0,-1):
     for j in range(i):
         print("*", end=" ")
     print()
+
+# ==========================================================
+# String Example
+# ==========================================================
+a = 'python programming'
+
+for ch in range(0, len(s), 2):
+    print(a[ch], end=" ")

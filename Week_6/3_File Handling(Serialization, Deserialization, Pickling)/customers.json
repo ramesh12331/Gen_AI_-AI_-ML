@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Ramesh",
+        "age": 30,
+        "balance": 10000000000.0
+    },
+    {
+        "name": "Rakesh",
+        "age": 30,
+        "balance": 10000.0
+    },
+    {
+        "name": "ram",
+        "age": 30,
+        "balance": 100000000.0
+    },
+    {
+        "name": "srinu",
+        "age": 25,
+        "balance": 10000000000.0
+    },
+    {
+        "name": "madhu",
+        "age": 33,
+        "balance": 100000.0
+    },
+    {
+        "name": "abhi",
+        "age": 5,
+        "balance": 1000.0
+    },
+    {
+        "name": "abhi",
+        "age": 5,
+        "balance": 2000.0
+    },
+    {
+        "name": "santhosh",
+        "age": 15,
+        "balance": 50000.0
+    },
+    {
+        "name": "manoj",
+        "age": 12,
+        "balance": 10000.0
+    },
+    {
+        "name": "Arun",
+        "age": 26,
+        "balance": 100000000000.0
+    }
+]

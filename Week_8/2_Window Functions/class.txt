@@ -1,0 +1,753 @@
+==========================================================
+SQL WINDOW FUNCTIONS
+==========================================================
+
+Window Functions are used to perform calculations
+across a set of rows without combining the rows
+into a single row.
+
+They use:
+
+OVER()
+
+Syntax:
+
+function_name()
+OVER
+(
+    PARTITION BY column_name
+    ORDER BY column_name
+);
+
+
+==========================================================
+TYPES OF WINDOW FUNCTIONS
+==========================================================
+
+At a high level, Window Functions can be divided
+into 3 types:
+
+1. Aggregate Functions
+2. Ranking Functions
+3. Value Analytic Functions
+
+
+==========================================================
+1. AGGREGATE WINDOW FUNCTIONS
+==========================================================
+
+Aggregate Window Functions:
+
+SUM()
+AVG()
+COUNT()
+MIN()
+MAX()
+
+
+Example:
+
+SELECT *,
+       SUM(price) OVER
+       (
+           PARTITION BY product_category
+       ) AS product_wise_revenue
+FROM product;
+
+
+Here:
+
+SUM(price)
+    ↓
+Calculates total price
+
+PARTITION BY product_category
+    ↓
+Creates a separate calculation
+for each product category.
+
+
+==========================================================
+SUM() OVER()
+==========================================================
+
+Used to calculate the total value
+within each group.
+
+Example:
+
+SELECT *,
+       SUM(salary) OVER
+       (
+           PARTITION BY dept_name
+       ) AS total_salary
+FROM employee;
+
+
+Example Result:
+
+emp_name    dept_name    salary    total_salary
+---------   ----------   -------   ------------
+Ramesh      Admin        5000      13000
+Ravi        Admin        4000      13000
+Suresh      Admin        4000      13000
+Rajesh      Finance      5000      16000
+Satya       Finance      6500      16000
+Tejaswi     Finance      4500      16000
+
+
+IMPORTANT:
+
+GROUP BY
+    ↓
+Combines rows into one row per group.
+
+WINDOW FUNCTION
+    ↓
+Keeps all original rows and adds
+the calculated value.
+
+
+==========================================================
+2. RANKING WINDOW FUNCTIONS
+==========================================================
+
+Ranking Functions:
+
+ROW_NUMBER()
+RANK()
+DENSE_RANK()
+PERCENT_RANK()
+
+
+==========================================================
+ROW_NUMBER()
+==========================================================
+
+ROW_NUMBER() gives a unique sequential number
+to each row.
+
+Syntax:
+
+ROW_NUMBER()
+OVER
+(
+    PARTITION BY column_name
+    ORDER BY column_name
+);
+
+
+Example:
+
+SELECT *,
+       ROW_NUMBER() OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS row_number
+FROM employee;
+
+
+Example:
+
+dept_name    emp_name    salary    row_number
+---------    --------    ------    ----------
+Admin        Monica      5000      1
+Admin        Mohan       4000      2
+Admin        Maryam      4000      3
+Finance      Satya       6500      1
+Finance      Tejaswi     5500      2
+Finance      Rajesh      5000      3
+
+
+==========================================================
+RANK()
+==========================================================
+
+RANK() assigns a rank based on the ORDER BY column.
+
+If two rows have the same value,
+they get the same rank.
+
+The next rank is skipped.
+
+
+Example:
+
+SELECT *,
+       RANK() OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS salary_rank
+FROM employee;
+
+
+Example:
+
+salary
+
+7000
+7000
+6000
+5000
+
+
+RANK:
+
+7000  -> 1
+7000  -> 1
+6000  -> 3
+5000  -> 4
+
+
+Notice:
+
+Rank 2 is skipped.
+
+
+==========================================================
+DENSE_RANK()
+==========================================================
+
+DENSE_RANK() is similar to RANK().
+
+But it does NOT skip the next rank.
+
+
+Example:
+
+salary
+
+7000
+7000
+6000
+5000
+
+
+DENSE_RANK:
+
+7000  -> 1
+7000  -> 1
+6000  -> 2
+5000  -> 3
+
+
+Difference:
+
+RANK():
+
+1
+1
+3
+4
+
+
+DENSE_RANK():
+
+1
+1
+2
+3
+
+
+==========================================================
+ROW_NUMBER() vs RANK() vs DENSE_RANK()
+==========================================================
+
+ROW_NUMBER()
+
+1
+2
+3
+4
+
+Every row gets a different number.
+
+
+RANK()
+
+1
+1
+3
+4
+
+Same values get the same rank
+and ranks can be skipped.
+
+
+DENSE_RANK()
+
+1
+1
+2
+3
+
+Same values get the same rank
+but ranks are NOT skipped.
+
+
+==========================================================
+3. VALUE ANALYTIC FUNCTIONS
+==========================================================
+
+Value Analytic Functions:
+
+LEAD()
+LAG()
+FIRST_VALUE()
+LAST_VALUE()
+
+
+==========================================================
+LAG()
+==========================================================
+
+LAG() is used to get the value
+from the previous row.
+
+
+Syntax:
+
+LAG(column_name)
+OVER
+(
+    PARTITION BY column_name
+    ORDER BY column_name
+);
+
+
+Example:
+
+SELECT *,
+       LAG(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS previous_salary
+FROM employee;
+
+
+Example:
+
+emp_name    salary    previous_salary
+---------   ------    ---------------
+Ramesh      7000      NULL
+Ravi        6000      7000
+Suresh      5000      6000
+Kiran       4000      5000
+
+
+First row has:
+
+previous_salary = NULL
+
+because there is no previous row.
+
+
+==========================================================
+LEAD()
+==========================================================
+
+LEAD() is used to get the value
+from the next row.
+
+
+Example:
+
+SELECT *,
+       LEAD(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS next_salary
+FROM employee;
+
+
+Example:
+
+emp_name    salary    next_salary
+---------   ------    -----------
+Ramesh      7000      6000
+Ravi        6000      5000
+Suresh      5000      4000
+Kiran       4000      NULL
+
+
+Last row has:
+
+next_salary = NULL
+
+because there is no next row.
+
+
+==========================================================
+LAG() vs LEAD()
+==========================================================
+
+LAG()
+    ↓
+Previous row
+
+
+LEAD()
+    ↓
+Next row
+
+
+Example:
+
+Current Row
+    |
+    +---- LAG()  -> Previous Row
+    |
+    +---- LEAD() -> Next Row
+
+
+==========================================================
+FIRST_VALUE()
+==========================================================
+
+FIRST_VALUE() returns the first value
+from the window.
+
+
+Example:
+
+SELECT *,
+       FIRST_VALUE(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS highest_salary
+FROM employee;
+
+
+If salaries are:
+
+7000
+6000
+5000
+4000
+
+
+FIRST_VALUE():
+
+7000
+7000
+7000
+7000
+
+
+==========================================================
+LAST_VALUE()
+==========================================================
+
+LAST_VALUE() returns the last value
+from the window.
+
+
+Example:
+
+SELECT *,
+       LAST_VALUE(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary
+       ) AS lowest_salary
+FROM employee;
+
+
+It can be used to find the last value
+within the specified window.
+
+
+==========================================================
+COUNT() WINDOW FUNCTION
+==========================================================
+
+COUNT() can also be used as a Window Function.
+
+Example:
+
+SELECT *,
+       COUNT(*) OVER
+       (
+           PARTITION BY dept_name
+       ) AS employee_count
+FROM employee;
+
+
+This gives the number of employees
+in each department.
+
+
+==========================================================
+COUNT(*) vs COUNT(1) vs COUNT(column)
+==========================================================
+
+COUNT(*)
+    ↓
+Counts all rows.
+
+
+COUNT(1)
+    ↓
+Counts rows.
+
+
+COUNT(column_name)
+    ↓
+Counts only NON-NULL values
+in that column.
+
+
+Example:
+
+COUNT(*)
+
+
+COUNT(1)
+
+
+COUNT(-1)
+
+
+COUNT(emp_id)
+
+
+IMPORTANT:
+
+COUNT(column_name) does NOT count NULL values.
+
+
+==========================================================
+IMPORTANT WINDOW FUNCTION SYNTAX
+==========================================================
+
+SELECT
+    column_name,
+
+    function_name(column_name)
+    OVER
+    (
+        PARTITION BY column_name
+        ORDER BY column_name
+    )
+
+FROM table_name;
+
+
+==========================================================
+WINDOW FUNCTION EXAMPLES
+==========================================================
+
+-- Total salary of each department
+
+SELECT *,
+       SUM(salary) OVER
+       (
+           PARTITION BY dept_name
+       ) AS total_salary
+FROM employee;
+
+
+-- Average salary of each department
+
+SELECT *,
+       AVG(salary) OVER
+       (
+           PARTITION BY dept_name
+       ) AS average_salary
+FROM employee;
+
+
+-- Number of employees in each department
+
+SELECT *,
+       COUNT(*) OVER
+       (
+           PARTITION BY dept_name
+       ) AS employee_count
+FROM employee;
+
+
+-- Rank employees by salary
+
+SELECT *,
+       RANK() OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS salary_rank
+FROM employee;
+
+
+-- Previous employee salary
+
+SELECT *,
+       LAG(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS previous_salary
+FROM employee;
+
+
+-- Next employee salary
+
+SELECT *,
+       LEAD(salary) OVER
+       (
+           PARTITION BY dept_name
+           ORDER BY salary DESC
+       ) AS next_salary
+FROM employee;
+
+
+==========================================================
+IMPORTANT INTERVIEW POINT
+==========================================================
+
+GROUP BY
+    ↓
+Reduces multiple rows into fewer rows.
+
+
+WINDOW FUNCTION
+    ↓
+Does NOT reduce the number of rows.
+
+
+Example:
+
+GROUP BY department
+
+Admin       13000
+Finance     16000
+
+
+Window Function:
+
+Ramesh      Admin      5000      13000
+Ravi        Admin      4000      13000
+Suresh      Admin      4000      13000
+Rajesh      Finance    5000      16000
+Satya       Finance    6500      16000
+
+
+==========================================================
+TOP 3 EMPLOYEES FROM EACH DEPARTMENT
+==========================================================
+
+SELECT *
+FROM
+(
+    SELECT *,
+           ROW_NUMBER() OVER
+           (
+               PARTITION BY dept_name
+               ORDER BY salary DESC
+           ) AS rn
+    FROM employee
+) AS ranked
+WHERE rn <= 3;
+
+
+==========================================================
+FIRST 2 EMPLOYEES TO JOIN FROM EACH DEPARTMENT
+==========================================================
+
+SELECT *
+FROM
+(
+    SELECT *,
+           ROW_NUMBER() OVER
+           (
+               PARTITION BY dept_name
+               ORDER BY joining_date
+           ) AS rn
+    FROM employee
+) AS ranked
+WHERE rn <= 2;
+
+
+==========================================================
+TOP 3 EMPLOYEES EARNING THE HIGHEST SALARY
+IN EACH DEPARTMENT
+==========================================================
+
+SELECT *
+FROM
+(
+    SELECT *,
+           RANK() OVER
+           (
+               PARTITION BY dept_name
+               ORDER BY salary DESC
+           ) AS rnk
+    FROM employee
+) AS ranked
+WHERE rnk <= 3;
+
+
+==========================================================
+SUMMARY
+==========================================================
+
+AGGREGATE:
+
+SUM()
+AVG()
+COUNT()
+MIN()
+MAX()
+
+
+RANKING:
+
+ROW_NUMBER()
+RANK()
+DENSE_RANK()
+PERCENT_RANK()
+
+
+VALUE ANALYTIC:
+
+LAG()
+LEAD()
+FIRST_VALUE()
+LAST_VALUE()
+
+
+MOST IMPORTANT:
+
+ROW_NUMBER()
+    -> Unique row number
+
+RANK()
+    -> Same rank + skips numbers
+
+DENSE_RANK()
+    -> Same rank + does not skip numbers
+
+LAG()
+    -> Previous row
+
+LEAD()
+    -> Next row
+
+FIRST_VALUE()
+    -> First value
+
+LAST_VALUE()
+    -> Last value
+
+SUM() OVER()
+    -> Total without grouping rows
+
+COUNT() OVER()
+    -> Count without grouping rows
+
+
+==========================================================

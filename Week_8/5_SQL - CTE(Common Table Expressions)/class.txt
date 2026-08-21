@@ -1,0 +1,415 @@
+--==========================================================
+-- 20-08-2026 SQL - CTE (COMMON TABLE EXPRESSIONS)
+-- SUMMARY
+--==========================================================
+
+
+--==========================================================
+-- 1. WHAT IS CTE?
+--==========================================================
+
+-- CTE stands for Common Table Expression.
+--
+-- CTE is a temporary result set that we can use
+-- inside a SELECT query.
+--
+-- CTE makes complex queries easier to read and understand.
+
+
+--==========================================================
+-- 2. CTE SYNTAX
+--==========================================================
+
+WITH cte_name AS
+(
+    -- CTE query
+)
+SELECT *
+FROM cte_name;
+
+
+-- TRICK:
+-- WITH → Create temporary result
+-- AS    → Define the query
+-- SELECT → Use the result
+
+
+--==========================================================
+-- 3. SIMPLE CTE EXAMPLE
+--==========================================================
+
+WITH electronics_orders AS
+(
+    SELECT *
+    FROM orders
+    WHERE category = 'Electronics'
+)
+
+SELECT *
+FROM electronics_orders;
+
+
+-- Meaning:
+-- First get Electronics orders.
+-- Then display the CTE result.
+
+
+--==========================================================
+-- 4. CTE + WHERE
+--==========================================================
+
+WITH electronics_orders AS
+(
+    SELECT *
+    FROM orders
+    WHERE category = 'Electronics'
+)
+
+SELECT *
+FROM electronics_orders
+WHERE product = 'Laptop';
+
+
+-- TRICK:
+-- CTE = First filtering
+-- Outer query = Second filtering
+
+
+-- Same result without CTE:
+
+SELECT *
+FROM orders
+WHERE category = 'Electronics'
+  AND product = 'Laptop';
+
+
+--==========================================================
+-- 5. CTE + GROUP BY
+--==========================================================
+
+WITH electronics_orders AS
+(
+    SELECT *
+    FROM orders
+    WHERE category = 'Electronics'
+)
+
+SELECT product,
+       SUM(quantity) AS total_quantity
+FROM electronics_orders
+GROUP BY product;
+
+
+-- Meaning:
+-- 1. Select Electronics orders
+-- 2. Group products
+-- 3. Calculate total quantity
+
+
+--==========================================================
+-- 6. CTE WITH AMOUNT FILTER
+--==========================================================
+
+WITH high_prods AS
+(
+    SELECT *
+    FROM orders
+    WHERE amount > 20000
+)
+
+SELECT *
+FROM high_prods;
+
+
+-- Meaning:
+-- Get orders where amount is greater than 20,000.
+
+
+--==========================================================
+-- 7. CTE + SUM + GROUP BY + WHERE
+--==========================================================
+
+WITH cust_sales AS
+(
+    SELECT customer_id,
+           SUM(amount) AS total_sales
+    FROM orders
+    GROUP BY customer_id
+)
+
+SELECT *
+FROM cust_sales
+WHERE total_sales > 50000.00;
+
+
+-- Meaning:
+-- First calculate total sales for each customer.
+-- Then show customers whose sales > 50,000.
+
+
+-- TRICK:
+-- GROUP BY → Calculate for each group
+-- WHERE outside CTE → Filter calculated result
+
+
+--==========================================================
+-- 8. CTE + EXTRACT()
+--==========================================================
+
+WITH feb_data AS
+(
+    SELECT *
+    FROM orders
+    WHERE EXTRACT(MONTH FROM order_date) = 2
+)
+
+SELECT *
+FROM feb_data;
+
+
+-- Meaning:
+-- EXTRACT(MONTH FROM order_date)
+-- gets the month number.
+--
+-- 2 = February
+
+
+--==========================================================
+-- 9. CTE + JOIN
+--==========================================================
+
+WITH cus_order_details AS
+(
+    SELECT c.customer_name,
+           c.city,
+           c.gender,
+           o.product,
+           o.amount
+    FROM customers c
+    JOIN orders o
+        ON c.customer_id = o.customer_id
+)
+
+SELECT *
+FROM cus_order_details;
+
+
+-- Meaning:
+-- Join customers and orders first.
+-- Store the result in CTE.
+-- Then retrieve the result.
+
+
+-- TRICK:
+-- CTE can contain JOIN.
+
+
+--==========================================================
+-- 10. CTE + JOIN + GROUP BY
+--==========================================================
+
+WITH cust_sales AS
+(
+    SELECT c.customer_name,
+           c.gender,
+           SUM(o.amount * o.quantity) AS total_sales
+    FROM customers c
+    JOIN orders o
+        ON c.customer_id = o.customer_id
+    GROUP BY c.customer_name,
+             c.gender
+)
+
+SELECT *
+FROM cust_sales
+WHERE total_sales > 40000;
+
+
+-- Meaning:
+-- 1. Join customers and orders
+-- 2. Calculate total sales
+-- 3. Group by customer
+-- 4. Filter customers with sales > 40,000
+
+
+--==========================================================
+-- 11. SIMPLE CTE RESULT
+--==========================================================
+
+WITH cust_sales AS
+(
+    SELECT customer_id,
+           SUM(amount) AS total_sales
+    FROM orders
+    GROUP BY customer_id
+)
+
+SELECT customer_id,
+       total_sales
+FROM cust_sales;
+
+
+--==========================================================
+-- 12. MULTIPLE CTEs
+--==========================================================
+
+-- We can create more than one CTE
+-- using commas.
+
+
+WITH cust_sales AS
+(
+    SELECT customer_id,
+           SUM(amount) AS total_sales
+    FROM orders
+    GROUP BY customer_id
+),
+
+cust_rank AS
+(
+    SELECT customer_id,
+           total_sales,
+           RANK() OVER(
+               ORDER BY total_sales DESC
+           ) AS sales_rnk
+    FROM cust_sales
+)
+
+SELECT *
+FROM cust_rank;
+
+
+-- Meaning:
+--
+-- CTE 1:
+-- Calculate customer total sales.
+--
+-- CTE 2:
+-- Rank customers according to sales.
+--
+-- Final query:
+-- Display the ranked result.
+
+
+--==========================================================
+-- CTE FLOW
+--==========================================================
+
+WITH cte1 AS
+(
+    -- Step 1
+),
+
+cte2 AS
+(
+    -- Step 2
+    -- Can use cte1
+)
+
+SELECT *
+FROM cte2;
+
+
+--==========================================================
+-- QUICK REVISION
+--==========================================================
+
+CTE
+---
+CTE = Common Table Expression
+
+Syntax:
+WITH cte_name AS
+(
+    query
+)
+SELECT *
+FROM cte_name;
+
+
+CTE CAN BE USED WITH
+--------------------
+
+WHERE
+GROUP BY
+JOIN
+HAVING
+CASE
+WINDOW FUNCTIONS
+AGGREGATE FUNCTIONS
+
+
+--==========================================================
+-- IMPORTANT TRICKS
+--==========================================================
+
+WITH
+    → Start a CTE
+
+AS
+    → Define CTE query
+
+GROUP BY
+    → Calculate values for groups
+
+JOIN
+    → Combine tables inside CTE
+
+SUM()
+    → Calculate total
+
+RANK()
+    → Rank the result
+
+Multiple CTEs
+    → Separate CTEs using comma
+
+
+--==========================================================
+-- CTE vs SUBQUERY
+--==========================================================
+
+SUBQUERY
+--------
+
+SELECT *
+FROM orders
+WHERE amount > (
+    SELECT AVG(amount)
+    FROM orders
+);
+
+
+CTE
+---
+
+WITH avg_data AS
+(
+    SELECT AVG(amount) AS avg_amount
+    FROM orders
+)
+
+SELECT *
+FROM orders
+WHERE amount > (
+    SELECT avg_amount
+    FROM avg_data
+);
+
+
+-- SIMPLE TRICK:
+--
+-- SUBQUERY
+-- = Query inside query
+--
+-- CTE
+-- = Give a name to the temporary result
+--   and use it in the main query.
+
+
+--==========================================================
+-- ONE-LINE MEMORY TRICK
+--==========================================================
+
+CTE = "FIRST CREATE A TEMPORARY RESULT,
+       THEN USE THAT RESULT IN THE MAIN QUERY."

@@ -1,0 +1,508 @@
+--==========================================================
+-- 19-08-2026 SQL - WINDOW FUNCTIONS AND SUBQUERY
+-- SUMMARY
+--==========================================================
+
+
+--==========================================================
+-- WINDOW FUNCTIONS
+--==========================================================
+
+-- Window Functions allow us to perform calculations
+-- across rows without combining/removing individual rows.
+
+
+--==========================================================
+-- 1. FIRST_VALUE()
+--==========================================================
+
+-- Returns the first value from the window.
+
+SELECT *,
+       FIRST_VALUE(brand) OVER(
+           PARTITION BY product_category
+           ORDER BY price DESC
+       ) AS first_val
+FROM product;
+
+
+-- TRICK:
+-- FIRST_VALUE = FIRST value in the window
+-- ORDER BY price DESC = highest price comes first
+
+
+--==========================================================
+-- 2. LAST_VALUE()
+--==========================================================
+
+-- Returns the last value from the window.
+
+SELECT *,
+       LAST_VALUE(brand) OVER(
+           PARTITION BY product_category
+           ORDER BY price DESC
+       ) AS last_val
+FROM product;
+
+
+-- IMPORTANT:
+-- LAST_VALUE depends on the WINDOW FRAME.
+
+
+-- Current Row Frame:
+
+SELECT *,
+       LAST_VALUE(brand) OVER(
+           PARTITION BY product_category
+           ORDER BY price DESC
+           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS last_val
+FROM product;
+
+
+-- Full Window Frame:
+
+SELECT *,
+       LAST_VALUE(brand) OVER(
+           PARTITION BY product_category
+           ORDER BY price DESC
+           ROWS BETWEEN UNBOUNDED PRECEDING
+                    AND UNBOUNDED FOLLOWING
+       ) AS last_val
+FROM product;
+
+
+-- TRICK:
+-- UNBOUNDED PRECEDING = Start of window
+-- CURRENT ROW          = Current row
+-- UNBOUNDED FOLLOWING  = End of window
+
+
+--==========================================================
+-- 3. NTH_VALUE()
+--==========================================================
+
+-- Returns the Nth value from the window.
+
+SELECT *,
+       NTH_VALUE(product_name, 2) OVER(
+           PARTITION BY product_category
+           ORDER BY price DESC
+           ROWS BETWEEN UNBOUNDED PRECEDING
+                    AND UNBOUNDED FOLLOWING
+       ) AS expensive_product
+FROM product;
+
+
+-- TRICK:
+-- NTH_VALUE(column, 2) = 2nd value
+-- NTH_VALUE(column, 3) = 3rd value
+
+
+--==========================================================
+-- 4. NTILE()
+--==========================================================
+
+-- Divides rows into a specified number of groups/buckets.
+
+SELECT *,
+       NTILE(5) OVER(
+           ORDER BY price DESC
+       ) AS bucket
+FROM product;
+
+
+-- TRICK:
+-- NTILE(3) = 3 groups
+-- NTILE(5) = 5 groups
+-- NTILE(10) = 10 groups
+
+
+--==========================================================
+-- 5. NTILE() + CASE
+--==========================================================
+
+SELECT *,
+       CASE
+           WHEN x.bucketss = 1 THEN 'high products'
+           WHEN x.bucketss = 2 THEN 'moderate'
+           ELSE 'low'
+       END AS status
+FROM
+(
+    SELECT *,
+           NTILE(3) OVER(
+               ORDER BY price DESC
+           ) AS bucketss
+    FROM product
+) x;
+
+
+-- TRICK:
+-- NTILE() creates groups
+-- CASE gives names to those groups
+
+
+--==========================================================
+-- 6. FILTER USING NTILE() + CASE
+--==========================================================
+
+SELECT *
+FROM
+(
+    SELECT *,
+           CASE
+               WHEN x.bucketss = 1 THEN 'high products'
+               WHEN x.bucketss = 2 THEN 'moderate'
+               ELSE 'low'
+           END AS status
+    FROM
+    (
+        SELECT *,
+               NTILE(3) OVER(
+                   ORDER BY price DESC
+               ) AS bucketss
+        FROM product
+    ) x
+) z
+WHERE z.status = 'low';
+
+
+-- TRICK:
+-- Window function first
+-- CASE second
+-- WHERE outside
+
+
+--==========================================================
+-- 7. CUME_DIST()
+--==========================================================
+
+-- CUME_DIST() calculates the cumulative distribution
+-- of rows.
+
+SELECT *,
+       CUME_DIST() OVER(
+           ORDER BY price DESC
+       ) AS cume_distt
+FROM product;
+
+
+-- Percentage:
+
+SELECT *,
+       CUME_DIST() OVER(
+           ORDER BY price DESC
+       ) AS cume_distt,
+
+       ROUND(
+           (
+               CUME_DIST() OVER(
+                   ORDER BY price DESC
+               ) * 100
+           )::numeric,
+           2
+       ) AS cume_dist_percentage
+
+FROM product;
+
+
+-- TRICK:
+-- CUME_DIST = Cumulative Distribution
+-- Multiply by 100 = Percentage
+
+
+--==========================================================
+-- 8. PERCENT_RANK()
+--==========================================================
+
+-- Calculates the relative rank of a row.
+
+SELECT *,
+       PERCENT_RANK() OVER(
+           ORDER BY price DESC
+       ) AS per_rankk
+FROM product;
+
+
+-- TRICK:
+-- PERCENT_RANK = Relative position/rank
+-- CUME_DIST    = Cumulative distribution
+
+
+--==========================================================
+-- SUBQUERY
+--==========================================================
+
+-- Subquery = Query inside another query.
+
+
+--==========================================================
+-- 9. CREATE EMPLOYEE TABLE
+--==========================================================
+
+CREATE TABLE emp1 (
+    empno INT PRIMARY KEY,
+    ename VARCHAR(100),
+    job VARCHAR(50),
+    mgr INT,
+    hiredate DATE,
+    sal DECIMAL(10,2),
+    deptno INT
+);
+
+
+--==========================================================
+-- 10. CREATE DEPARTMENT TABLE
+--==========================================================
+
+CREATE TABLE dept (
+    deptno INT PRIMARY KEY,
+    dname VARCHAR(50),
+    loc VARCHAR(50)
+);
+
+
+--==========================================================
+-- 11. SIMPLE QUERY
+--==========================================================
+
+SELECT deptno
+FROM dept
+WHERE dname = 'SALES';
+
+
+-- Result:
+-- 30
+
+
+SELECT *
+FROM emp1
+WHERE deptno = 30;
+
+
+--==========================================================
+-- 12. CONVERT INTO SUBQUERY
+--==========================================================
+
+SELECT *
+FROM emp1
+WHERE deptno = (
+    SELECT deptno
+    FROM dept
+    WHERE dname = 'SALES'
+);
+
+
+-- TRICK:
+-- Inner query gives the value.
+-- Outer query uses that value.
+
+
+--==========================================================
+-- 13. MAXIMUM SALARY
+--==========================================================
+
+SELECT MAX(sal)
+FROM emp1;
+
+
+SELECT *
+FROM emp1
+WHERE sal = 9000;
+
+
+-- Using Subquery:
+
+SELECT *
+FROM emp1
+WHERE sal = (
+    SELECT MAX(sal)
+    FROM emp1
+);
+
+
+-- TRICK:
+-- MAX() + = = Find highest salary employee
+
+
+--==========================================================
+-- 14. AVERAGE SALARY
+--==========================================================
+
+SELECT AVG(sal)
+FROM emp1;
+
+
+SELECT *
+FROM emp1
+WHERE sal > 4018.75;
+
+
+-- Using Subquery:
+
+SELECT *
+FROM emp1
+WHERE sal > (
+    SELECT AVG(sal)
+    FROM emp1
+);
+
+
+-- TRICK:
+-- sal > AVG(sal)
+-- = Employees earning more than average
+
+
+--==========================================================
+-- 15. MINIMUM SALARY
+--==========================================================
+
+SELECT MIN(sal)
+FROM emp1;
+
+
+SELECT *
+FROM emp1
+WHERE sal = 805;
+
+
+-- Using Subquery:
+
+SELECT *
+FROM emp1
+WHERE sal = (
+    SELECT MIN(sal)
+    FROM emp1
+);
+
+
+-- TRICK:
+-- MIN() + =
+-- = Employee with minimum salary
+
+
+--==========================================================
+-- 16. GREATER THAN AVERAGE
+--==========================================================
+
+SELECT *
+FROM emp1
+WHERE sal > (
+    SELECT AVG(sal)
+    FROM emp1
+);
+
+
+-- Meaning:
+-- Find employees whose salary is greater
+-- than the average salary.
+
+
+--==========================================================
+-- 17. LESS THAN AVERAGE
+--==========================================================
+
+SELECT *
+FROM emp1
+WHERE sal < (
+    SELECT AVG(sal)
+    FROM emp1
+);
+
+
+-- Meaning:
+-- Find employees whose salary is less
+-- than the average salary.
+
+
+--==========================================================
+-- QUICK REVISION
+--==========================================================
+
+WINDOW FUNCTIONS
+----------------
+
+FIRST_VALUE()
+    = First value
+
+LAST_VALUE()
+    = Last value
+
+NTH_VALUE()
+    = Nth value
+
+NTILE()
+    = Divide rows into groups
+
+CUME_DIST()
+    = Cumulative distribution
+
+PERCENT_RANK()
+    = Relative rank
+
+
+SUBQUERY
+--------
+
+SUBQUERY
+    = Query inside another query
+
+SINGLE ROW
+    = Usually use =, >, <, >=, <=
+
+MULTIPLE ROWS
+    = Usually use IN
+
+
+AGGREGATE + SUBQUERY
+--------------------
+
+MAX()
+    = Highest value
+
+MIN()
+    = Lowest value
+
+AVG()
+    = Average value
+
+SUM()
+    = Total value
+
+COUNT()
+    = Number of rows
+
+
+EASY TRICKS
+-----------
+
+FIRST_VALUE  → FIRST
+LAST_VALUE   → LAST
+NTH_VALUE    → Nth position
+NTILE        → GROUPS
+CUME_DIST    → CUMULATIVE %
+PERCENT_RANK → RANK %
+
+SUBQUERY
+    → INNER QUERY gives value
+    → OUTER QUERY uses value
+
+
+IMPORTANT
+---------
+
+WHERE salary > (SELECT AVG(salary) ...)
+    → Above average
+
+WHERE salary < (SELECT AVG(salary) ...)
+    → Below average
+
+WHERE salary = (SELECT MAX(salary) ...)
+    → Highest salary
+
+WHERE salary = (SELECT MIN(salary) ...)
+    → Lowest salary
+
+WHERE deptno = (SELECT deptno ...)
+    → Employees from a particular department

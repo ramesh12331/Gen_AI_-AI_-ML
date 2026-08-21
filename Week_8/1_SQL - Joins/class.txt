@@ -1,0 +1,759 @@
+SQL JOINS
+==========
+
+
+1. INNER JOIN
+==============
+
+Definition:
+------------
+INNER JOIN returns only the matching records from both tables.
+
+Syntax:
+--------
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+
+
+Example:
+--------
+SELECT
+    c.customer_name,
+    o.order_id
+FROM customers c
+INNER JOIN orders o
+ON c.customer_id = o.customer_id;
+
+
+Trick:
+------
+INNER JOIN = MATCHING RECORDS ONLY
+
+
+
+2. LEFT JOIN
+============
+
+Definition:
+------------
+LEFT JOIN returns all records from the left table
+and matching records from the right table.
+
+Syntax:
+--------
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+
+
+Example:
+--------
+SELECT
+    c.customer_name,
+    o.order_id
+FROM customers c
+LEFT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+
+Trick:
+------
+LEFT JOIN = ALL LEFT TABLE
+
+
+
+3. RIGHT JOIN
+=============
+
+Definition:
+------------
+RIGHT JOIN returns all records from the right table
+and matching records from the left table.
+
+Syntax:
+--------
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+
+
+Example:
+--------
+SELECT
+    c.customer_name,
+    o.order_id
+FROM customers c
+RIGHT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+
+Trick:
+------
+RIGHT JOIN = ALL RIGHT TABLE
+
+
+
+4. OUTER JOIN USING UNION
+=========================
+
+Definition:
+------------
+A FULL OUTER JOIN returns all records from both tables,
+including matching and non-matching records.
+
+Using LEFT JOIN + RIGHT JOIN + UNION:
+
+Syntax:
+--------
+SELECT *
+FROM table1
+LEFT JOIN table2
+ON table1.id = table2.id
+
+UNION
+
+SELECT *
+FROM table1
+RIGHT JOIN table2
+ON table1.id = table2.id;
+
+
+Example:
+--------
+SELECT *
+FROM customers c
+LEFT JOIN orders o
+ON c.customer_id = o.customer_id
+
+UNION
+
+SELECT *
+FROM customers c
+RIGHT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+
+Trick:
+------
+FULL OUTER JOIN
+=
+LEFT JOIN + RIGHT JOIN
+
+
+
+5. UNION vs UNION ALL
+=====================
+
+Definition:
+------------
+UNION combines the results of two SELECT queries
+and removes duplicate records.
+
+UNION ALL combines the results
+and keeps duplicate records.
+
+Syntax:
+--------
+SELECT column1
+FROM table1
+
+UNION
+
+SELECT column1
+FROM table2;
+
+
+SELECT column1
+FROM table1
+
+UNION ALL
+
+SELECT column1
+FROM table2;
+
+
+Example:
+--------
+SELECT city
+FROM customers
+
+UNION
+
+SELECT city
+FROM employees;
+
+
+Trick:
+------
+UNION     = REMOVE DUPLICATES
+
+UNION ALL = KEEP ALL RECORDS
+
+
+
+6. CROSS JOIN
+=============
+
+Definition:
+------------
+CROSS JOIN combines every row from the first table
+with every row from the second table.
+
+Syntax:
+--------
+SELECT *
+FROM table1
+CROSS JOIN table2;
+
+
+Example:
+--------
+SELECT
+    c.customer_name,
+    p.product_name
+FROM customers c
+CROSS JOIN products p;
+
+
+Example:
+
+customers = 5 rows
+products  = 10 rows
+
+Result:
+
+5 * 10 = 50 rows
+
+
+Trick:
+------
+CROSS JOIN = EVERY ROW x EVERY ROW
+
+
+
+7. NATURAL JOIN
+===============
+
+Definition:
+------------
+NATURAL JOIN automatically joins tables
+using columns having the same name.
+
+Syntax:
+--------
+SELECT *
+FROM table1
+NATURAL JOIN table2;
+
+
+Example:
+--------
+SELECT *
+FROM customers
+NATURAL JOIN orders;
+
+
+Trick:
+------
+NATURAL JOIN = SAME COLUMN NAME AUTOMATICALLY
+
+
+
+8. SELF JOIN
+============
+
+Definition:
+------------
+SELF JOIN means joining a table with itself.
+
+It is commonly used to find employee-manager relationships.
+
+Syntax:
+--------
+SELECT *
+FROM table1 a
+JOIN table1 b
+ON a.column = b.column;
+
+
+Example:
+--------
+SELECT
+    e.emp_name AS employee,
+    m.emp_name AS manager
+FROM employees e
+JOIN employees m
+ON e.manager_id = m.emp_id;
+
+
+Trick:
+------
+SELF JOIN = SAME TABLE TWICE
+
+
+
+9. JOINING 2 TABLES
+===================
+
+Definition:
+------------
+Two tables can be joined using a common/related column.
+
+Example:
+--------
+SELECT
+    e.name,
+    d.department_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id;
+
+
+Trick:
+------
+2 TABLES
+   |
+   v
+COMMON COLUMN
+   |
+   v
+JOIN
+
+
+
+10. JOINING 3 TABLES
+====================
+
+Definition:
+------------
+We can join three tables by using multiple JOIN statements.
+
+Example:
+--------
+SELECT
+    e.name,
+    d.department_name,
+    l.location_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+
+JOIN locations l
+ON d.location_id = l.location_id;
+
+
+Trick:
+------
+TABLE 1
+   |
+   v
+TABLE 2
+   |
+   v
+TABLE 3
+
+
+
+11. JOINING MULTIPLE TABLES
+===========================
+
+Definition:
+------------
+Multiple tables can be joined by using
+multiple JOIN statements.
+
+Example:
+--------
+SELECT
+    c.customer_name,
+    o.order_id,
+    p.product_name
+FROM customers c
+
+JOIN orders o
+ON c.customer_id = o.customer_id
+
+JOIN order_items oi
+ON o.order_id = oi.order_id
+
+JOIN products p
+ON oi.product_id = p.product_id;
+
+
+Trick:
+------
+ONE JOIN = ONE TABLE RELATIONSHIP
+
+
+
+12. CASE WITH JOIN
+==================
+
+Definition:
+------------
+CASE is used to apply IF/ELSE conditions
+to the data obtained from joined tables.
+
+Syntax:
+--------
+SELECT
+    column,
+    CASE
+        WHEN condition THEN result
+        ELSE result
+    END AS new_column
+FROM table1
+JOIN table2
+ON condition;
+
+
+Example:
+--------
+SELECT
+    e.name,
+    e.salary,
+
+    CASE
+        WHEN e.salary >= 70000 THEN 'High'
+        WHEN e.salary >= 50000 THEN 'Medium'
+        ELSE 'Low'
+    END AS salary_level
+
+FROM employees e
+
+JOIN departments d
+ON e.department_id = d.department_id;
+
+
+Trick:
+------
+CASE = IF / ELSE
+
+
+
+13. WHERE WITH JOIN
+===================
+
+Definition:
+------------
+WHERE is used to filter rows
+after joining tables.
+
+Syntax:
+--------
+SELECT columns
+FROM table1
+JOIN table2
+ON table1.id = table2.id
+WHERE condition;
+
+
+Example:
+--------
+SELECT
+    e.name,
+    d.department_name,
+    e.salary
+
+FROM employees e
+
+JOIN departments d
+ON e.department_id = d.department_id
+
+WHERE e.salary > 50000;
+
+
+Trick:
+------
+JOIN
+  |
+  v
+WHERE
+  |
+  v
+FILTER ROWS
+
+
+
+14. GROUP BY WITH JOIN
+======================
+
+Definition:
+------------
+GROUP BY is used to group records
+after joining tables.
+
+Example:
+--------
+SELECT
+    d.department_name,
+    COUNT(e.emp_id) AS total_employees
+
+FROM departments d
+
+JOIN employees e
+ON d.department_id = e.department_id
+
+GROUP BY d.department_name;
+
+
+Trick:
+------
+GROUP BY = CREATE GROUPS
+
+
+
+15. HAVING WITH JOIN
+====================
+
+Definition:
+------------
+HAVING is used to filter groups
+created using GROUP BY.
+
+Example:
+--------
+SELECT
+    d.department_name,
+    COUNT(e.emp_id) AS total_employees
+
+FROM departments d
+
+JOIN employees e
+ON d.department_id = e.department_id
+
+GROUP BY d.department_name
+
+HAVING COUNT(e.emp_id) > 3;
+
+
+Trick:
+------
+WHERE  = FILTER ROWS
+
+HAVING = FILTER GROUPS
+
+
+
+16. WHERE + GROUP BY + HAVING
+=============================
+
+Definition:
+------------
+We can use WHERE, GROUP BY and HAVING together.
+
+Order:
+------
+JOIN
+  |
+  v
+WHERE
+  |
+  v
+GROUP BY
+  |
+  v
+HAVING
+
+
+Example:
+--------
+SELECT
+    d.department_name,
+    SUM(e.salary) AS total_salary
+
+FROM departments d
+
+JOIN employees e
+ON d.department_id = e.department_id
+
+WHERE e.salary > 50000
+
+GROUP BY d.department_name
+
+HAVING SUM(e.salary) > 200000;
+
+
+Explanation:
+------------
+WHERE
+-----
+Filters individual employees.
+
+GROUP BY
+--------
+Creates department-wise groups.
+
+HAVING
+------
+Filters departments based on total salary.
+
+
+
+17. REAL-TIME JOIN EXAMPLE
+==========================
+
+Example:
+--------
+E-Commerce Application
+
+
+Tables:
+
+customers
+    |
+    v
+orders
+    |
+    v
+order_items
+    |
+    v
+products
+
+
+Requirement:
+------------
+Display:
+
+Customer Name
+Order ID
+Product Name
+Quantity
+
+
+Query:
+------
+SELECT
+    c.customer_name,
+    o.order_id,
+    p.product_name,
+    oi.quantity
+
+FROM customers c
+
+JOIN orders o
+ON c.customer_id = o.customer_id
+
+JOIN order_items oi
+ON o.order_id = oi.order_id
+
+JOIN products p
+ON oi.product_id = p.product_id;
+
+
+Trick:
+------
+Customer
+   |
+   v
+Order
+   |
+   v
+Order Item
+   |
+   v
+Product
+
+
+
+18. JOIN QUICK REVISION
+=======================
+
+INNER JOIN
+-----------
+MATCHING RECORDS ONLY
+
+
+LEFT JOIN
+---------
+ALL LEFT TABLE
+
+
+RIGHT JOIN
+----------
+ALL RIGHT TABLE
+
+
+FULL OUTER JOIN
+---------------
+ALL LEFT + ALL RIGHT
+
+
+CROSS JOIN
+----------
+EVERY ROW x EVERY ROW
+
+
+NATURAL JOIN
+------------
+SAME COLUMN NAME
+
+
+SELF JOIN
+---------
+SAME TABLE TWICE
+
+
+UNION
+-----
+REMOVE DUPLICATES
+
+
+UNION ALL
+---------
+KEEP DUPLICATES
+
+
+CASE
+----
+IF / ELSE
+
+
+WHERE
+-----
+FILTER ROWS
+
+
+GROUP BY
+--------
+CREATE GROUPS
+
+
+HAVING
+------
+FILTER GROUPS
+
+
+
+19. SQL QUERY ORDER
+===================
+
+SELECT
+FROM
+JOIN
+WHERE
+GROUP BY
+HAVING
+ORDER BY;
+
+
+Easy Trick:
+-----------
+FROM   = WHERE DATA COMES FROM
+
+JOIN   = COMBINE TABLES
+
+WHERE  = FILTER ROWS
+
+GROUP BY = CREATE GROUPS
+
+HAVING = FILTER GROUPS
+
+SELECT = SHOW DATA
+
+ORDER BY = SORT DATAu 

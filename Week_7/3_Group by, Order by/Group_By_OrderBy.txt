@@ -1,0 +1,424 @@
+--==========================================================
+-- SQL GROUP BY + ORDER BY
+-- QUICK REVISION
+--==========================================================
+
+
+--==========================================================
+-- 1. GROUP BY
+--==========================================================
+
+-- Definition:
+-- GROUP BY is used to combine rows having
+-- the same value into groups.
+
+-- Example:
+-- Find total sales for each country.
+
+SELECT country,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+GROUP BY country;
+
+
+-- TRICK:
+-- "Country-wise" → GROUP BY country
+-- "Category-wise" → GROUP BY category
+
+
+--==========================================================
+-- 2. ORDER BY
+--==========================================================
+
+-- Definition:
+-- ORDER BY is used to sort the result.
+
+-- ASC  → Lowest to Highest
+-- DESC → Highest to Lowest
+
+SELECT country,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+GROUP BY country
+ORDER BY total_sales DESC;
+
+
+-- TRICK:
+-- Highest → DESC
+-- Lowest  → ASC
+
+
+--==========================================================
+-- 3. SUM() + GROUP BY
+--==========================================================
+
+-- Total sales country-wise
+
+SELECT country,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+GROUP BY country;
+
+
+--==========================================================
+-- 4. COUNT() + GROUP BY
+--==========================================================
+
+-- Number of transactions country-wise
+
+SELECT country,
+       COUNT(*) AS total_count
+FROM retail_sales
+GROUP BY country;
+
+
+--==========================================================
+-- 5. AVG() + GROUP BY
+--==========================================================
+
+-- Average sales category-wise
+
+SELECT category,
+       AVG(sales_amount) AS average_sales
+FROM retail_sales
+GROUP BY category;
+
+
+--==========================================================
+-- 6. HAVING
+--==========================================================
+
+-- Definition:
+-- HAVING is used to filter GROUP BY results.
+
+-- Example:
+-- Categories having total sales > 100000
+
+SELECT category,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+GROUP BY category
+HAVING SUM(sales_amount) > 100000;
+
+
+-- TRICK:
+-- WHERE  → Filter rows
+-- HAVING → Filter groups
+
+
+--==========================================================
+-- 7. WHERE + GROUP BY + HAVING
+--==========================================================
+
+-- Example:
+-- Find total sales for Beauty category
+-- country-wise and show groups above 5000.
+
+SELECT country,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+WHERE category = 'Beauty'
+GROUP BY country
+HAVING SUM(sales_amount) > 5000;
+
+
+--==========================================================
+-- 8. GROUP BY MULTIPLE COLUMNS
+--==========================================================
+
+-- Country + Category analysis
+
+SELECT country,
+       category,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+GROUP BY country,
+         category;
+
+
+-- TRICK:
+-- Country-wise              → GROUP BY country
+-- Category-wise             → GROUP BY category
+-- Country + Category-wise   → GROUP BY country, category
+
+
+--==========================================================
+-- 9. PAYMENT METHOD ANALYSIS
+--==========================================================
+
+-- Find total sales and number of transactions
+-- for each payment method.
+
+SELECT payment_method,
+       SUM(sales_amount) AS total_amount,
+       COUNT(*) AS transactions
+FROM retail_sales
+GROUP BY payment_method
+HAVING COUNT(*) >= 50
+ORDER BY total_amount DESC;
+
+
+-- TRICK:
+-- Total amount       → SUM()
+-- Transactions       → COUNT()
+-- Minimum 50         → HAVING COUNT(*) >= 50
+-- Highest first     → ORDER BY ... DESC
+
+
+--==========================================================
+-- 10. PRODUCT PERFORMANCE
+--==========================================================
+
+-- Total quantity and revenue for every product.
+
+SELECT product,
+       SUM(quantity) AS total_quantity,
+       SUM(sales_amount) AS total_revenue
+FROM retail_sales
+GROUP BY product
+HAVING SUM(quantity) > 50
+ORDER BY total_quantity DESC;
+
+
+--==========================================================
+-- 11. CASE
+--==========================================================
+
+-- Definition:
+-- CASE is used to apply conditions
+-- and create a new calculated column.
+
+SELECT product,
+       sales_amount,
+
+       CASE
+           WHEN sales_amount >= 50000
+               THEN 'High'
+
+           WHEN sales_amount >= 10000
+               THEN 'Medium'
+
+           ELSE 'Low'
+       END AS sales_level
+
+FROM retail_sales;
+
+
+-- TRICK:
+-- CASE = IF / ELSE IF / ELSE
+
+
+--==========================================================
+-- 12. SQL EXECUTION ORDER
+--==========================================================
+
+-- SQL is written in this order:
+
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+
+-- But logically SQL executes approximately:
+
+FROM
+JOIN / ON
+WHERE
+GROUP BY
+HAVING
+SELECT
+DISTINCT
+ORDER BY
+LIMIT
+
+
+--==========================================================
+-- 13. MOST IMPORTANT DIFFERENCE
+--==========================================================
+
+WHERE
+    → Filters individual rows
+    → Comes before GROUP BY
+    → Normally used with normal columns
+
+
+HAVING
+    → Filters groups
+    → Comes after GROUP BY
+    → Commonly used with SUM(), COUNT(), AVG()
+
+
+-- Example:
+
+SELECT country,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+WHERE category = 'Beauty'
+GROUP BY country
+HAVING SUM(sales_amount) > 5000
+ORDER BY total_sales DESC;
+
+
+--==========================================================
+-- FINAL MEMORY TRICK
+--==========================================================
+
+-- WHAT?
+-- Total       → SUM()
+-- Count       → COUNT()
+-- Average     → AVG()
+
+-- GROUP?
+-- Country     → GROUP BY country
+-- Category    → GROUP BY category
+
+-- FILTER?
+-- Rows        → WHERE
+-- Groups      → HAVING
+
+-- SORT?
+-- Highest     → DESC
+-- Lowest      → ASC
+
+
+--==========================================================
+-- ONE-LINE FORMULA
+--==========================================================
+
+SELECT group_column,
+       AGGREGATE_FUNCTION(column)
+FROM table_name
+WHERE condition
+GROUP BY group_column
+HAVING aggregate_condition
+ORDER BY aggregate_column DESC;
+
+
+--==========================================================
+-- EASY INTERVIEW TRICK
+--==========================================================
+
+-- "Country-wise total sales"
+--       ↓
+-- GROUP BY country
+--       ↓
+-- SUM(sales_amount)
+
+
+-- "Categories above 100000"
+--       ↓
+-- GROUP BY category
+--       ↓
+-- SUM(sales_amount)
+--       ↓
+-- HAVING SUM(sales_amount) > 100000
+
+
+-- "Highest sales first"
+--       ↓
+-- ORDER BY total_sales DESC
+
+--==========================================================
+-- CASE EXPRESSION
+--==========================================================
+
+-- Definition:
+-- CASE is used to apply conditions in SQL
+-- and create a new column based on those conditions.
+
+
+-- Syntax:
+
+SELECT *,
+       CASE
+           WHEN condition1 THEN result1
+           WHEN condition2 THEN result2
+           ELSE result3
+       END AS column_name
+FROM table_name;
+
+
+--==========================================================
+-- EXAMPLE: QUANTITY CLASSIFICATION
+--==========================================================
+
+SELECT *,
+       CASE
+
+           WHEN quantity >= 6
+               THEN 'high quantity prods'
+
+           WHEN quantity >= 3
+                AND quantity <= 5
+               THEN 'moderate prods'
+
+           ELSE 'low quantity prods'
+
+       END AS status
+
+FROM retail_sales;
+
+
+--==========================================================
+-- SIMPLE UNDERSTANDING
+--==========================================================
+
+-- quantity >= 6
+--      ↓
+-- High Quantity
+
+-- quantity 3 to 5
+--      ↓
+-- Moderate Quantity
+
+-- quantity < 3
+--      ↓
+-- Low Quantity
+
+
+--==========================================================
+-- IMPORTANT TRICK
+--==========================================================
+
+-- CASE works like:
+
+-- IF
+-- ELSE IF
+-- ELSE
+
+
+-- Python equivalent:
+
+-- if quantity >= 6:
+--     "high quantity prods"
+-- elif quantity >= 3:
+--     "moderate prods"
+-- else:
+--     "low quantity prods"
+
+
+--==========================================================
+-- BEST SHORT VERSION
+--==========================================================
+
+SELECT *,
+       CASE
+           WHEN quantity >= 6 THEN 'High'
+           WHEN quantity >= 3 THEN 'Moderate'
+           ELSE 'Low'
+       END AS status
+FROM retail_sales;
+
+
+--==========================================================
+-- REMEMBER
+--==========================================================
+
+CASE
+    WHEN condition THEN result
+    WHEN condition THEN result
+    ELSE result
+END

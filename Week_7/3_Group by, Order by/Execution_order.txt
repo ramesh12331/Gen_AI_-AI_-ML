@@ -1,0 +1,212 @@
+--==========================================================
+-- MYSQL LOGICAL EXECUTION ORDER
+--==========================================================
+
+-- SQL is written in one order,
+-- but logically executed in another order.
+
+
+--==========================================================
+-- EXECUTION ORDER
+--==========================================================
+
+1. FROM
+2. JOIN / ON
+3. WHERE
+4. GROUP BY
+5. HAVING
+6. SELECT
+7. DISTINCT
+8. ORDER BY
+9. LIMIT
+
+
+--==========================================================
+-- EASY TRICK
+--==========================================================
+
+FROM
+    ↓
+JOIN
+    ↓
+WHERE
+    ↓
+GROUP BY
+    ↓
+HAVING
+    ↓
+SELECT
+    ↓
+DISTINCT
+    ↓
+ORDER BY
+    ↓
+LIMIT
+
+
+--==========================================================
+-- MEANING
+--==========================================================
+
+FROM
+    → Choose the table.
+
+JOIN / ON
+    → Combine tables.
+
+WHERE
+    → Filter individual rows.
+
+GROUP BY
+    → Create groups.
+
+HAVING
+    → Filter groups.
+
+SELECT
+    → Choose the columns to display.
+
+DISTINCT
+    → Remove duplicate results.
+
+ORDER BY
+    → Sort the result.
+
+LIMIT
+    → Restrict the number of rows.
+
+
+--==========================================================
+-- EXAMPLE
+--==========================================================
+
+SELECT category,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+WHERE country = 'India'
+GROUP BY category
+HAVING SUM(sales_amount) > 5000
+ORDER BY total_sales DESC
+LIMIT 3;
+
+
+--==========================================================
+-- HOW MYSQL LOGICALLY EXECUTES IT
+--==========================================================
+
+-- 1. FROM
+-- Get data from retail_sales.
+
+-- 2. WHERE
+-- Keep only India records.
+
+-- 3. GROUP BY
+-- Create groups based on category.
+
+-- 4. HAVING
+-- Keep categories where total sales > 5000.
+
+-- 5. SELECT
+-- Display category and total_sales.
+
+-- 6. ORDER BY
+-- Sort total_sales from highest to lowest.
+
+-- 7. LIMIT
+-- Show only the first 3 rows.
+
+
+--==========================================================
+-- IMPORTANT DIFFERENCE
+--==========================================================
+
+WHERE
+    → Filters rows BEFORE GROUP BY
+
+HAVING
+    → Filters groups AFTER GROUP BY
+
+
+-- Example:
+
+SELECT category,
+       SUM(sales_amount) AS total_sales
+FROM retail_sales
+WHERE country = 'India'
+GROUP BY category
+HAVING SUM(sales_amount) > 5000;
+
+
+-- WHERE:
+-- country = 'India'
+-- filters individual records.
+
+-- HAVING:
+-- SUM(sales_amount) > 5000
+-- filters grouped results.
+
+
+--==========================================================
+-- INTERVIEW TRICK
+--==========================================================
+
+-- Remember:
+
+FROM
+JOIN
+WHERE
+GROUP BY
+HAVING
+SELECT
+DISTINCT
+ORDER BY
+LIMIT
+
+
+-- SHORT TRICK:
+
+-- "FROM JOIN WHERE GROUP HAVING
+--  SELECT DISTINCT ORDER LIMIT"
+
+
+--==========================================================
+-- MOST IMPORTANT POINT
+--==========================================================
+
+-- Query Writing Order:
+
+SELECT
+FROM
+JOIN
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+LIMIT
+
+
+-- Logical Execution Order:
+
+FROM
+JOIN
+WHERE
+GROUP BY
+HAVING
+SELECT
+DISTINCT
+ORDER BY
+LIMIT
+
+
+--==========================================================
+-- ONE-LINE MEMORY TRICK
+--==========================================================
+
+-- FIRST GET DATA
+-- → FILTER ROWS
+-- → MAKE GROUPS
+-- → FILTER GROUPS
+-- → SELECT COLUMNS
+-- → REMOVE DUPLICATES
+-- → SORT
+-- → LIMIT

@@ -1,0 +1,703 @@
+==========================================================
+CREATE OR REPLACE - SQL NOTES
+==========================================================
+
+
+1. DEFINITION
+----------------------------------------------------------
+
+CREATE OR REPLACE is used in PostgreSQL to create a
+database object if it does not exist.
+
+If the object already exists, its definition is replaced
+with the new definition.
+
+
+Simple Meaning:
+
+CREATE OR REPLACE
+        |
+        +-- Object does not exist
+        |       |
+        |       +-- CREATE
+        |
+        +-- Object already exists
+                |
+                +-- REPLACE
+
+
+Commonly used with:
+
+CREATE OR REPLACE FUNCTION
+CREATE OR REPLACE PROCEDURE
+CREATE OR REPLACE VIEW
+
+
+==========================================================
+2. FUNCTION
+==========================================================
+
+Definition:
+
+A FUNCTION is used to perform some logic and return
+a value or result.
+
+
+SYNTAX:
+
+CREATE OR REPLACE FUNCTION function_name(
+    parameters
+)
+RETURNS return_type
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- SQL statements
+
+    RETURN value;
+
+END;
+$$;
+
+
+==========================================================
+3. FUNCTION - SIMPLE EXAMPLE
+==========================================================
+
+CREATE OR REPLACE FUNCTION get_message()
+RETURNS VARCHAR
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN 'Hello SQL';
+
+END;
+$$;
+
+
+Execute:
+
+SELECT get_message();
+
+
+Output:
+
+Hello SQL
+
+
+==========================================================
+4. FUNCTION WITH PARAMETER
+==========================================================
+
+CREATE OR REPLACE FUNCTION get_salary(
+    p_emp_id INT
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN (
+        SELECT salary
+        FROM employee
+        WHERE emp_id = p_emp_id
+    );
+
+END;
+$$;
+
+
+Execute:
+
+SELECT get_salary(103);
+
+
+==========================================================
+5. FUNCTION RETURNING TABLE
+==========================================================
+
+Definition:
+
+A table-returning function is used when we want to
+return multiple rows and columns.
+
+
+SYNTAX:
+
+CREATE OR REPLACE FUNCTION function_name()
+RETURNS TABLE (
+    column1 datatype,
+    column2 datatype
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN QUERY
+    SELECT column1,
+           column2
+    FROM table_name;
+
+END;
+$$;
+
+
+EXAMPLE:
+
+CREATE OR REPLACE FUNCTION it_department()
+RETURNS TABLE (
+    emp_id INT,
+    emp_name VARCHAR(100),
+    dept_name VARCHAR(100),
+    salary INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN QUERY
+    SELECT
+        e.emp_id,
+        e.emp_name,
+        e.dept_name,
+        e.salary
+    FROM employee e
+    WHERE e.dept_name = 'IT';
+
+END;
+$$;
+
+
+Execute:
+
+SELECT *
+FROM it_department();
+
+
+==========================================================
+6. PROCEDURE
+==========================================================
+
+Definition:
+
+A PROCEDURE is used to perform an operation such as:
+
+    INSERT
+    UPDATE
+    DELETE
+
+
+SYNTAX:
+
+CREATE OR REPLACE PROCEDURE procedure_name(
+    parameters
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- SQL statements
+
+END;
+$$;
+
+
+==========================================================
+7. PROCEDURE - EXAMPLE
+==========================================================
+
+CREATE OR REPLACE PROCEDURE update_employee_salary(
+    p_emp_id INT,
+    p_salary INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    UPDATE employee
+    SET salary = p_salary
+    WHERE emp_id = p_emp_id;
+
+END;
+$$;
+
+
+Execute:
+
+CALL update_employee_salary(103, 6000);
+
+
+Check:
+
+SELECT *
+FROM employee
+WHERE emp_id = 103;
+
+
+==========================================================
+8. VIEW
+==========================================================
+
+Definition:
+
+A VIEW is a saved SQL query that can be used like
+a virtual table.
+
+
+SYNTAX:
+
+CREATE OR REPLACE VIEW view_name AS
+SELECT ...
+FROM table_name;
+
+
+EXAMPLE:
+
+CREATE OR REPLACE VIEW hr_employees AS
+SELECT
+    emp_id,
+    emp_name,
+    dept_name,
+    salary
+FROM employee
+WHERE dept_name = 'HR';
+
+
+Execute:
+
+SELECT *
+FROM hr_employees;
+
+
+==========================================================
+9. CREATE vs CREATE OR REPLACE
+==========================================================
+
+CREATE:
+
+CREATE FUNCTION get_employee()
+...
+
+
+If the object already exists:
+
+ERROR
+
+
+CREATE OR REPLACE:
+
+CREATE OR REPLACE FUNCTION get_employee()
+...
+
+
+If the object does not exist:
+
+CREATE
+
+
+If the object already exists:
+
+REPLACE / UPDATE DEFINITION
+
+
+==========================================================
+10. CREATE OR REPLACE vs DROP
+==========================================================
+
+DROP:
+
+DROP FUNCTION IF EXISTS get_employee();
+
+
+Meaning:
+
+Delete the existing function.
+
+
+CREATE OR REPLACE:
+
+CREATE OR REPLACE FUNCTION get_employee()
+...
+
+
+Meaning:
+
+Create it if it doesn't exist.
+Replace its definition if it already exists.
+
+
+TRICK:
+
+DROP
+    |
+    +-- DELETE OBJECT
+
+
+CREATE OR REPLACE
+    |
+    +-- CREATE / UPDATE OBJECT
+
+
+==========================================================
+11. IMPORTANT KEYWORDS
+==========================================================
+
+LANGUAGE plpgsql
+    |
+    +-- Specifies PostgreSQL PL/pgSQL language
+
+
+AS $$
+    |
+    +-- Starts the function/procedure body
+
+
+BEGIN
+    |
+    +-- Starts the SQL block
+
+
+END;
+    |
+    +-- Ends the SQL block
+
+
+$$;
+    |
+    +-- Ends the function/procedure body
+
+
+==========================================================
+12. RETURN
+==========================================================
+
+RETURN is used to return a value.
+
+
+Example:
+
+RETURN 6000;
+
+
+Function:
+
+CREATE OR REPLACE FUNCTION get_salary()
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN 6000;
+
+END;
+$$;
+
+
+Execute:
+
+SELECT get_salary();
+
+
+==========================================================
+13. RETURN QUERY
+==========================================================
+
+RETURN QUERY is used to return the result of a
+SELECT query.
+
+
+Example:
+
+RETURN QUERY
+SELECT *
+FROM employee;
+
+
+Used mainly with:
+
+RETURNS TABLE
+
+
+Example:
+
+CREATE OR REPLACE FUNCTION get_it_employees()
+RETURNS TABLE (
+    emp_id INT,
+    emp_name VARCHAR(100),
+    dept_name VARCHAR(100),
+    salary INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    RETURN QUERY
+    SELECT
+        emp_id,
+        emp_name,
+        dept_name,
+        salary
+    FROM employee
+    WHERE dept_name = 'IT';
+
+END;
+$$;
+
+
+Execute:
+
+SELECT *
+FROM get_it_employees();
+
+
+==========================================================
+14. FUNCTION VS PROCEDURE
+==========================================================
+
+FUNCTION:
+
+    Returns a value/result.
+
+    Execute:
+
+    SELECT function_name();
+
+
+PROCEDURE:
+
+    Performs an operation.
+
+    Execute:
+
+    CALL procedure_name();
+
+
+Easy Trick:
+
+FUNCTION
+    |
+    +-- RETURN
+    |
+    +-- SELECT
+
+
+PROCEDURE
+    |
+    +-- ACTION
+    |
+    +-- CALL
+
+
+==========================================================
+15. RETURN VS RETURN QUERY
+==========================================================
+
+RETURN
+    |
+    +-- Returns a value
+
+
+Example:
+
+RETURN 5000;
+
+
+RETURN QUERY
+    |
+    +-- Returns rows from SELECT
+
+
+Example:
+
+RETURN QUERY
+SELECT *
+FROM employee;
+
+
+Easy Trick:
+
+RETURN
+    = ONE VALUE
+
+
+RETURN QUERY
+    = QUERY RESULT
+
+
+==========================================================
+16. MAIN SYNTAX TO REMEMBER
+==========================================================
+
+FUNCTION:
+
+CREATE OR REPLACE FUNCTION function_name()
+RETURNS return_type
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- logic
+
+    RETURN value;
+
+END;
+$$;
+
+
+PROCEDURE:
+
+CREATE OR REPLACE PROCEDURE procedure_name()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- logic
+
+END;
+$$;
+
+
+VIEW:
+
+CREATE OR REPLACE VIEW view_name AS
+SELECT *
+FROM table_name;
+
+
+==========================================================
+17. MEMORY TRICKS
+==========================================================
+
+TRICK 1:
+
+CREATE OR REPLACE
+        =
+CREATE + UPDATE
+
+
+TRICK 2:
+
+FUNCTION
+    =
+RETURN
+
+
+PROCEDURE
+    =
+ACTION
+
+
+TRICK 3:
+
+FUNCTION
+    =
+SELECT
+
+
+PROCEDURE
+    =
+CALL
+
+
+TRICK 4:
+
+RETURN
+    =
+Single value
+
+
+RETURN QUERY
+    =
+Multiple rows / SELECT result
+
+
+TRICK 5:
+
+PostgreSQL function structure:
+
+CREATE OR REPLACE FUNCTION
+        |
+        +-- RETURNS
+        |
+        +-- LANGUAGE plpgsql
+        |
+        +-- AS $$
+        |
+        +-- BEGIN
+        |
+        +-- SQL LOGIC
+        |
+        +-- END;
+        |
+        +-- $$;
+
+
+==========================================================
+18. QUICK SUMMARY
+==========================================================
+
+CREATE OR REPLACE
+    -> Create object if it doesn't exist
+    -> Replace definition if it exists
+
+
+FUNCTION
+    -> Returns a value/result
+    -> SELECT function_name()
+
+
+PROCEDURE
+    -> Performs an operation
+    -> CALL procedure_name()
+
+
+VIEW
+    -> Saved SQL query
+    -> SELECT * FROM view_name
+
+
+RETURN
+    -> Returns a value
+
+
+RETURN QUERY
+    -> Returns SELECT query result
+
+
+LANGUAGE plpgsql
+    -> PostgreSQL procedural language
+
+
+BEGIN ... END
+    -> SQL code block
+
+
+==========================================================
+19. INTERVIEW ANSWER
+==========================================================
+
+Q: What is CREATE OR REPLACE?
+
+A:
+
+CREATE OR REPLACE is a PostgreSQL command used to
+create a database object if it does not exist and
+replace its definition if it already exists.
+
+It is commonly used with functions, procedures,
+and views.
+
+
+==========================================================
+20. ONE-LINE REVISION
+==========================================================
+
+CREATE OR REPLACE
+        |
+        +-- FUNCTION  -> RETURN -> SELECT
+        |
+        +-- PROCEDURE -> ACTION -> CALL
+        |
+        +-- VIEW      -> SAVED QUERY

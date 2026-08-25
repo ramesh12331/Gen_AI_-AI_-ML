@@ -1,0 +1,102 @@
+[
+  {
+    "customer_id": "C001",
+    "customer_name": "Rahul",
+    "age": 28,
+    "city": "Hyderabad",
+    "product": "Laptop",
+    "category": "Electronics",
+    "quantity": 1,
+    "price": 55000
+  },
+  {
+    "customer_id": "C002",
+    "customer_name": "Priya",
+    "age": 24,
+    "city": "Vijayawada",
+    "product": "Smartphone",
+    "category": "Electronics",
+    "quantity": 2,
+    "price": 25000
+  },
+  {
+    "customer_id": "C003",
+    "customer_name": "Arjun",
+    "age": 31,
+    "city": "Bangalore",
+    "product": "Headphones",
+    "category": "Electronics",
+    "quantity": 1,
+    "price": 3500
+  },
+  {
+    "customer_id": "C004",
+    "customer_name": "Sneha",
+    "age": 27,
+    "city": "Chennai",
+    "product": "Running Shoes",
+    "category": "Footwear",
+    "quantity": 2,
+    "price": 4500
+  },
+  {
+    "customer_id": "C005",
+    "customer_name": "Vikram",
+    "age": 35,
+    "city": "Pune",
+    "product": "Office Chair",
+    "category": "Furniture",
+    "quantity": 1,
+    "price": 8500
+  },
+  {
+    "customer_id": "C006",
+    "customer_name": "Anjali",
+    "age": 22,
+    "city": "Hyderabad",
+    "product": "Smart Watch",
+    "category": "Electronics",
+    "quantity": 1,
+    "price": 7000
+  },
+  {
+    "customer_id": "C007",
+    "customer_name": "Kiran",
+    "age": 29,
+    "city": "Visakhapatnam",
+    "product": "Backpack",
+    "category": "Accessories",
+    "quantity": 3,
+    "price": 1800
+  },
+  {
+    "customer_id": "C008",
+    "customer_name": "Meena",
+    "age": 33,
+    "city": "Mumbai",
+    "product": "Coffee Maker",
+    "category": "Home Appliances",
+    "quantity": 1,
+    "price": 6500
+  },
+  {
+    "customer_id": "C009",
+    "customer_name": "Suresh",
+    "age": 40,
+    "city": "Delhi",
+    "product": "Television",
+    "category": "Electronics",
+    "quantity": 1,
+    "price": 42000
+  },
+  {
+    "customer_id": "C010",
+    "customer_name": "Divya",
+    "age": 26,
+    "city": "Vijayawada",
+    "product": "T-Shirt",
+    "category": "Clothing",
+    "quantity": 4,
+    "price": 1200
+  }
+]

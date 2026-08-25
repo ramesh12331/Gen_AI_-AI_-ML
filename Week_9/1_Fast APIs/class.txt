@@ -1,0 +1,709 @@
+pip install uvicorn
+pip install pydantic
+pip install fastapi
+
+APP RUN:python -m uvicorn day1:app --reload
+
+======================================================
+============================================================
+FASTAPI INSTALLATION - DEFINITION & PURPOSE
+============================================================
+
+
+1. FASTAPI
+============================================================
+
+Installation:
+
+pip install fastapi
+
+
+Definition:
+FastAPI is a modern Python web framework used to build
+APIs and web applications quickly and easily.
+
+
+Purpose:
+> To create REST APIs.
+> To create GET, POST, PUT and DELETE endpoints.
+> To receive and return data.
+> To build backend applications.
+> Automatic API documentation.
+
+
+Example:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+============================================================
+2. UVICORN
+============================================================
+
+Installation:
+
+pip install uvicorn
+
+
+Definition:
+Uvicorn is an ASGI web server used to run FastAPI
+applications.
+
+
+Purpose:
+> To start/run the FastAPI application.
+> To handle HTTP requests.
+> To communicate between the client and FastAPI.
+> To provide a development server.
+
+
+Example:
+
+python -m uvicorn day1:app --reload
+
+
+Meaning:
+
+day1
+    -> Python file name
+
+app
+    -> FastAPI object
+
+--reload
+    -> Automatically restart the server when code changes.
+
+
+============================================================
+3. PYDANTIC
+============================================================
+
+Installation:
+
+pip install pydantic
+
+
+Definition:
+Pydantic is a Python library used for data validation
+and data parsing.
+
+
+Purpose:
+> To validate input data.
+> To check data types.
+> To convert data into the required type.
+> To create structured data models.
+> FastAPI uses Pydantic for request validation.
+
+
+Example:
+
+from pydantic import BaseModel
+
+
+class Customer(BaseModel):
+
+    name: str
+    age: int
+    city: str
+
+
+Here:
+
+name: str
+    -> name must be a string
+
+age: int
+    -> age must be an integer
+
+city: str
+    -> city must be a string
+
+
+============================================================
+4. JSON
+============================================================
+
+Python already provides JSON support.
+
+No installation required.
+
+import json
+
+
+Definition:
+JSON (JavaScript Object Notation) is a lightweight format
+used to store and exchange data.
+
+
+Purpose:
+> To store data.
+> To exchange data between frontend and backend.
+> To store API data.
+> Easy for humans and computers to read.
+
+
+Example data.json:
+
+[
+    {
+        "customer_name": "Ramesh",
+        "age": 25,
+        "city": "Hyderabad"
+    }
+]
+
+
+Read JSON:
+
+with open('data.json', 'r') as f:
+    data = json.load(f)
+
+
+============================================================
+5. INSTALL ALL REQUIRED PACKAGES
+============================================================
+
+pip install fastapi uvicorn pydantic
+
+
+============================================================
+6. RUN FASTAPI APPLICATION
+============================================================
+
+python -m uvicorn day1:app --reload
+
+
+============================================================
+7. QUICK SUMMARY
+============================================================
+
+FASTAPI
+    -> Create APIs
+
+UVICORN
+    -> Run FastAPI application
+
+PYDANTIC
+    -> Validate data
+
+JSON
+    -> Store/exchange data
+
+
+============================================================
+8. EASY TRICK TO REMEMBER
+============================================================
+
+FASTAPI
+    = API Building
+
+UVICORN
+    = API Running
+
+PYDANTIC
+    = Data Validation
+
+JSON
+    = Data Storage/Exchange
+
+
+============================================================
+
+============================================================
+FASTAPI - DAY 1
+============================================================
+
+
+1. INSTALLATION
+============================================================
+
+pip install uvicorn
+pip install pydantic
+pip install fastapi
+
+
+2. RUN FASTAPI APPLICATION
+============================================================
+
+python -m uvicorn day1:app --reload
+
+
+3. BASIC FASTAPI ENDPOINTS
+============================================================
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get('/')
+def home():
+    return {'message': 'Welcome to my landing page....'}
+
+
+@app.get('/about')
+def about():
+    return {'message': 'Heyy, there is no about. Get lost!'}
+
+
+@app.get('/data')
+def data():
+    return {'message': 'This is my data'}
+
+
+============================================================
+4. LOAD DATA FROM JSON FILE
+============================================================
+
+import json
+
+
+class GetData:
+
+    def get_data(self):
+
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+
+        return data
+
+
+============================================================
+5. FETCH CITIES FROM JSON DATA
+============================================================
+
+@app.get('/cities')
+def fetch_data():
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    return [customer['city'] for customer in customers]
+
+
+============================================================
+6. SEARCH CUSTOMER BY PRODUCT
+============================================================
+
+@app.get('/products')
+def get_prod(product: str):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    for customer in customers:
+
+        if customer['product'] == product:
+            return customer['customer_name']
+
+    return {'message': 'No product found'}
+
+
+============================================================
+7. SEARCH CUSTOMER BY CITY
+============================================================
+
+@app.get('/city')
+def city_info(city: str):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    for customer in customers:
+
+        if customer['city'] == city:
+            return customer
+
+    return {'message': 'Customer not found'}
+
+
+============================================================
+8. FIND CUSTOMERS ABOVE GIVEN AGE
+============================================================
+
+@app.get('/major')
+def major_cust(age: int):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    result = []
+
+    for customer in customers:
+
+        if customer['age'] >= age:
+            result.append(customer)
+
+    return result
+
+
+============================================================
+9. IMPORTANT ENDPOINTS TO PRACTICE
+============================================================
+
+# Find all customers
+GET /customers
+
+
+# Find all products
+GET /products
+
+
+# Find all cities
+GET /cities
+
+
+# Search customer by city
+GET /city?city=Hyderabad
+
+
+# Customers by category
+GET /category?category=Electronics
+
+
+# Customers above given age
+GET /major?age=25
+
+
+# Products below given price
+GET /products/price?price=50000
+
+
+# Calculate total sales
+GET /sales/total
+
+
+============================================================
+10. COMPLETE BASIC STRUCTURE
+============================================================
+
+from fastapi import FastAPI
+import json
+
+
+app = FastAPI()
+
+
+# ----------------------------------------------------------
+# Load JSON Data
+# ----------------------------------------------------------
+
+class GetData:
+
+    def get_data(self):
+
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+
+        return data
+
+
+# ----------------------------------------------------------
+# Home Endpoint
+# ----------------------------------------------------------
+
+@app.get('/')
+def home():
+
+    return {
+        'message': 'Welcome to my FastAPI application'
+    }
+
+
+# ----------------------------------------------------------
+# About Endpoint
+# ----------------------------------------------------------
+
+@app.get('/about')
+def about():
+
+    return {
+        'message': 'This is About page'
+    }
+
+
+# ----------------------------------------------------------
+# Get All Customers
+# ----------------------------------------------------------
+
+@app.get('/customers')
+def get_customers():
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    return customers
+
+
+# ----------------------------------------------------------
+# Get All Cities
+# ----------------------------------------------------------
+
+@app.get('/cities')
+def get_cities():
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    return [customer['city'] for customer in customers]
+
+
+# ----------------------------------------------------------
+# Search Customer By City
+# ----------------------------------------------------------
+
+@app.get('/city')
+def city_info(city: str):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    result = []
+
+    for customer in customers:
+
+        if customer['city'].lower() == city.lower():
+            result.append(customer)
+
+    if result:
+        return result
+
+    return {
+        'message': 'No customers found in this city'
+    }
+
+
+# ----------------------------------------------------------
+# Customers By Category
+# ----------------------------------------------------------
+
+@app.get('/category')
+def category_info(category: str):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    result = []
+
+    for customer in customers:
+
+        if customer['category'].lower() == category.lower():
+            result.append(customer)
+
+    if result:
+        return result
+
+    return {
+        'message': 'No customers found in this category'
+    }
+
+
+# ----------------------------------------------------------
+# Customers Above Given Age
+# ----------------------------------------------------------
+
+@app.get('/major')
+def major_cust(age: int):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    result = []
+
+    for customer in customers:
+
+        if customer['age'] >= age:
+            result.append(customer)
+
+    if result:
+        return result
+
+    return {
+        'message': 'No customers found'
+    }
+
+
+# ----------------------------------------------------------
+# Products Below Given Price
+# ----------------------------------------------------------
+
+@app.get('/products/price')
+def products_below_price(price: float):
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    result = []
+
+    for customer in customers:
+
+        if customer['price'] < price:
+            result.append(customer)
+
+    if result:
+        return result
+
+    return {
+        'message': 'No products found below given price'
+    }
+
+
+# ----------------------------------------------------------
+# Calculate Total Sales
+# ----------------------------------------------------------
+
+@app.get('/sales/total')
+def total_sales():
+
+    data = GetData()
+
+    customers = data.get_data()
+
+    total = 0
+
+    for customer in customers:
+
+        total += customer['price']
+
+    return {
+        'total_sales': total
+    }
+
+
+============================================================
+11. IMPORTANT FASTAPI CONCEPT
+============================================================
+
+@app.get('/city')
+def city_info(city: str):
+
+
+@app.get('/major')
+def major_cust(age: int):
+
+
+@app.get('/products/price')
+def products_below_price(price: float):
+
+
+city: str
+    |
+    +---- city is the parameter name
+    +---- str is the data type
+
+
+age: int
+    |
+    +---- age is the parameter name
+    +---- int is the data type
+
+
+price: float
+    |
+    +---- price is the parameter name
+    +---- float is the data type
+
+
+============================================================
+12. URL EXAMPLES
+============================================================
+
+http://127.0.0.1:8000/
+
+http://127.0.0.1:8000/about
+
+http://127.0.0.1:8000/customers
+
+http://127.0.0.1:8000/cities
+
+http://127.0.0.1:8000/city?city=Hyderabad
+
+http://127.0.0.1:8000/category?category=Electronics
+
+http://127.0.0.1:8000/major?age=25
+
+http://127.0.0.1:8000/products/price?price=50000
+
+http://127.0.0.1:8000/sales/total
+
+
+============================================================
+13. QUICK TRICKS
+============================================================
+
+@app.get()
+    -> Used to create GET endpoint.
+
+
+FastAPI()
+    -> Creates FastAPI application.
+
+
+json.load()
+    -> Converts JSON file data into Python object.
+
+
+with open()
+    -> Opens a file safely.
+
+
+customer['city']
+    -> Gets city value from dictionary.
+
+
+customer['age']
+    -> Gets age value.
+
+
+customer['price']
+    -> Gets price value.
+
+
+result.append(customer)
+    -> Adds customer to result list.
+
+
+return result
+    -> Sends result as API response.
+
+
+============================================================
+14. PROJECT STRUCTURE
+============================================================
+
+fastapi_project/
+│
+├── day1.py
+│
+└── data.json
+
+
+Run:
+
+python -m uvicorn day1:app --reload
+
+
+Then open:
+
+http://127.0.0.1:8000/
+
+
+Swagger Documentation:
+
+http://127.0.0.1:8000/docs
+
+
+============================================================

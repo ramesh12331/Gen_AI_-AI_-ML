@@ -1,0 +1,46 @@
+[
+    {
+        "customer_id": "C001",
+        "customer_name": "RAMESH",
+        "age": 25,
+        "city": "Hyderabad",
+        "product": "laptop",
+        "category": "electronics",
+        "quantity": 2,
+        "price": 50000,
+        "total_price": 100000
+    },
+    {
+        "customer_id": "C002",
+        "customer_name": "SURESH",
+        "age": 30,
+        "city": "Warangal",
+        "product": "mobile",
+        "category": "electronics",
+        "quantity": 3,
+        "price": 20000,
+        "total_price": 60000
+    },
+    {
+        "customer_id": "C004",
+        "customer_name": "PRASAD",
+        "age": 35,
+        "city": "Chennai",
+        "product": "headphones",
+        "category": "electronics",
+        "quantity": 2,
+        "price": 2500,
+        "total_price": 5000
+    },
+    {
+        "customer_id": "C005",
+        "customer_name": "LAKSHMI",
+        "age": 42,
+        "city": "Bangalore",
+        "product": "table",
+        "category": "furniture",
+        "quantity": 2,
+        "price": 7500,
+        "total_price": 15000
+    }
+]

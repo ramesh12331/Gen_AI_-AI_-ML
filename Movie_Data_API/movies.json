@@ -1,0 +1,62 @@
+[
+    {
+        "title": "RRR",
+        "genre": "Action",
+        "language": "Telugu",
+        "release_year": 2022,
+        "rating": 8.0,
+        "duration_minutes": 187,
+        "platform": "Netflix",
+        "budget_crore": 550.0,
+        "box_office_crore": 1200.0,
+        "movie_id": 1
+    },
+    {
+        "title": "Baahubali 2",
+        "genre": "Action",
+        "language": "Telugu",
+        "release_year": 2017,
+        "rating": 8.2,
+        "duration_minutes": 167,
+        "platform": "Netflix",
+        "budget_crore": 250.0,
+        "box_office_crore": 1800.0,
+        "movie_id": 2
+    },
+    {
+        "title": "Jersey",
+        "genre": "Drama",
+        "language": "Telugu",
+        "release_year": 2019,
+        "rating": 8.5,
+        "duration_minutes": 157,
+        "platform": "Amazon Prime",
+        "budget_crore": 25.0,
+        "box_office_crore": 50.0,
+        "movie_id": 3
+    },
+    {
+        "title": "Pushpa",
+        "genre": "Action",
+        "language": "Telugu",
+        "release_year": 2021,
+        "rating": 7.6,
+        "duration_minutes": 179,
+        "platform": "Amazon Prime",
+        "budget_crore": 170.0,
+        "box_office_crore": 360.0,
+        "movie_id": 4
+    },
+    {
+        "title": "PARADISE",
+        "genre": "Sci-Fi",
+        "language": "English",
+        "release_year": 2024,
+        "rating": 8.4,
+        "duration_minutes": 142,
+        "platform": "Netflix",
+        "budget_crore": 300.0,
+        "box_office_crore": 750.0,
+        "movie_id": 5
+    }
+]

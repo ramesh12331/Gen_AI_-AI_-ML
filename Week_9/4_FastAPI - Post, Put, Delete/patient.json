@@ -1,0 +1,10 @@
+[
+    {
+        "name": "John",
+        "city": "Bangalore",
+        "age": 30,
+        "gender": "male",
+        "height": 170.5,
+        "weight": 75.0
+    }
+]

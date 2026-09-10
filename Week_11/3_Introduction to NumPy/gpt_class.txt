@@ -1,0 +1,782 @@
+import numpy as np
+
+# ============================================================
+# 1. INTRODUCTION TO NUMPY ARRAY
+# ============================================================
+
+# np.array() is used to create a NumPy array.
+# Here, we are creating a 1D array containing 4 numbers.
+arr = np.array([10, 20, 30, 40])
+
+# Print the array
+print(arr)
+
+
+# ============================================================
+# 2. PYTHON LIST VS NUMPY ARRAY
+# ============================================================
+
+# ---------------- Python Lists ----------------
+
+list_1 = [1, 2, 3]
+list_2 = [4, 5, 6]
+
+# In Python, + joins two lists together.
+# It does NOT perform element-wise addition.
+#
+# Output:
+# [1, 2, 3, 4, 5, 6]
+
+print(list_1 + list_2)
+
+
+# ---------------- NumPy Arrays ----------------
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# NumPy performs element-wise addition.
+#
+# 1 + 4 = 5
+# 2 + 5 = 7
+# 3 + 6 = 9
+#
+# Output:
+# [5 7 9]
+
+print(a + b)
+
+
+# ============================================================
+# 3. CREATING A NUMPY ARRAY
+# ============================================================
+
+# We can directly pass a Python list to np.array().
+arr = np.array([3, 4, 5])
+
+print(arr)
+
+
+# We can also first create a Python list
+# and then convert it into a NumPy array.
+
+numbers = [10, 20, 30, 40]
+
+arr = np.array(numbers)
+
+print(arr)
+
+
+# ============================================================
+# 4. 1D ARRAY
+# ============================================================
+
+# 1D means one-dimensional.
+# It looks similar to a simple Python list.
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr)
+
+
+# ============================================================
+# 5. 2D ARRAY
+# ============================================================
+
+print("2D Array")
+
+# A 2D array contains rows and columns.
+#
+#       Columns
+#       1  2  3
+#       4  5  6
+#
+# This array has:
+# 2 rows
+# 3 columns
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+# ndim tells us the number of dimensions.
+#
+# 2D array -> ndim = 2
+
+print(arr.ndim)
+
+
+# ============================================================
+# 6. 3D ARRAY
+# ============================================================
+
+# A 3D array contains multiple 2D arrays.
+
+arr = np.array([
+    [
+        [1, 2],
+        [3, 4]
+    ],
+    [
+        [5, 6],
+        [7, 8]
+    ]
+])
+
+# ndim tells us the number of dimensions.
+#
+# This is a 3D array.
+#
+# Output:
+# 3
+
+print(arr.ndim)
+
+
+# ============================================================
+# 7. NUMPY ARRAY ATTRIBUTES
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+
+# ---------------- ndim ----------------
+
+# ndim = number of dimensions.
+#
+# Our array has rows and columns,
+# so it is a 2D array.
+
+print(arr.ndim)
+
+
+# ---------------- shape ----------------
+
+# shape tells us the size of each dimension.
+#
+# (2, 3) means:
+# 2 rows
+# 3 columns
+
+print(arr.shape)
+
+
+# ---------------- size ----------------
+
+# size tells us the total number of elements.
+#
+# 2 rows × 3 columns = 6 elements
+
+print(arr.size)
+
+
+# ---------------- dtype ----------------
+
+# dtype tells us the data type of the elements.
+#
+# Example:
+# int64
+
+print(arr.dtype)
+
+
+# ============================================================
+# 8. ELEMENT-WISE OPERATIONS
+# ============================================================
+
+a = np.array([3, 4, 5])
+b = np.array([6, 7, 8])
+
+
+# Element-wise addition
+#
+# 3 + 6 = 9
+# 4 + 7 = 11
+# 5 + 8 = 13
+
+print(a + b)
+
+
+# Element-wise subtraction
+#
+# 3 - 6 = -3
+# 4 - 7 = -3
+# 5 - 8 = -3
+
+print(a - b)
+
+
+# Element-wise multiplication
+#
+# 3 × 6 = 18
+# 4 × 7 = 28
+# 5 × 8 = 40
+
+print(a * b)
+
+
+# Element-wise division
+#
+# 3 / 6 = 0.5
+# 4 / 7 = 0.571...
+# 5 / 8 = 0.625
+
+print(a / b)
+
+
+# ============================================================
+# 9. ADDING A SINGLE NUMBER
+# ============================================================
+
+arr = np.array([10, 20, 30, 40])
+
+# NumPy adds 5 to EVERY element.
+#
+# 10 + 5 = 15
+# 20 + 5 = 25
+# 30 + 5 = 35
+# 40 + 5 = 45
+
+print(arr + 5)
+
+
+# ============================================================
+# 10. DTYPE
+# ============================================================
+
+# dtype can be used to specify the data type
+# of the NumPy array.
+
+arr = np.array(
+    [45, 67, 899874564675, 23],
+    dtype="int64"
+)
+
+# Print the data type of the array.
+
+print(arr.dtype)
+
+
+# ============================================================
+# 11. NUMPY IS USUALLY HOMOGENEOUS
+# ============================================================
+
+# NumPy arrays generally store elements
+# using the same data type.
+
+# Here we have integers and one float.
+#
+# 34 -> int
+# 56 -> int
+# 78 -> int
+# 23 -> int
+# 45.7 -> float
+#
+# NumPy converts the integers to float
+# so that all elements have a common data type.
+
+arr = np.array([34, 56, 78, 23, 45.7])
+
+print(arr)
+
+# Check the final data type.
+
+print(arr.dtype)
+
+
+# ============================================================
+# 12. ONES
+# ============================================================
+
+# np.ones() creates an array filled with 1s.
+#
+# (3, 4) means:
+# 3 rows
+# 4 columns
+
+arr = np.ones((3, 4))
+
+print(arr)
+
+
+# ============================================================
+# 13. ZEROS
+# ============================================================
+
+# np.zeros() creates an array filled with 0s.
+#
+# 3 rows × 4 columns
+
+arr = np.zeros((3, 4))
+
+print(arr)
+
+
+# ============================================================
+# 14. IDENTITY MATRIX USING eye()
+# ============================================================
+
+# np.eye(4) creates a 4 × 4 identity matrix.
+#
+# Main diagonal = 1
+# Other positions = 0
+
+arr = np.eye(4)
+
+print(arr)
+
+
+# ============================================================
+# 15. IDENTITY MATRIX USING identity()
+# ============================================================
+
+print("Identity Matrix")
+
+# np.identity(5) creates a 5 × 5 identity matrix.
+
+arr = np.identity(5)
+
+print(arr)
+
+
+# ============================================================
+# 16. DIAGONAL MATRIX
+# ============================================================
+
+# np.diag() places the given values
+# on the main diagonal.
+
+arr = np.diag([2, 3, 4, 5, 6])
+
+print(arr)
+
+# Output:
+#
+# [[2 0 0 0 0]
+#  [0 3 0 0 0]
+#  [0 0 4 0 0]
+#  [0 0 0 5 0]
+#  [0 0 0 0 6]]
+
+
+# ============================================================
+# 17. EMPTY ARRAY
+# ============================================================
+
+# np.empty() creates an array without initializing
+# its values to a particular number.
+#
+# (2, 4) means:
+# 2 rows
+# 4 columns
+#
+# IMPORTANT:
+# The values are NOT guaranteed to be 0.
+# They contain whatever values happen to be in memory.
+
+arr = np.empty([2, 4])
+
+print(arr)
+
+
+# ============================================================
+# 18. arange()
+# ============================================================
+
+# np.arange(start, stop, step)
+#
+# start = where to begin
+# stop  = where to stop (not included)
+# step  = difference between values
+
+arr = np.arange(2, 10, 2)
+
+# Values:
+# 2, 4, 6, 8
+#
+# 10 is not included.
+
+print(arr)
+
+
+# Another example
+
+arr = np.arange(100, 10, -10)
+
+# Start = 100
+# Stop = 10
+# Step = -10
+#
+# Values:
+# 100, 90, 80, 70, 60, 50, 40, 30, 20
+#
+# 10 is not included.
+
+print(arr)
+
+
+# ============================================================
+# 19. linspace()
+# ============================================================
+
+# np.linspace(start, stop, number_of_values)
+#
+# It creates evenly spaced values between
+# the start and stop values.
+#
+# Here:
+# Start = 1
+# Stop = 10
+# Number of values = 9
+
+arr = np.linspace(1, 10, 9)
+
+print(arr)
+
+# Unlike arange(), linspace() focuses on
+# the number of values we want.
+
+
+# ============================================================
+# 20. RANDOM ARRAYS
+# ============================================================
+
+# np.random.rand(4, 5) creates a 2D array
+# with:
+# 4 rows
+# 5 columns
+#
+# Values are random numbers between 0 and 1.
+
+arr = np.random.rand(4, 5)
+
+print(arr)
+
+
+# ============================================================
+# 21. RESHAPE
+# ============================================================
+
+# First create a 1D array.
+
+arr = np.arange(1, 7)
+
+print(arr)
+
+# Output:
+# [1 2 3 4 5 6]
+
+
+# reshape() changes the shape of the array
+# without changing its data.
+#
+# Here we convert:
+#
+# 1D -> 2D
+#
+# 6 elements become:
+# 2 rows × 3 columns
+
+reshaped_arr = arr.reshape(2, 3)
+
+print(reshaped_arr)
+
+# Output:
+#
+# [[1 2 3]
+#  [4 5 6]]
+
+
+# IMPORTANT:
+# Total number of elements must remain the same.
+#
+# Original:
+# 6 elements
+#
+# New shape:
+# 2 × 3 = 6
+#
+# Therefore reshape works.
+
+
+# ============================================================
+# 22. FLATTEN
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+# flatten() converts a multidimensional array
+# into a 1D array.
+#
+# 2D -> 1D
+
+flattened = arr.flatten()
+
+print(flattened)
+
+# Output:
+# [1 2 3 4 5 6]
+
+
+# IMPORTANT:
+# flatten() returns a COPY of the data.
+
+
+# ============================================================
+# 23. RAVEL
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+# ravel() also converts the array into 1D.
+
+raveled = arr.ravel()
+
+print(raveled)
+
+# Output:
+# [1 2 3 4 5 6]
+
+
+# IMPORTANT:
+# ravel() usually returns a VIEW when possible.
+# Therefore, changes to the raveled array can
+# affect the original array.
+
+
+# ============================================================
+# 24. TRANSPOSE
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+# Original array:
+#
+# [[1 2 3]
+#  [4 5 6]]
+#
+# Shape = (2, 3)
+#
+# arr.T changes rows into columns
+# and columns into rows.
+#
+# Transposed array:
+#
+# [[1 4]
+#  [2 5]
+#  [3 6]]
+#
+# Shape = (3, 2)
+
+print(arr.T)
+
+
+# ============================================================
+# 25. VIEW VS COPY
+# ============================================================
+
+arr = np.array([1, 2, 3])
+
+
+# ---------------- VIEW ----------------
+
+# view() creates another array object
+# that shares the SAME underlying data.
+
+arr_view = arr.view()
+
+
+# ---------------- COPY ----------------
+
+# copy() creates a completely independent copy
+# of the data.
+
+arr_copy = arr.copy()
+
+
+# Print the view
+
+print(arr_view)
+
+
+# Print the copy
+
+print(arr_copy)
+
+
+# ------------------------------------------------------------
+# VIEW vs COPY - IMPORTANT
+# ------------------------------------------------------------
+
+# If we change arr_view:
+#
+# arr_view[0] = 100
+#
+# the original arr can also be affected because
+# view() shares the same underlying data.
+#
+# If we change arr_copy:
+#
+# arr_copy[0] = 200
+#
+# the original arr will NOT be affected because
+# copy() creates independent data.
+
+
+# ============================================================
+# FINAL SUMMARY
+# ============================================================
+
+# NumPy
+# -----
+# NumPy is a Python library mainly used for
+# numerical computing and working with arrays.
+
+
+# Important concepts learned:
+#
+# 1. np.array()
+#    -> Creates a NumPy array.
+#
+# 2. 1D Array
+#    -> One-dimensional array.
+#
+# 3. 2D Array
+#    -> Rows and columns.
+#
+# 4. 3D Array
+#    -> Collection of 2D arrays.
+#
+# 5. ndim
+#    -> Number of dimensions.
+#
+# 6. shape
+#    -> Size of each dimension.
+#
+# 7. size
+#    -> Total number of elements.
+#
+# 8. dtype
+#    -> Data type of array elements.
+#
+# 9. Element-wise operations
+#    -> Operations are performed on each element.
+#
+# 10. np.ones()
+#     -> Creates an array filled with 1s.
+#
+# 11. np.zeros()
+#     -> Creates an array filled with 0s.
+#
+# 12. np.eye()
+#     -> Creates an identity matrix.
+#
+# 13. np.diag()
+#     -> Creates a diagonal matrix.
+#
+# 14. np.empty()
+#     -> Creates an uninitialized array.
+#
+# 15. np.arange()
+#     -> Creates values using start, stop and step.
+#
+# 16. np.linspace()
+#     -> Creates evenly spaced values.
+#
+# 17. np.random.rand()
+#     -> Creates random values between 0 and 1.
+#
+# 18. reshape()
+#     -> Changes the shape of an array.
+#
+# 19. flatten()
+#     -> Converts an array into 1D and returns a copy.
+#
+# 20. ravel()
+#     -> Converts an array into 1D and usually returns a view.
+#
+# 21. transpose / .T
+#     -> Converts rows into columns and columns into rows.
+#
+# 22. view()
+#     -> Shares the underlying data.
+#
+# 23. copy()
+#     -> Creates independent data.
+
+=========================================
+Yes — you want **that exact `int32` code added**, with the **VS Code Terminal output**.
+
+Use this section:
+
+```python
+# ============================================================
+# 10. DTYPE - int32
+# ============================================================
+
+# dtype is used to specify the data type
+# of the NumPy array.
+#
+# int32 can store integer values from:
+#
+# -2,147,483,648
+# to
+#  2,147,483,647
+#
+# But 899874564675 is much larger than
+# the maximum int32 value.
+
+arr = np.array(
+    [45, 67, 899874564675, 23],
+    dtype="int32"
+)
+
+print(arr)
+```
+
+### VS CODE TERMINAL
+
+```text
+OverflowError: Python integer 899874564675 out of bounds for int32
+```
+
+### Correct version using `int64`
+
+```python
+# ============================================================
+# 11. DTYPE - int64
+# ============================================================
+
+# int64 can store much larger integer values.
+
+arr = np.array(
+    [45, 67, 899874564675, 23],
+    dtype="int64"
+)
+
+print(arr)
+
+print(arr.dtype)
+```
+
+### VS CODE TERMINAL
+
+```text
+[           45            67 899874564675            23]
+int64
+```
+
+This `dtype` section is based on the code in your uploaded NumPy notes. 

@@ -1,0 +1,625 @@
+# ============================================================
+# NUMPY
+# Python Lists vs NumPy Arrays
+# ============================================================
+
+import numpy as np
+import time
+
+
+# ============================================================
+# 1. Python Lists vs NumPy Arrays
+# ============================================================
+
+# Python Lists:
+# - Can store different data types
+# - Can grow or shrink dynamically
+# - Do not directly support element-wise mathematical operations
+# - Multidimensional data can be difficult to manage
+# - Less efficient for large numerical computations
+#
+# NumPy Arrays:
+# - Fixed size after creation
+# - Usually contain elements of the same data type
+# - Support element-wise operations
+# - Efficient for large numerical data
+# - Easy to work with multidimensional data
+# - Better memory and computational efficiency
+# - Widely used in Data Science, Machine Learning, and Scientific Computing
+
+
+# ============================================================
+# 2. Creating a NumPy Array
+# ============================================================
+
+arr = np.array([3, 4, 5])
+
+print("Array:", arr)
+print("Number of dimensions:", arr.ndim)
+
+
+# ============================================================
+# 3. Creating a 2D Array
+# ============================================================
+
+arr_2d = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\n2D Array:")
+print(arr_2d)
+
+print("Dimensions:", arr_2d.ndim)
+print("Shape:", arr_2d.shape)
+
+
+# ============================================================
+# 4. Creating a 3D Array
+# ============================================================
+
+arr_3d = np.array([
+    [
+        [1, 2],
+        [3, 4]
+    ],
+    [
+        [5, 6],
+        [7, 8]
+    ]
+])
+
+print("\n3D Array:")
+print(arr_3d)
+
+print("Dimensions:", arr_3d.ndim)
+print("Shape:", arr_3d.shape)
+
+
+# ============================================================
+# 5. Creating a 5D Array
+# ============================================================
+
+arr_5d = np.array([
+    [
+        [
+            [
+                [1, 2],
+                [4, 5]
+            ]
+        ]
+    ]
+])
+
+print("\n5D Array:")
+print(arr_5d)
+
+print("Dimensions:", arr_5d.ndim)
+print("Shape:", arr_5d.shape)
+
+
+# ============================================================
+# 6. Creating NumPy Array from Python List
+# ============================================================
+
+numbers = [4, 5, 6, 7]
+
+arr = np.array(numbers)
+
+print("\nPython List:")
+print(numbers)
+
+print("NumPy Array:")
+print(arr)
+
+
+# ============================================================
+# 7. Element-wise Operation
+# ============================================================
+
+arr = np.array([4, 5, 6, 7])
+
+result = arr + 10
+
+print("\nOriginal Array:")
+print(arr)
+
+print("After adding 10:")
+print(result)
+
+
+# ============================================================
+# 8. Python List Concatenation
+# ============================================================
+
+list_1 = [1, 2, 3]
+list_2 = [4, 5, 6]
+
+result = list_1 + list_2
+
+print("\nPython Lists:")
+print(result)
+
+# Output:
+# [1, 2, 3, 4, 5, 6]
+
+# In Python lists, + performs concatenation.
+
+
+# ============================================================
+# 9. NumPy Element-wise Addition
+# ============================================================
+
+a = np.array([3, 4, 5])
+b = np.array([6, 7, 8])
+
+print("\nArray A:")
+print(a)
+
+print("Array B:")
+print(b)
+
+print("A + B:")
+print(a + b)
+
+# Output:
+# [ 9 11 13 ]
+
+
+# ============================================================
+# 10. NumPy Element-wise Operations
+# ============================================================
+
+a = np.array([3, 4, 5])
+b = np.array([6, 7, 8])
+
+print("\nAddition:")
+print(a + b)
+
+print("Subtraction:")
+print(a - b)
+
+print("Multiplication:")
+print(a * b)
+
+print("Division:")
+print(a / b)
+
+
+# ============================================================
+# 11. dtype Management
+# ============================================================
+
+arr = np.array([
+    45,
+    67,
+    899874564675,
+    23
+], dtype="int64")
+
+print("\nArray:")
+print(arr)
+
+print("Data type:")
+print(arr.dtype)
+
+
+# ============================================================
+# 12. NumPy is Homogeneous
+# ============================================================
+
+age = np.array([34, 56, 78, 23, 45.7])
+
+print("\nAge Array:")
+print(age)
+
+print("Data type:")
+print(age.dtype)
+
+# Because one value is float (45.7),
+# NumPy converts the other integer values to float.
+
+
+# ============================================================
+# 13. NumPy Ones
+# ============================================================
+
+arr = np.ones((3, 4))
+
+print("\nOnes Array:")
+print(arr)
+
+
+# ============================================================
+# 14. NumPy Zeros
+# ============================================================
+
+arr = np.zeros((2, 3))
+
+print("\nZeros Array:")
+print(arr)
+
+
+# ============================================================
+# 15. Identity Matrix
+# ============================================================
+
+arr = np.eye(4)
+
+print("\nIdentity Matrix:")
+print(arr)
+
+
+# ============================================================
+# 16. np.identity()
+# ============================================================
+
+arr = np.identity(5)
+
+print("\nIdentity Matrix using np.identity():")
+print(arr)
+
+
+# ============================================================
+# 17. Diagonal Matrix
+# ============================================================
+
+arr = np.diag([2, 3, 4, 5, 6])
+
+print("\nDiagonal Matrix:")
+print(arr)
+
+
+# ============================================================
+# 18. Empty Array
+# ============================================================
+
+arr = np.empty((2, 4))
+
+print("\nEmpty Array:")
+print(arr)
+
+# np.empty() creates an array without initializing
+# its values to zero.
+
+
+# ============================================================
+# 19. np.arange()
+# ============================================================
+
+arr = np.arange(2, 10)
+
+print("\nUsing arange:")
+print(arr)
+
+
+# ============================================================
+# 20. np.arange() with Start, Stop and Step
+# ============================================================
+
+arr = np.arange(2, 10, 2)
+
+print("\nUsing arange(start, stop, step):")
+print(arr)
+
+# Output:
+# [2 4 6 8]
+
+# Important:
+# The stop value is excluded.
+
+
+# ============================================================
+# 21. Another arange Example
+# ============================================================
+
+arr = np.arange(100, 10, -2)
+
+print("\nReverse arange:")
+print(arr)
+
+# Important:
+# If start > stop, use a negative step.
+
+
+# ============================================================
+# 22. np.linspace()
+# ============================================================
+
+arr = np.linspace(1, 10, 9)
+
+print("\nUsing linspace:")
+print(arr)
+
+# np.linspace(start, stop, number_of_values)
+#
+# It generates a specified number of equally spaced values.
+
+
+# ============================================================
+# 23. Random Array - Uniform Distribution
+# ============================================================
+
+arr = np.random.rand(4, 5)
+
+print("\nRandom Array:")
+print(arr)
+
+
+# ============================================================
+# 24. Random Integer Array
+# ============================================================
+
+arr = np.random.randint(2, 10, 5)
+
+print("\nRandom Integer Array:")
+print(arr)
+
+# Generates 5 random integers from 2 to 9.
+
+
+# ============================================================
+# 25. Standard Normal Distribution
+# ============================================================
+
+arr = np.random.randn(5)
+
+print("\nStandard Normal Distribution:")
+print(arr)
+
+# Standard normal distribution:
+# Mean = 0
+# Standard deviation = 1
+
+
+# ============================================================
+# 26. Important NumPy Array Attributes
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\nArray:")
+print(arr)
+
+print("ndim:", arr.ndim)
+print("shape:", arr.shape)
+print("size:", arr.size)
+print("dtype:", arr.dtype)
+
+
+# ============================================================
+# 27. Reshaping
+# ============================================================
+
+arr = np.arange(1, 7)
+
+print("\nOriginal Array:")
+print(arr)
+
+reshaped_arr = arr.reshape(2, 3)
+
+print("Reshaped Array:")
+print(reshaped_arr)
+
+
+# ============================================================
+# 28. Flatten
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\nOriginal Array:")
+print(arr)
+
+flattened = arr.flatten()
+
+print("Flattened Array:")
+print(flattened)
+
+
+# ============================================================
+# 29. Ravel
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\nOriginal Array:")
+print(arr)
+
+raveled = arr.ravel()
+
+print("Raveled Array:")
+print(raveled)
+
+
+# ============================================================
+# 30. Transpose
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\nOriginal Array:")
+print(arr)
+
+print("Transpose:")
+print(arr.T)
+
+
+# ============================================================
+# 31. Shallow Copy vs Deep Copy
+# ============================================================
+
+arr = np.array([1, 2, 3])
+
+# Shallow/View-like behavior
+arr_view = arr.view()
+
+# Deep copy
+arr_copy = arr.copy()
+
+print("\nOriginal:")
+print(arr)
+
+print("View:")
+print(arr_view)
+
+print("Copy:")
+print(arr_copy)
+
+
+# ============================================================
+# 32. Comparing List and NumPy Array
+# ============================================================
+
+python_list = [1, 2, 3]
+
+numpy_array = np.array([1, 2, 3])
+
+print("\nPython List:")
+print(python_list)
+
+print("NumPy Array:")
+print(numpy_array)
+
+
+# Python List
+# python_list + python_list
+#
+# Output:
+# [1, 2, 3, 1, 2, 3]
+
+
+# NumPy Array
+# numpy_array + numpy_array
+#
+# Output:
+# [2 4 6]
+
+
+# ============================================================
+# 33. Element-wise Operations
+# ============================================================
+
+arr = np.array([10, 20, 30, 40])
+
+print("\nOriginal:")
+print(arr)
+
+print("Add 5:")
+print(arr + 5)
+
+print("Subtract 5:")
+print(arr - 5)
+
+print("Multiply by 2:")
+print(arr * 2)
+
+print("Divide by 2:")
+print(arr / 2)
+
+
+# ============================================================
+# 34. Performance Comparison
+# ============================================================
+
+n = 10_000_000
+
+
+# -----------------------------
+# Python List
+# -----------------------------
+
+python_list = range(n)
+
+start = time.time()
+
+result_list = [i ** 2 for i in python_list]
+
+end = time.time()
+
+time_taken_list = end - start
+
+print("\nPython List Time:")
+print(time_taken_list)
+
+
+# -----------------------------
+# NumPy Array
+# -----------------------------
+
+numpy_array = np.arange(n)
+
+start = time.time()
+
+result_array = numpy_array ** 2
+
+end = time.time()
+
+time_taken_array = end - start
+
+print("\nNumPy Array Time:")
+print(time_taken_array)
+
+
+# ============================================================
+# 35. Performance Result
+# ============================================================
+
+print("\nPerformance Comparison:")
+print("Python List Time :", time_taken_list)
+print("NumPy Array Time :", time_taken_array)
+
+if time_taken_array < time_taken_list:
+    print("NumPy is faster for this operation.")
+else:
+    print("Python List was faster for this particular run.")
+
+
+# ============================================================
+# 36. Heterogeneous Data
+# ============================================================
+
+# Python lists can contain different data types.
+
+data = [
+    10,
+    20.5,
+    "Python",
+    True
+]
+
+print("\nPython List with Different Data Types:")
+print(data)
+
+
+# ============================================================
+# 37. NumPy Object dtype
+# ============================================================
+
+data = np.array([
+    10,
+    "Python",
+    20.5
+])
+
+print("\nNumPy Object Array:")
+print(data)
+
+print("dtype:")
+print(data.dtype)
+
+# When NumPy cannot represent the values
+# using a common normal numeric/string dtype,
+# it may use dtype=object.

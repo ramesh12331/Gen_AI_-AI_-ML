@@ -1,0 +1,1521 @@
+# ============================================================
+# NUMPY BEGINNER LEVEL
+# CODE + OUTPUT
+# ============================================================
+
+import numpy as np
+import time
+
+
+# ============================================================
+# 1. DIFFERENCE BETWEEN PYTHON LISTS AND NUMPY ARRAYS
+# ============================================================
+
+"""
+Python Lists:
+
+1. Lists can grow and shrink dynamically.
+2. Lists can store different data types.
+3. Lists do not directly support element-wise arithmetic.
+4. Multidimensional data is more difficult to manage.
+5. Numerical operations may be slower for large data.
+
+NumPy Arrays:
+
+1. NumPy arrays generally have a fixed size.
+2. NumPy arrays generally store one common data type.
+3. NumPy supports element-wise operations.
+4. NumPy handles multidimensional data easily.
+5. NumPy is faster for large numerical calculations.
+"""
+
+
+# ============================================================
+# 2. PYTHON LIST CONCATENATION
+# ============================================================
+
+list_1 = [1, 2, 3]
+list_2 = [4, 5, 6]
+
+print("2. Python List Addition:")
+print(list_1 + list_2)
+
+"""
+OUTPUT:
+
+2. Python List Addition:
+[1, 2, 3, 4, 5, 6]
+"""
+
+"""
+Explanation:
+
+For Python lists, + joins the lists.
+It is called concatenation.
+"""
+
+
+# ============================================================
+# 3. CREATING A BASIC NUMPY ARRAY
+# ============================================================
+
+arr = np.array([3, 4, 5])
+
+print("\n3. Basic NumPy Array:")
+print(arr)
+
+print("Number of Dimensions:")
+print(arr.ndim)
+
+"""
+OUTPUT:
+
+3. Basic NumPy Array:
+[3 4 5]
+Number of Dimensions:
+1
+"""
+
+
+# ============================================================
+# 4. CREATING A NUMPY ARRAY FROM A PYTHON LIST
+# ============================================================
+
+numbers = [4, 5, 6, 7]
+
+arr = np.array(numbers)
+
+print("\n4. Array Created from Python List:")
+print(arr)
+
+"""
+OUTPUT:
+
+4. Array Created from Python List:
+[4 5 6 7]
+"""
+
+
+# ============================================================
+# 5. ELEMENT-WISE OPERATION
+# ============================================================
+
+result = arr + 10
+
+print("\n5. Adding 10 to Every Element:")
+print(result)
+
+"""
+OUTPUT:
+
+5. Adding 10 to Every Element:
+[14 15 16 17]
+"""
+
+"""
+Explanation:
+
+[4, 5, 6, 7] + 10
+
+becomes:
+
+[14, 15, 16, 17]
+"""
+
+
+# ============================================================
+# 6. CREATING A 2D ARRAY
+# ============================================================
+
+arr_2d = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\n6. 2D Array:")
+print(arr_2d)
+
+print("Number of Dimensions:")
+print(arr_2d.ndim)
+
+print("Shape:")
+print(arr_2d.shape)
+
+"""
+OUTPUT:
+
+6. 2D Array:
+[[1 2 3]
+ [4 5 6]]
+Number of Dimensions:
+2
+Shape:
+(2, 3)
+"""
+
+"""
+Explanation:
+
+shape = (2, 3)
+
+2 = number of rows
+3 = number of columns
+"""
+
+
+# ============================================================
+# 7. CREATING A 5D ARRAY
+# ============================================================
+
+arr_5d = np.array([
+    [
+        [
+            [
+                [1, 2],
+                [4, 5]
+            ]
+        ]
+    ]
+])
+
+print("\n7. 5D Array:")
+print(arr_5d)
+
+print("Number of Dimensions:")
+print(arr_5d.ndim)
+
+print("Shape:")
+print(arr_5d.shape)
+
+"""
+OUTPUT:
+
+7. 5D Array:
+[[[[[1 2]
+    [4 5]]]]]
+Number of Dimensions:
+5
+Shape:
+(1, 1, 1, 2, 2)
+"""
+
+
+# ============================================================
+# 8. np.ones()
+# ============================================================
+
+ones_array = np.ones((3, 4))
+
+print("\n8. Array Containing Ones:")
+print(ones_array)
+
+"""
+OUTPUT:
+
+8. Array Containing Ones:
+[[1. 1. 1. 1.]
+ [1. 1. 1. 1.]
+ [1. 1. 1. 1.]]
+"""
+
+
+# ============================================================
+# 9. np.zeros()
+# ============================================================
+
+zeros_array = np.zeros((2, 3))
+
+print("\n9. Array Containing Zeros:")
+print(zeros_array)
+
+"""
+OUTPUT:
+
+9. Array Containing Zeros:
+[[0. 0. 0.]
+ [0. 0. 0.]]
+"""
+
+
+# ============================================================
+# 10. np.eye()
+# ============================================================
+
+eye_array = np.eye(4)
+
+print("\n10. Identity-like Matrix Using np.eye():")
+print(eye_array)
+
+"""
+OUTPUT:
+
+10. Identity-like Matrix Using np.eye():
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+"""
+
+
+# ============================================================
+# 11. np.identity()
+# ============================================================
+
+identity_array = np.identity(5)
+
+print("\n11. Identity Matrix Using np.identity():")
+print(identity_array)
+
+"""
+OUTPUT:
+
+11. Identity Matrix Using np.identity():
+[[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]
+"""
+
+
+# ============================================================
+# 12. np.diag()
+# ============================================================
+
+diagonal_array = np.diag([2, 3, 4, 5, 6])
+
+print("\n12. Diagonal Matrix:")
+print(diagonal_array)
+
+"""
+OUTPUT:
+
+12. Diagonal Matrix:
+[[2 0 0 0 0]
+ [0 3 0 0 0]
+ [0 0 4 0 0]
+ [0 0 0 5 0]
+ [0 0 0 0 6]]
+"""
+
+
+# ============================================================
+# 13. np.empty()
+# ============================================================
+
+empty_array = np.empty((2, 4))
+
+print("\n13. Empty Array:")
+print(empty_array)
+
+"""
+OUTPUT:
+
+The output of np.empty() is not fixed.
+
+Example output:
+
+[[4.675e-310 0.000e+000 6.952e-310 6.952e-310]
+ [6.952e-310 6.952e-310 6.952e-310 6.952e-310]]
+
+Explanation:
+
+np.empty() creates an array without initializing values.
+Therefore, it may contain random existing memory values.
+"""
+
+
+# ============================================================
+# 14. np.arange()
+# ============================================================
+
+arr = np.arange(1, 10)
+
+print("\n14. Array Created Using np.arange():")
+print(arr)
+
+"""
+OUTPUT:
+
+14. Array Created Using np.arange():
+[1 2 3 4 5 6 7 8 9]
+"""
+
+"""
+Syntax:
+
+np.arange(start, stop, step)
+
+The stop value is not included.
+"""
+
+
+# ============================================================
+# 15. REVERSE np.arange()
+# ============================================================
+
+reverse_arr = np.arange(100, 10, -2)
+
+print("\n15. Reverse Range:")
+print(reverse_arr)
+
+"""
+OUTPUT:
+
+15. Reverse Range:
+[100  98  96  94  92  90  88  86  84  82  80  78  76  74
+  72  70  68  66  64  62  60  58  56  54  52  50  48  46
+  44  42  40  38  36  34  32  30  28  26  24  22  20  18
+  16  14  12]
+"""
+
+
+# ============================================================
+# 16. np.linspace()
+# ============================================================
+
+linear_array = np.linspace(1, 10, 9)
+
+print("\n16. Array Created Using np.linspace():")
+print(linear_array)
+
+"""
+OUTPUT:
+
+16. Array Created Using np.linspace():
+[ 1.     2.125  3.25   4.375  5.5    6.625  7.75   8.875 10.   ]
+"""
+
+"""
+Syntax:
+
+np.linspace(start, stop, number_of_values)
+
+It creates equally spaced values.
+"""
+
+
+# ============================================================
+# 17. RANDOM ARRAY USING np.random.rand()
+# ============================================================
+
+random_array = np.random.rand(4, 5)
+
+print("\n17. Random Array:")
+print(random_array)
+
+"""
+OUTPUT:
+
+The output changes every time.
+
+Example:
+
+[[0.52 0.18 0.91 0.34 0.76]
+ [0.12 0.65 0.44 0.83 0.27]
+ [0.71 0.39 0.56 0.14 0.95]
+ [0.22 0.87 0.31 0.68 0.49]]
+"""
+
+
+# ============================================================
+# 18. RANDOM INTEGERS USING np.random.randint()
+# ============================================================
+
+random_integers = np.random.randint(2, 10, 5)
+
+print("\n18. Random Integers:")
+print(random_integers)
+
+"""
+OUTPUT:
+
+Output changes every time.
+
+Example:
+
+[4 8 2 7 5]
+
+Explanation:
+
+np.random.randint(2, 10, 5)
+
+2 = starting value
+10 = ending value, not included
+5 = number of random integers
+"""
+
+
+# ============================================================
+# 19. STANDARD NORMAL DISTRIBUTION
+# ============================================================
+
+normal_array = np.random.randn(5)
+
+print("\n19. Standard Normal Random Values:")
+print(normal_array)
+
+"""
+OUTPUT:
+
+Output changes every time.
+
+Example:
+
+[ 0.45 -1.21  0.18  0.76 -0.32]
+
+Mean is approximately 0.
+Standard deviation is approximately 1.
+"""
+
+
+# ============================================================
+# 20. NUMPY ARRAY ATTRIBUTES
+# ============================================================
+
+arr = np.array([
+    [2, 3, 4],
+    [5, 6, 7]
+])
+
+print("\n20. Original Array:")
+print(arr)
+
+print("Data Type:")
+print(arr.dtype)
+
+print("Number of Dimensions:")
+print(arr.ndim)
+
+print("Shape:")
+print(arr.shape)
+
+print("Total Number of Elements:")
+print(arr.size)
+
+"""
+OUTPUT:
+
+20. Original Array:
+[[2 3 4]
+ [5 6 7]]
+Data Type:
+int64
+Number of Dimensions:
+2
+Shape:
+(2, 3)
+Total Number of Elements:
+6
+
+Note:
+The integer dtype may be int32 or int64 depending on your system.
+"""
+
+
+# ============================================================
+# 21. DATA TYPE MANAGEMENT
+# ============================================================
+
+arr = np.array(
+    [45, 67, 899874564675, 23],
+    dtype="int64"
+)
+
+print("\n21. Array with int64 Data Type:")
+print(arr)
+
+print("Array Data Type:")
+print(arr.dtype)
+
+"""
+OUTPUT:
+
+21. Array with int64 Data Type:
+[           45            67 899874564675            23]
+Array Data Type:
+int64
+"""
+
+
+# ============================================================
+# 22. NUMPY ARRAYS ARE HOMOGENEOUS
+# ============================================================
+
+age = np.array([34, 56, 78, 23, 45.7])
+
+print("\n22. Array with Integer and Float Values:")
+print(age)
+
+print("Data Type of age Array:")
+print(age.dtype)
+
+"""
+OUTPUT:
+
+22. Array with Integer and Float Values:
+[34.  56.  78.  23.  45.7]
+Data Type of age Array:
+float64
+
+Explanation:
+
+Because 45.7 is a float, NumPy converts all values
+into float values.
+"""
+
+
+# ============================================================
+# 23. OBJECT DATA TYPE
+# ============================================================
+
+mixed_array = np.array(
+    [10, "Python", 25.5],
+    dtype=object
+)
+
+print("\n23. Object Data Type Array:")
+print(mixed_array)
+
+print("Object Array Data Type:")
+print(mixed_array.dtype)
+
+"""
+OUTPUT:
+
+23. Object Data Type Array:
+[10 'Python' 25.5]
+Object Array Data Type:
+object
+"""
+
+
+# ============================================================
+# 24. RESHAPING AN ARRAY
+# ============================================================
+
+arr = np.array([
+    [2, 3, 4],
+    [5, 6, 7]
+])
+
+print("\n24. Original Array:")
+print(arr)
+
+reshaped_array = arr.reshape(3, 2)
+
+print("Reshaped Array:")
+print(reshaped_array)
+
+"""
+OUTPUT:
+
+24. Original Array:
+[[2 3 4]
+ [5 6 7]]
+Reshaped Array:
+[[2 3]
+ [4 5]
+ [6 7]]
+"""
+
+"""
+Original shape = (2, 3)
+New shape = (3, 2)
+
+Total elements must remain the same.
+
+2 x 3 = 6
+3 x 2 = 6
+"""
+
+
+# ============================================================
+# 25. flatten()
+# ============================================================
+
+arr = np.array([
+    [2, 3, 4],
+    [5, 6, 7]
+])
+
+flattened_array = arr.flatten()
+
+print("\n25. Flattened Array:")
+print(flattened_array)
+
+flattened_array[1] = 30
+
+print("Modified Flattened Array:")
+print(flattened_array)
+
+print("Original Array:")
+print(arr)
+
+"""
+OUTPUT:
+
+25. Flattened Array:
+[2 3 4 5 6 7]
+Modified Flattened Array:
+[ 2 30  4  5  6  7]
+Original Array:
+[[2 3 4]
+ [5 6 7]]
+
+Explanation:
+
+flatten() creates a copy.
+
+Changing the flattened array does not affect
+the original array.
+"""
+
+
+# ============================================================
+# 26. ravel()
+# ============================================================
+
+arr = np.array([
+    [2, 3, 4],
+    [5, 6, 7]
+])
+
+ravelled_array = arr.ravel()
+
+print("\n26. Ravelled Array:")
+print(ravelled_array)
+
+ravelled_array[2] = 40
+
+print("Modified Ravelled Array:")
+print(ravelled_array)
+
+print("Original Array:")
+print(arr)
+
+"""
+OUTPUT:
+
+26. Ravelled Array:
+[2 3 4 5 6 7]
+Modified Ravelled Array:
+[ 2  3 40  5  6  7]
+Original Array:
+[[ 2  3 40]
+ [ 5  6  7]]
+
+Explanation:
+
+ravel() usually returns a view.
+
+Changing the ravelled array may affect
+the original array.
+"""
+
+
+# ============================================================
+# 27. DIFFERENCE BETWEEN flatten() AND ravel()
+# ============================================================
+
+"""
+flatten():
+
+1. Creates a copy.
+2. Original array is not affected.
+3. Uses additional memory.
+
+ravel():
+
+1. Usually creates a view.
+2. Original array may be affected.
+3. Uses less memory when a view is possible.
+"""
+
+
+# ============================================================
+# 28. TRANSPOSE
+# ============================================================
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print("\n28. Original Array:")
+print(arr)
+
+transposed_array = arr.T
+
+print("Transposed Array:")
+print(transposed_array)
+
+"""
+OUTPUT:
+
+28. Original Array:
+[[1 2 3]
+ [4 5 6]]
+Transposed Array:
+[[1 4]
+ [2 5]
+ [3 6]]
+"""
+
+"""
+Original shape = (2, 3)
+Transposed shape = (3, 2)
+"""
+
+
+# ============================================================
+# 29. VIEW AND COPY
+# ============================================================
+
+arr = np.array([10, 20, 30])
+
+view_array = arr.view()
+copy_array = arr.copy()
+
+view_array[0] = 100
+copy_array[1] = 200
+
+print("\n29. Original Array:")
+print(arr)
+
+print("View Array:")
+print(view_array)
+
+print("Copy Array:")
+print(copy_array)
+
+"""
+OUTPUT:
+
+29. Original Array:
+[100  20  30]
+View Array:
+[100  20  30]
+Copy Array:
+[ 10 200  30]
+
+Explanation:
+
+Changing view_array affects arr.
+
+Changing copy_array does not affect arr.
+"""
+
+
+# ============================================================
+# 30. VECTORIZED OPERATIONS
+# ============================================================
+
+a = np.array([3, 4, 5])
+b = np.array([6, 7, 8])
+
+print("\n30. Array a:")
+print(a)
+
+print("Array b:")
+print(b)
+
+print("Addition:")
+print(a + b)
+
+print("Subtraction:")
+print(a - b)
+
+print("Multiplication:")
+print(a * b)
+
+print("Division:")
+print(a / b)
+
+"""
+OUTPUT:
+
+30. Array a:
+[3 4 5]
+Array b:
+[6 7 8]
+Addition:
+[ 9 11 13]
+Subtraction:
+[-3 -3 -3]
+Multiplication:
+[18 28 40]
+Division:
+[0.5        0.57142857 0.625     ]
+"""
+
+
+# ============================================================
+# 31. SCALAR OPERATIONS
+# ============================================================
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print("\n31. Original Array:")
+print(arr)
+
+print("Addition:")
+print(arr + 10)
+
+print("Subtraction:")
+print(arr - 10)
+
+print("Multiplication:")
+print(arr * 10)
+
+print("Division:")
+print(arr / 10)
+
+"""
+OUTPUT:
+
+31. Original Array:
+[1 2 3 4 5]
+Addition:
+[11 12 13 14 15]
+Subtraction:
+[-9 -8 -7 -6 -5]
+Multiplication:
+[10 20 30 40 50]
+Division:
+[0.1 0.2 0.3 0.4 0.5]
+"""
+
+
+# ============================================================
+# 32. RELATIONAL OPERATORS
+# ============================================================
+
+arr = np.array([1, 2, 11, 4, 2, 3, 1])
+
+print("\n32. Original Array:")
+print(arr)
+
+print("Values Greater Than 8:")
+print(arr[arr > 8])
+
+print("Values Less Than 5:")
+print(arr[arr < 5])
+
+print("Values Equal To 2:")
+print(arr[arr == 2])
+
+"""
+OUTPUT:
+
+32. Original Array:
+[ 1  2 11  4  2  3  1]
+Values Greater Than 8:
+[11]
+Values Less Than 5:
+[1 2 4 2 3 1]
+Values Equal To 2:
+[2 2]
+"""
+
+
+# ============================================================
+# 33. MATHEMATICAL FUNCTIONS
+# ============================================================
+
+arr = np.array([10, 20, 30, 40, 50])
+
+print("\n33. Array:")
+print(arr)
+
+print("Sum:")
+print(np.sum(arr))
+
+print("Minimum:")
+print(np.min(arr))
+
+print("Maximum:")
+print(np.max(arr))
+
+print("Product:")
+print(np.prod(arr))
+
+print("Mean:")
+print(np.mean(arr))
+
+print("Median:")
+print(np.median(arr))
+
+print("Standard Deviation:")
+print(np.std(arr))
+
+"""
+OUTPUT:
+
+33. Array:
+[10 20 30 40 50]
+Sum:
+150
+Minimum:
+10
+Maximum:
+50
+Product:
+12000000
+Mean:
+30.0
+Median:
+30.0
+Standard Deviation:
+14.142135623730951
+"""
+
+
+# ============================================================
+# 34. argmin() AND argmax()
+# ============================================================
+
+arr = np.array([10, 5, 30, 2, 50])
+
+print("\n34. Array:")
+print(arr)
+
+print("Index of Minimum Value:")
+print(np.argmin(arr))
+
+print("Index of Maximum Value:")
+print(np.argmax(arr))
+
+"""
+OUTPUT:
+
+34. Array:
+[10  5 30  2 50]
+Index of Minimum Value:
+3
+Index of Maximum Value:
+4
+
+Explanation:
+
+Minimum value = 2
+Its index = 3
+
+Maximum value = 50
+Its index = 4
+"""
+
+
+# ============================================================
+# 35. ROW-WISE AND COLUMN-WISE OPERATIONS
+# ============================================================
+
+arr = np.array([
+    [10, 20, 30],
+    [40, 50, 60]
+])
+
+print("\n35. 2D Array:")
+print(arr)
+
+print("Sum of All Elements:")
+print(np.sum(arr))
+
+print("Column-Wise Sum:")
+print(np.sum(arr, axis=0))
+
+print("Row-Wise Sum:")
+print(np.sum(arr, axis=1))
+
+print("Column-Wise Minimum:")
+print(np.min(arr, axis=0))
+
+print("Row-Wise Minimum:")
+print(np.min(arr, axis=1))
+
+"""
+OUTPUT:
+
+35. 2D Array:
+[[10 20 30]
+ [40 50 60]]
+Sum of All Elements:
+210
+Column-Wise Sum:
+[50 70 90]
+Row-Wise Sum:
+[ 60 150]
+Column-Wise Minimum:
+[10 20 30]
+Row-Wise Minimum:
+[10 40]
+"""
+
+"""
+axis=0:
+
+Operation is performed down the rows.
+Result is column-wise.
+
+axis=1:
+
+Operation is performed across the columns.
+Result is row-wise.
+"""
+
+
+# ============================================================
+# 36. round(), ceil() AND floor()
+# ============================================================
+
+arr = np.array([1.2, 2.7, 3.5, 4.9])
+
+print("\n36. Original Decimal Array:")
+print(arr)
+
+print("Rounded Values:")
+print(np.round(arr))
+
+print("Ceiling Values:")
+print(np.ceil(arr))
+
+print("Floor Values:")
+print(np.floor(arr))
+
+"""
+OUTPUT:
+
+36. Original Decimal Array:
+[1.2 2.7 3.5 4.9]
+Rounded Values:
+[1. 3. 4. 5.]
+Ceiling Values:
+[2. 3. 4. 5.]
+Floor Values:
+[1. 2. 3. 4.]
+"""
+
+
+# ============================================================
+# 37. INDEXING IN 1D ARRAY
+# ============================================================
+
+arr = np.array([10, 20, 30, 40, 50])
+
+print("\n37. Original Array:")
+print(arr)
+
+print("First Element:")
+print(arr[0])
+
+print("Third Element:")
+print(arr[2])
+
+print("Last Element:")
+print(arr[-1])
+
+"""
+OUTPUT:
+
+37. Original Array:
+[10 20 30 40 50]
+First Element:
+10
+Third Element:
+30
+Last Element:
+50
+"""
+
+
+# ============================================================
+# 38. SLICING IN 1D ARRAY
+# ============================================================
+
+arr = np.array([10, 20, 30, 40, 50])
+
+print("\n38. Original Array:")
+print(arr)
+
+print("Elements from Index 1 to 3:")
+print(arr[1:4])
+
+print("First Three Elements:")
+print(arr[:3])
+
+print("Last Two Elements:")
+print(arr[-2:])
+
+print("Every Second Element:")
+print(arr[::2])
+
+"""
+OUTPUT:
+
+38. Original Array:
+[10 20 30 40 50]
+Elements from Index 1 to 3:
+[20 30 40]
+First Three Elements:
+[10 20 30]
+Last Two Elements:
+[40 50]
+Every Second Element:
+[10 30 50]
+"""
+
+
+# ============================================================
+# 39. FANCY INDEXING
+# ============================================================
+
+arr = np.array([10, 20, 30, 40, 50])
+
+selected_values = arr[[0, 2, 4]]
+
+print("\n39. Fancy Indexing Result:")
+print(selected_values)
+
+"""
+OUTPUT:
+
+39. Fancy Indexing Result:
+[10 30 50]
+"""
+
+"""
+Fancy indexing selects multiple indexes at once.
+"""
+
+
+# ============================================================
+# 40. BOOLEAN INDEXING
+# ============================================================
+
+arr = np.array([10, 20, 30, 40, 50])
+
+condition = arr > 25
+
+print("\n40. Boolean Condition:")
+print(condition)
+
+print("Values Greater Than 25:")
+print(arr[condition])
+
+"""
+OUTPUT:
+
+40. Boolean Condition:
+[False False  True  True  True]
+Values Greater Than 25:
+[30 40 50]
+"""
+
+
+# ============================================================
+# 41. INDEXING IN A 2D ARRAY
+# ============================================================
+
+arr = np.array([
+    [10, 20, 30],
+    [40, 50, 60]
+])
+
+print("\n41. 2D Array:")
+print(arr)
+
+print("First Row:")
+print(arr[0])
+
+print("Second Row:")
+print(arr[1])
+
+print("First Row, Second Column:")
+print(arr[0, 1])
+
+print("Second Row, Third Column:")
+print(arr[1, 2])
+
+"""
+OUTPUT:
+
+41. 2D Array:
+[[10 20 30]
+ [40 50 60]]
+First Row:
+[10 20 30]
+Second Row:
+[40 50 60]
+First Row, Second Column:
+20
+Second Row, Third Column:
+60
+"""
+
+
+# ============================================================
+# 42. SLICING IN A 2D ARRAY
+# ============================================================
+
+arr = np.array([
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+])
+
+print("\n42. Original 2D Array:")
+print(arr)
+
+print("First Two Rows:")
+print(arr[:2])
+
+print("First Two Columns:")
+print(arr[:, :2])
+
+print("Rows 1 to 2 and Columns 1 to 2:")
+print(arr[1:3, 1:3])
+
+"""
+OUTPUT:
+
+42. Original 2D Array:
+[[10 20 30]
+ [40 50 60]
+ [70 80 90]]
+
+First Two Rows:
+[[10 20 30]
+ [40 50 60]]
+
+First Two Columns:
+[[10 20]
+ [40 50]
+ [70 80]]
+
+Rows 1 to 2 and Columns 1 to 2:
+[[50 60]
+ [80 90]]
+"""
+
+"""
+2D slicing syntax:
+
+arr[row_start:row_end, column_start:column_end]
+"""
+
+
+# ============================================================
+# 43. DOT PRODUCT
+# ============================================================
+
+arr = np.array([
+    [2, 3],
+    [4, 5]
+])
+
+a1 = np.array([
+    [1, 8],
+    [2, 9]
+])
+
+print("\n43. First Matrix:")
+print(arr)
+
+print("Second Matrix:")
+print(a1)
+
+dot_result = np.dot(arr, a1)
+
+print("Dot Product:")
+print(dot_result)
+
+"""
+OUTPUT:
+
+43. First Matrix:
+[[2 3]
+ [4 5]]
+Second Matrix:
+[[1 8]
+ [2 9]]
+Dot Product:
+[[ 8 43]
+ [14 77]]
+"""
+
+"""
+Calculation:
+
+First element:
+
+(2 * 1) + (3 * 2) = 8
+
+Second element:
+
+(2 * 8) + (3 * 9) = 43
+"""
+
+
+# ============================================================
+# 44. PERFORMANCE COMPARISON
+# ============================================================
+
+"""
+The original value 100,000,000 requires a lot of memory.
+
+So we use 10,000,000 for practice.
+"""
+
+n = 10_000_000
+
+
+# ------------------------------------------------------------
+# Python List Performance
+# ------------------------------------------------------------
+
+numbers = range(n)
+
+start = time.time()
+
+list_result = [i ** 2 for i in numbers]
+
+end = time.time()
+
+time_taken_list = end - start
+
+print("\n44. Time Taken by Python List:")
+print(time_taken_list, "seconds")
+
+
+# ------------------------------------------------------------
+# NumPy Array Performance
+# ------------------------------------------------------------
+
+arr = np.arange(n)
+
+start = time.time()
+
+numpy_result = arr ** 2
+
+end = time.time()
+
+time_taken_array = end - start
+
+print("Time Taken by NumPy Array:")
+print(time_taken_array, "seconds")
+
+
+# ------------------------------------------------------------
+# Performance Comparison
+# ------------------------------------------------------------
+
+if time_taken_array < time_taken_list:
+    print("NumPy was faster in this execution.")
+else:
+    print("Python list was faster in this execution.")
+
+"""
+EXAMPLE OUTPUT:
+
+44. Time Taken by Python List:
+1.85 seconds
+
+Time Taken by NumPy Array:
+0.08 seconds
+
+NumPy was faster in this execution.
+
+Note:
+
+Execution time changes depending on your computer.
+"""
+
+
+# ============================================================
+# FINAL SUMMARY
+# ============================================================
+
+"""
+NUMPY FINAL SUMMARY
+===================
+
+1. NumPy is a Python library used for numerical calculations.
+
+2. NumPy arrays are created using np.array().
+
+3. NumPy arrays support 1D, 2D and multidimensional data.
+
+4. ndim returns the number of dimensions.
+
+5. shape returns the number of rows and columns.
+
+6. size returns the total number of elements.
+
+7. dtype returns the data type of the array.
+
+8. NumPy arrays generally contain one common data type.
+
+9. np.ones() creates an array containing ones.
+
+10. np.zeros() creates an array containing zeros.
+
+11. np.eye() creates an identity-like matrix.
+
+12. np.identity() creates an identity matrix.
+
+13. np.diag() creates a diagonal matrix.
+
+14. np.empty() creates an uninitialized array.
+
+15. np.arange() creates a sequence of values.
+
+16. np.linspace() creates equally spaced values.
+
+17. np.random.rand() creates random decimal values.
+
+18. np.random.randint() creates random integer values.
+
+19. np.random.randn() creates standard normal random values.
+
+20. reshape() changes the shape of an array.
+
+21. flatten() creates a copy of an array.
+
+22. ravel() usually creates a view of an array.
+
+23. Transpose changes rows into columns.
+
+24. view() shares memory with the original array.
+
+25. copy() creates an independent array.
+
+26. NumPy supports scalar operations.
+
+27. NumPy supports vectorized or element-wise operations.
+
+28. Boolean indexing selects values based on conditions.
+
+29. Fancy indexing selects multiple indexes.
+
+30. axis=0 performs column-wise operations.
+
+31. axis=1 performs row-wise operations.
+
+32. Mathematical functions include:
+    sum()
+    min()
+    max()
+    prod()
+    mean()
+    median()
+    std()
+    argmin()
+    argmax()
+
+33. NumPy supports indexing and slicing.
+
+34. NumPy supports matrix multiplication using np.dot().
+
+35. NumPy is generally faster than Python lists
+    for large numerical calculations.
+"""

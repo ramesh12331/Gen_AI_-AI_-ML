@@ -1,0 +1,132 @@
+# ============================================================
+# 🔐 PASSWORD HASHING AND VERIFICATION
+# ============================================================
+
+# Import CryptContext from Passlib.
+# CryptContext is used to configure password hashing.
+from passlib.context import CryptContext
+
+
+# ============================================================
+# 1. CREATE PASSWORD CONTEXT
+# ============================================================
+
+# Create a password hashing object.
+#
+# schemes=["bcrypt"]
+#     → Tells Passlib to use bcrypt algorithm
+#       for hashing passwords.
+#
+# deprecated="auto"
+#     → Automatically handles older/deprecated
+#       password hashing schemes when required.
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
+)
+
+
+# ============================================================
+# 2. HASH PASSWORD
+# ============================================================
+
+def hash_password(password: str):
+    """
+    Convert a plain-text password into a secure bcrypt hash.
+
+    Example:
+        Input:
+            python123
+
+        Output:
+            $2b$12$....................
+    """
+
+    # pwd_context.hash()
+    #     → Takes the original password
+    #     → Generates a bcrypt hash
+    #     → Returns the hashed password
+    return pwd_context.hash(password)
+
+
+# ============================================================
+# 3. VERIFY PASSWORD
+# ============================================================
+
+def verify_password(
+    plain_password: str,
+    hashed_password: str
+):
+    """
+    Check whether the entered password
+    matches the stored hashed password.
+
+    plain_password:
+        Password entered by the user during login.
+
+    hashed_password:
+        Password hash stored in the database.
+
+    Returns:
+        True  → Password is correct
+        False → Password is incorrect
+    """
+
+    # pwd_context.verify()
+    #     → Compares the plain password
+    #       with the stored bcrypt hash.
+    #
+    # IMPORTANT:
+    # plain_password  → User's entered password
+    # hashed_password → Database stored hash
+    return pwd_context.verify(
+        plain_password,
+        hashed_password
+    )
+
+
+# ============================================================
+# 🔄 PASSWORD FLOW
+# ============================================================
+
+# REGISTER
+# --------
+#
+# User enters:
+#     python123
+#
+#        ↓
+#
+# hash_password("python123")
+#
+#        ↓
+#
+# bcrypt creates:
+#     $2b$12$................
+#
+#        ↓
+#
+# Store the HASH in the database.
+#
+#
+# LOGIN
+# -----
+#
+# User enters:
+#     python123
+#
+#        ↓
+#
+# Get stored hash from database
+#
+#        ↓
+#
+# verify_password(
+#     "python123",
+#     stored_hash
+# )
+#
+#        ↓
+#
+# True  → Login successful ✅
+# False → Invalid password ❌

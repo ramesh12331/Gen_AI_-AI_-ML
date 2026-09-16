@@ -1,0 +1,259 @@
+# ============================================================
+# 🔐 USER REGISTRATION API
+# ============================================================
+
+# Import APIRouter and Depends from FastAPI
+#
+# APIRouter
+#     → Used to create API routes in a separate router file.
+#
+# Depends
+#     → Used for dependency injection.
+#        Here, it provides the database session.
+from fastapi import APIRouter, Depends
+
+
+# Import Session from SQLAlchemy
+#
+# Session
+#     → Represents a connection/session with the database.
+from sqlalchemy.orm import Session
+
+
+# Import SessionLocal from our database.py file
+#
+# SessionLocal()
+#     → Creates a new database session.
+from database import SessionLocal
+
+
+# Import User model
+#
+# User
+#     → Represents the "users" table in PostgreSQL.
+from models.user import User
+
+
+# Import UserRegister schema
+#
+# UserRegister
+#     → Validates the data received from the client.
+from schemas.user import UserRegister
+
+
+# Import password hashing function
+#
+# hash_password()
+#     → Converts the user's plain password
+#       into a secure bcrypt hash.
+from security import hash_password
+
+
+# ============================================================
+# 1. CREATE ROUTER
+# ============================================================
+
+router = APIRouter(
+    # All routes in this router start with /auth
+    prefix="/auth",
+
+    # Groups these APIs under "Authentication" in Swagger
+    tags=["Authentication"]
+)
+
+
+# ============================================================
+# 2. DATABASE DEPENDENCY
+# ============================================================
+
+def get_db():
+    """
+    Create a database session for the API request.
+
+    yield db
+        → Gives the database session to the API endpoint.
+
+    finally
+        → Runs after the request is completed.
+
+    db.close()
+        → Closes the database session.
+    """
+
+    # Create a new database session
+    db = SessionLocal()
+
+    try:
+        # Send the database session to the endpoint
+        yield db
+
+    finally:
+        # Always close the database session
+        db.close()
+
+
+# ============================================================
+# 3. REGISTER USER API
+# ============================================================
+
+@router.post("/register")
+def register(
+    user: UserRegister,
+    con: Session = Depends(get_db)
+):
+    """
+    Register a new user.
+
+    user
+        → Contains the data sent by the client.
+
+    con
+        → Database session provided by FastAPI.
+    """
+
+
+    # ========================================================
+    # 4. CHECK WHETHER USERNAME ALREADY EXISTS
+    # ========================================================
+
+    existing_user = (
+        con.query(User)
+        .filter(
+            User.username == user.username
+        )
+        .first()
+    )
+
+    # Explanation:
+    #
+    # con.query(User)
+    #     → Query the users table.
+    #
+    # .filter(...)
+    #     → Find a specific user.
+    #
+    # User.username == user.username
+    #     → Compare database username
+    #       with username entered by user.
+    #
+    # .first()
+    #     → Get the first matching user.
+    #
+    # If no matching user exists:
+    #     existing_user = None
+
+
+    # ========================================================
+    # 5. STOP IF USERNAME ALREADY EXISTS
+    # ========================================================
+
+    if existing_user:
+
+        return {
+            "message": "Username already exists"
+        }
+
+
+    # ========================================================
+    # 6. HASH USER PASSWORD
+    # ========================================================
+
+    hashed_password = hash_password(
+        user.password
+    )
+
+    # IMPORTANT:
+    #
+    # user.password
+    #     → Original password entered by user.
+    #
+    # Example:
+    #     "python123"
+    #
+    # hash_password()
+    #     → Converts it into a bcrypt hash.
+    #
+    # Example:
+    #     $2b$12$................
+    #
+    # We store the HASH, NOT the original password.
+
+
+    # ========================================================
+    # 7. CREATE NEW USER OBJECT
+    # ========================================================
+
+    new_user = User(
+        username=user.username,
+        email=user.email,
+
+        # Store the HASHED password
+        password=hashed_password,
+
+        # For this project, every registered user
+        # gets the default role "student".
+        role="student"
+    )
+
+
+    # ========================================================
+    # 8. ADD USER TO DATABASE SESSION
+    # ========================================================
+
+    con.add(new_user)
+
+    # con.add()
+    #     → Adds the new user object to the SQLAlchemy session.
+    #
+    # IMPORTANT:
+    #     This does NOT permanently save it yet.
+    #
+    # It is currently waiting for commit.
+
+
+    # ========================================================
+    # 9. SAVE USER TO DATABASE
+    # ========================================================
+
+    con.commit()
+
+    # con.commit()
+    #     → Permanently saves the new user
+    #       into the PostgreSQL database.
+
+
+    # ========================================================
+    # 10. REFRESH USER OBJECT
+    # ========================================================
+
+    con.refresh(new_user)
+
+    # refresh()
+    #     → Gets the latest data from the database.
+    #
+    # This is useful because the database may generate
+    # values automatically.
+    #
+    # Example:
+    #     user_id
+    #
+    # After INSERT:
+    #
+    #     new_user.user_id
+    #         ↓
+    #         1
+
+
+    # ========================================================
+    # 11. RETURN SUCCESS RESPONSE
+    # ========================================================
+
+    return {
+        "message": "User registered successfully",
+
+        # Return the automatically generated user ID
+        "user_id": new_user.user_id,
+
+        # Return the username
+        "username": new_user.username
+    }

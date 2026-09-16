@@ -1,0 +1,2 @@
+## python-jose[cryptography] => Create and verify JWT tokens
+## passlib[bcrypt] => Hash and verify passwords

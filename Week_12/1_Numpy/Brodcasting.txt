@@ -1,0 +1,122 @@
+============================================================
+BROADCASTING RULE 1
+============================================================
+
+Compare dimensions from RIGHT to LEFT.
+
+
+Example:
+
+(4, 3)
+(3,)
+
+Think of (3,) as:
+
+(1, 3)
+
+Now:
+
+(4, 3)
+(1, 3)
+
+3 == 3
+
+Therefore compatible.
+
+============================================================
+BROADCASTING RULE 2
+============================================================
+
+Two dimensions are compatible when:
+
+1. They are equal
+
+OR
+
+2. One of them is 1
+
+(3, 1)
+(1, 3)
+
+      ↓
+
+Both dimensions can be expanded.
+
+Therefore compatible.
+
+(3, 4)
+(4, 3)
+
+Compare from right:
+
+4 != 3
+3 != 4
+
+Therefore NOT compatible.
+
+NumPy Topics Covered in This Continuation
+==========================================
+
+5.  np.hstack()
+6.  np.vstack()
+7.  np.concatenate(axis=0)
+8.  np.concatenate(axis=1)
+9.  np.hsplit()
+10. np.vsplit()
+11. np.split()
+
+12. np.cumsum()
+13. Final cumulative sum
+14. np.cumprod()
+15. Final cumulative product
+
+16. Mathematical Functions
+    ├── np.sqrt()
+    ├── np.square()
+    └── np.power()
+
+17. More Mathematical Functions
+    ├── np.multiply()
+    ├── np.divide()
+    └── Floor division //
+
+18. Missing Values
+    ├── np.nan
+    ├── np.isnan()
+    └── Boolean selection of NaN
+
+19. Visualization
+    ├── Histogram
+    └── Box Plot
+
+20. Broadcasting
+    ├── Basic broadcasting
+    ├── Compatible shapes
+    ├── Incompatible shapes
+    ├── (1,3) + (3,1)
+    └── Broadcasting rules
+    
+⭐ Most important for you as a beginner
+
+Focus especially on these:
+np.hstack()
+np.vstack()
+
+np.concatenate()
+
+np.hsplit()
+np.vsplit()
+
+np.cumsum()
+np.cumprod()
+
+np.sqrt()
+np.square()
+np.power()
+
+np.isnan()
+
+Histogram
+Box Plot
+
+Broadcasting

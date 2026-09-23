@@ -1,0 +1,11 @@
+id,name,age,city,salary,department
+1,Ramesh,25,Hyderabad,35000,IT
+2,Suresh,28,Chennai,42000,HR
+3,Anil,24,Bangalore,30000,IT
+4,Priya,27,Hyderabad,45000,Finance
+5,Kiran,30,Pune,50000,IT
+6,Lakshmi,26,Mumbai,38000,HR
+7,Rahul,29,Delhi,55000,Finance
+8,Sneha,23,Chennai,32000,IT
+9,Arjun,31,Bangalore,60000,Management
+10,Divya,25,Hyderabad,40000,Finance

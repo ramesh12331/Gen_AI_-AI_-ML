@@ -1,0 +1,101 @@
+order_id,city,category,product,customer_type,quantity,unit_price,discount,payment_method,rating
+1001,Mumbai,Furniture,Mobile,Premium,2,23748,15,UPI,3.8
+1002,Pune,Electronics,Headphones,Regular,5,27584,10,UPI,4.2
+1003,Chennai,Furniture,Headphones,Regular,2,44625,20,UPI,4.5
+1004,Pune,Clothing,Laptop,Regular,5,38956,15,Credit Card,3.6
+1005,Pune,Electronics,Chair,Regular,1,19088,10,UPI,4.6
+1006,Delhi,Electronics,T-Shirt,Premium,4,20164,25,Debit Card,4.7
+1007,Hyderabad,Electronics,T-Shirt,Premium,1,18003,10,Debit Card,5.0
+1008,Pune,Furniture,Chair,Regular,4,38909,10,Debit Card,3.7
+1009,Delhi,Electronics,Jeans,Premium,5,26215,25,Credit Card,3.3
+1010,Bangalore,Electronics,Jeans,Premium,3,18665,10,UPI,4.6
+1011,Bangalore,Electronics,Mobile,Premium,5,35622,10,Cash,3.8
+1012,Delhi,Electronics,Headphones,Regular,2,31162,25,Debit Card,4.5
+1013,Bangalore,Clothing,Chair,Regular,2,24065,25,Cash,3.2
+1014,Mumbai,Furniture,Headphones,Premium,4,19163,20,Cash,4.2
+1015,Bangalore,Clothing,Laptop,Premium,1,32486,15,UPI,3.6
+1016,Pune,Electronics,Mobile,Regular,5,26708,25,UPI,4.7
+1017,Chennai,Clothing,T-Shirt,Premium,2,39504,10,UPI,4.2
+1018,Bangalore,Furniture,Mobile,Regular,3,30692,5,Credit Card,4.8
+1019,Mumbai,Furniture,Jeans,Regular,1,49911,10,Credit Card,4.3
+1020,Hyderabad,Furniture,Laptop,Regular,2,28182,15,Cash,5.0
+1021,Delhi,Electronics,Chair,Regular,1,31246,10,UPI,3.7
+1022,Hyderabad,Clothing,Headphones,Premium,1,19652,5,Credit Card,3.1
+1023,Mumbai,Electronics,Mobile,Premium,3,46812,10,Credit Card,4.4
+1024,Hyderabad,Clothing,Chair,Premium,4,41677,10,UPI,3.2
+1025,Bangalore,Electronics,Chair,Regular,4,18550,5,UPI,3.8
+1026,Chennai,Furniture,Headphones,Premium,2,44400,10,Cash,3.4
+1027,Bangalore,Furniture,Sofa,Premium,4,21416,5,UPI,4.9
+1028,Pune,Furniture,Chair,Regular,4,29008,20,UPI,3.3
+1029,Mumbai,Electronics,Laptop,Regular,3,42722,25,Cash,3.3
+1030,Chennai,Furniture,Mobile,Premium,3,18746,5,Cash,4.0
+1031,Hyderabad,Furniture,Mobile,Premium,2,19490,25,UPI,4.4
+1032,Pune,Electronics,Mobile,Premium,5,17604,25,UPI,3.8
+1033,Hyderabad,Clothing,T-Shirt,Regular,3,28386,15,Credit Card,3.5
+1034,Pune,Clothing,Jeans,Regular,4,35720,5,UPI,3.9
+1035,Hyderabad,Furniture,Mobile,Premium,5,32380,10,Debit Card,4.8
+1036,Pune,Electronics,Laptop,Premium,4,34825,25,UPI,4.3
+1037,Hyderabad,Electronics,Jeans,Premium,2,32332,5,UPI,4.5
+1038,Pune,Electronics,Laptop,Premium,3,28342,15,Cash,3.5
+1039,Mumbai,Furniture,Jeans,Regular,3,17889,5,Debit Card,4.5
+1040,Delhi,Electronics,Headphones,Regular,5,43028,25,UPI,3.2
+1041,Delhi,Furniture,T-Shirt,Premium,3,24705,20,Credit Card,3.1
+1042,Chennai,Furniture,Laptop,Premium,2,21736,15,Cash,4.9
+1043,Delhi,Furniture,Headphones,Premium,2,42020,5,Credit Card,4.5
+1044,Chennai,Electronics,Sofa,Premium,3,25433,5,Cash,4.7
+1045,Bangalore,Furniture,Headphones,Regular,3,35000,10,Credit Card,3.0
+1046,Pune,Electronics,Laptop,Regular,1,33292,15,Cash,4.4
+1047,Hyderabad,Electronics,Mobile,Premium,3,26702,25,Debit Card,3.1
+1048,Hyderabad,Electronics,Laptop,Regular,4,48516,5,Cash,4.8
+1049,Pune,Electronics,Mobile,Regular,1,49073,25,Credit Card,3.7
+1050,Mumbai,Clothing,Laptop,Regular,1,34681,25,Debit Card,4.3
+1051,Chennai,Electronics,Jeans,Regular,5,23341,10,Cash,4.3
+1052,Bangalore,Clothing,Jeans,Premium,5,34723,20,UPI,3.6
+1053,Pune,Electronics,Sofa,Regular,4,43952,20,Credit Card,4.0
+1054,Delhi,Furniture,Jeans,Premium,3,48780,25,Debit Card,3.2
+1055,Pune,Clothing,Laptop,Premium,2,24656,5,UPI,3.5
+1056,Bangalore,Clothing,Sofa,Premium,4,42160,25,Credit Card,4.4
+1057,Bangalore,Electronics,Chair,Premium,2,15363,5,Cash,3.4
+1058,Delhi,Clothing,Chair,Premium,5,31331,5,Cash,3.3
+1059,Bangalore,Clothing,T-Shirt,Regular,4,48081,20,Cash,4.8
+1060,Delhi,Electronics,Chair,Regular,2,33173,25,Cash,4.3
+1061,Chennai,Electronics,Mobile,Regular,2,32807,15,Debit Card,4.8
+1062,Mumbai,Furniture,Headphones,Premium,4,25014,10,UPI,3.8
+1063,Chennai,Clothing,Chair,Regular,1,28555,20,Cash,4.8
+1064,Hyderabad,Clothing,Mobile,Regular,4,15386,15,Debit Card,4.5
+1065,Bangalore,Clothing,Jeans,Premium,4,29380,15,Cash,4.0
+1066,Bangalore,Electronics,Jeans,Regular,2,45630,10,UPI,4.8
+1067,Hyderabad,Clothing,Jeans,Premium,1,43089,10,Cash,3.4
+1068,Chennai,Electronics,Laptop,Premium,4,36420,15,Cash,3.6
+1069,Bangalore,Electronics,Sofa,Premium,4,16270,25,UPI,5.0
+1070,Chennai,Furniture,Jeans,Premium,1,17033,10,Credit Card,4.7
+1071,Hyderabad,Furniture,Headphones,Premium,4,22496,25,Credit Card,3.9
+1072,Chennai,Electronics,Headphones,Premium,2,35384,5,UPI,4.9
+1073,Hyderabad,Clothing,Chair,Regular,2,19980,25,Credit Card,3.2
+1074,Chennai,Clothing,T-Shirt,Premium,5,17691,15,Cash,4.3
+1075,Mumbai,Clothing,Jeans,Regular,1,42528,20,UPI,3.9
+1076,Chennai,Clothing,Sofa,Regular,2,43540,10,Debit Card,4.2
+1077,Hyderabad,Electronics,Chair,Regular,5,32589,15,Credit Card,4.7
+1078,Mumbai,Electronics,Chair,Premium,4,39837,15,UPI,4.0
+1079,Chennai,Furniture,Chair,Premium,3,31931,15,Debit Card,4.8
+1080,Delhi,Electronics,T-Shirt,Premium,5,27521,5,Credit Card,4.4
+1081,Bangalore,Clothing,Sofa,Premium,4,47166,20,UPI,3.2
+1082,Pune,Electronics,Jeans,Premium,3,39184,20,Debit Card,3.9
+1083,Delhi,Clothing,Laptop,Regular,4,32754,15,Debit Card,3.5
+1084,Delhi,Furniture,Laptop,Premium,5,27133,10,Credit Card,4.5
+1085,Chennai,Clothing,T-Shirt,Regular,1,27721,15,Credit Card,3.7
+1086,Chennai,Furniture,Jeans,Premium,3,17982,5,Debit Card,4.4
+1087,Pune,Clothing,Sofa,Regular,1,15803,25,Debit Card,3.9
+1088,Bangalore,Electronics,Headphones,Premium,3,46308,5,UPI,3.8
+1089,Mumbai,Clothing,Jeans,Premium,2,24777,25,Debit Card,3.2
+1090,Pune,Furniture,T-Shirt,Regular,5,29790,25,Cash,3.9
+1091,Bangalore,Electronics,Sofa,Regular,3,18947,25,UPI,4.9
+1092,Pune,Clothing,Headphones,Regular,1,25292,10,Credit Card,4.1
+1093,Pune,Furniture,Chair,Regular,5,45796,15,UPI,3.5
+1094,Delhi,Electronics,Jeans,Regular,1,30297,15,Credit Card,3.9
+1095,Hyderabad,Furniture,Jeans,Premium,3,24321,5,UPI,3.3
+1096,Chennai,Clothing,Jeans,Regular,4,23149,20,Debit Card,4.4
+1097,Chennai,Clothing,T-Shirt,Regular,4,20271,25,UPI,4.8
+1098,Delhi,Electronics,T-Shirt,Regular,1,20985,10,UPI,5.0
+1099,Delhi,Electronics,T-Shirt,Premium,2,45834,25,Cash,4.8
+1100,Pune,Clothing,Chair,Regular,1,45802,15,Cash,3.7

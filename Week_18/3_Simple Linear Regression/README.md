@@ -1,0 +1,1810 @@
+# 📈 Chapter — Simple Linear Regression
+
+> **Goal:** Understand Simple Linear Regression from **zero level → mathematics → graph → error → Gradient Descent → Python → evaluation → interview questions**.
+
+---
+
+# 🧠 1. What is Regression?
+
+**Regression** is a Machine Learning technique used to predict a **numerical / continuous value**.
+
+### Examples
+
+| Input | Predicted Output |
+|---|---|
+| Experience | Salary |
+| Area of house | House Price |
+| Advertising Budget | Sales |
+| Hours Studied | Exam Score |
+| Temperature | Electricity Usage |
+
+### Example
+
+Suppose:
+
+```text
+Experience = 3 years
+```
+
+We want to predict:
+
+```text
+Salary = ₹6 LPA
+```
+
+Since salary is a numerical value, this is a **Regression problem**.
+
+---
+
+# 🎯 2. Where does Linear Regression fit?
+
+```text
+Machine Learning
+│
+├── Supervised Learning
+│
+│   ├── Regression
+│   │   ├── Simple Linear Regression
+│   │   ├── Multiple Linear Regression
+│   │   ├── Polynomial Regression
+│   │   ├── Decision Tree Regression
+│   │   ├── Random Forest Regression
+│   │   └── Gradient Boosting Regression
+│   │
+│   └── Classification
+│       ├── Logistic Regression
+│       ├── Decision Tree Classification
+│       ├── Random Forest Classification
+│       └── SVM Classification
+│
+└── Unsupervised Learning
+    ├── Clustering
+    └── Dimensionality Reduction
+```
+
+> ⚠️ **Important:** Logistic Regression is mainly used for **Classification**, despite having "Regression" in its name.
+
+---
+
+# 📌 3. What is Simple Linear Regression?
+
+**Simple Linear Regression (SLR)** predicts a numerical target using **one input feature**.
+
+### Simple example
+
+We have:
+
+```text
+X = Years of Experience
+Y = Salary
+```
+
+Our goal is to find the best line that represents the relationship between `X` and `Y`.
+
+```text
+Salary
+  │
+  │                  ●
+  │             ●
+  │          ●
+  │       ●
+  │    ●
+  │ ●
+  └──────────────────────── Experience
+```
+
+The model tries to find the **best-fit straight line**.
+
+---
+
+# 📐 4. Simple Linear Regression Equation
+
+The basic equation is:
+
+$$
+\hat{y} = mx + c
+$$
+
+Where:
+
+| Symbol | Meaning |
+|---|---|
+| $x$ | Input feature |
+| $y$ | Actual value |
+| $\hat{y}$ | Predicted value |
+| $m$ | Slope |
+| $c$ | Intercept |
+
+---
+
+# 🔍 5. Understanding the Equation
+
+Suppose:
+
+$$
+\hat{y} = 2x + 3
+$$
+
+Here:
+
+```text
+m = 2
+c = 3
+```
+
+If:
+
+```text
+x = 1
+```
+
+Then:
+
+$$
+\hat{y} = 2(1) + 3
+$$
+
+$$
+\hat{y} = 5
+$$
+
+If:
+
+```text
+x = 2
+```
+
+Then:
+
+$$
+\hat{y} = 2(2) + 3
+$$
+
+$$
+\hat{y} = 7
+$$
+
+If:
+
+```text
+x = 3
+```
+
+Then:
+
+$$
+\hat{y} = 2(3) + 3
+$$
+
+$$
+\hat{y} = 9
+$$
+
+So:
+
+| x | Predicted $\hat{y}$ |
+|---:|---:|
+| 1 | 5 |
+| 2 | 7 |
+| 3 | 9 |
+
+---
+
+# 📈 6. What is Slope?
+
+The **slope ($m$)** tells us how much the predicted output changes when the input increases by 1 unit.
+
+$$
+\hat{y} = mx+c
+$$
+
+Suppose:
+
+$$
+\hat{y}=2x+3
+$$
+
+Here:
+
+```text
+m = 2
+```
+
+Therefore:
+
+> For every 1-unit increase in `x`, predicted `y` increases by 2 units.
+
+### Example
+
+If experience increases from:
+
+```text
+2 years → 3 years
+```
+
+and:
+
+```text
+m = 2
+```
+
+the predicted salary value increases by 2 units in whatever units `y` uses.
+
+---
+
+# 📍 7. What is Intercept?
+
+The **intercept ($c$)** is the predicted value of `y` when `x = 0`.
+
+$$
+\hat{y}=mx+c
+$$
+
+If:
+
+```text
+m = 2
+c = 3
+```
+
+Then when:
+
+```text
+x = 0
+```
+
+$$
+\hat{y}=2(0)+3
+$$
+
+$$
+\hat{y}=3
+$$
+
+Therefore:
+
+```text
+Intercept = 3
+```
+
+---
+
+# 📊 8. Actual Value vs Predicted Value
+
+Suppose our dataset contains:
+
+| Experience | Actual Salary |
+|---:|---:|
+| 1 | 4 |
+| 2 | 6 |
+| 3 | 8 |
+| 4 | 10 |
+
+Our model predicts:
+
+| Experience | Actual $y$ | Predicted $\hat{y}$ |
+|---:|---:|---:|
+| 1 | 4 | 4.2 |
+| 2 | 6 | 5.8 |
+| 3 | 8 | 7.7 |
+| 4 | 10 | 10.1 |
+
+The difference between actual and predicted values is called **error / residual**.
+
+---
+
+# ❌ 9. What is Error?
+
+The basic error formula is:
+
+$$
+e = y-\hat{y}
+$$
+
+Where:
+
+```text
+y      = Actual value
+ŷ      = Predicted value
+e      = Error / Residual
+```
+
+### Example
+
+Actual:
+
+$$
+y=10
+$$
+
+Predicted:
+
+$$
+\hat{y}=8
+$$
+
+Therefore:
+
+$$
+e=10-8
+$$
+
+$$
+e=2
+$$
+
+So the prediction is off by **2 units**.
+
+---
+
+# 📏 10. Residual
+
+A **residual** is the vertical difference between the actual data point and the predicted line.
+
+```text
+Actual point ●
+             │
+             │  ← Residual
+             │
+Predicted  ──●──────────── Regression Line
+```
+
+Mathematically:
+
+$$
+Residual = y-\hat{y}
+$$
+
+A good model tries to keep the residuals small.
+
+---
+
+# 🎯 11. What is the Best-Fit Line?
+
+There can be many possible lines through a dataset.
+
+```text
+Line 1  ─────────────
+Line 2       ╱
+Line 3     ╱
+Line 4   ╱
+```
+
+But we want the line that produces the **smallest overall prediction error**.
+
+This is called the:
+
+> **Best-Fit Line**
+
+For ordinary least-squares linear regression, we choose the line that minimizes the **sum of squared residuals**.
+
+---
+
+# 📉 12. Mean Absolute Error — MAE
+
+MAE means:
+
+> **Mean Absolute Error**
+
+Formula:
+
+$$
+MAE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat{y}_i|
+$$
+
+### Meaning of each term
+
+| Term | Meaning |
+|---|---|
+| $n$ | Number of observations |
+| $y_i$ | Actual value |
+| $\hat{y}_i$ | Predicted value |
+| $y_i-\hat{y}_i$ | Error |
+| $|...|$ | Absolute value |
+| $\sum$ | Add all errors |
+| $\frac{1}{n}$ | Take the average |
+
+---
+
+# 🧮 13. MAE Example
+
+Suppose:
+
+```text
+Actual    = [10, 20, 30]
+Predicted = [12, 18, 33]
+```
+
+Errors:
+
+$$
+10-12=-2
+$$
+
+$$
+20-18=2
+$$
+
+$$
+30-33=-3
+$$
+
+Absolute errors:
+
+```text
+2, 2, 3
+```
+
+Therefore:
+
+$$
+MAE=\frac{2+2+3}{3}
+$$
+
+$$
+MAE=\frac{7}{3}
+$$
+
+$$
+MAE\approx2.33
+$$
+
+### Interpretation
+
+The model's predictions are off by about:
+
+```text
+2.33 units on average
+```
+
+---
+
+# 📉 14. Mean Squared Error — MSE
+
+MSE means:
+
+> **Mean Squared Error**
+
+Formula:
+
+$$
+MSE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+$$
+
+Unlike MAE, MSE **squares the errors**.
+
+---
+
+# 🧮 15. MSE Example
+
+Using:
+
+```text
+Actual    = [10, 20, 30]
+Predicted = [12, 18, 33]
+```
+
+Errors:
+
+```text
+-2, 2, -3
+```
+
+Squared errors:
+
+```text
+4, 4, 9
+```
+
+Therefore:
+
+$$
+MSE=\frac{4+4+9}{3}
+$$
+
+$$
+MSE=\frac{17}{3}
+$$
+
+$$
+MSE\approx5.67
+$$
+
+---
+
+# ⚖️ 16. MAE vs MSE
+
+| MAE | MSE |
+|---|---|
+| Uses absolute error | Uses squared error |
+| Easier to interpret | Penalizes large errors more |
+| Less sensitive to outliers | More sensitive to outliers |
+| Same unit as target | Squared unit |
+
+### Simple memory trick
+
+```text
+MAE → Absolute
+
+MSE → Square
+```
+
+---
+
+# 🧠 17. Why do we need a Cost Function?
+
+The model needs a way to answer:
+
+> **"How bad are my predictions?"**
+
+The cost/loss function gives us a numerical measure of error.
+
+For linear regression, a common objective is based on squared error.
+
+$$
+J(m,c)=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left(y_i-(mx_i+c)\right)^2
+$$
+
+The goal is:
+
+$$
+\boxed{\text{Minimize }J(m,c)}
+$$
+
+In simple words:
+
+> Find values of `m` and `c` that make the prediction error as small as possible.
+
+---
+
+# 🏔️ 18. Cost Function Visualization
+
+Think of the cost function like a mountain/valley.
+
+```text
+Cost
+ │
+ │\
+ │ \
+ │  \
+ │   \        /
+ │    \______/   ← Minimum
+ │
+ └──────────────── Parameter
+```
+
+The lowest point represents a parameter combination with low cost.
+
+The optimization process tries to move toward this minimum.
+
+---
+
+# 🚶 19. Gradient Descent
+
+**Gradient Descent** is an optimization algorithm used to find parameter values that minimize a cost function.
+
+For Linear Regression, the parameters are:
+
+```text
+m → slope
+c → intercept
+```
+
+The basic idea:
+
+```text
+Start somewhere
+      ↓
+Calculate cost
+      ↓
+Calculate gradient
+      ↓
+Move toward lower cost
+      ↓
+Repeat
+      ↓
+Reach minimum
+```
+
+---
+
+# 📐 20. Cost Function for Gradient Descent
+
+For Simple Linear Regression:
+
+$$
+J(m,c)=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left[y_i-(mx_i+c)\right]^2
+$$
+
+We calculate how the cost changes with respect to:
+
+```text
+m
+```
+
+and:
+
+```text
+c
+```
+
+These are called **partial derivatives**.
+
+---
+
+# 🧮 21. Partial Derivative with Respect to m
+
+The derivative is:
+
+$$
+\frac{\partial J}{\partial m}
+=
+-\frac{2}{n}
+\sum_{i=1}^{n}
+x_i
+\left[
+y_i-(mx_i+c)
+\right]
+$$
+
+### Meaning
+
+This tells us:
+
+> How much the cost function changes when we change the slope `m`.
+
+---
+
+# 🧮 22. Partial Derivative with Respect to c
+
+The derivative is:
+
+$$
+\frac{\partial J}{\partial c}
+=
+-\frac{2}{n}
+\sum_{i=1}^{n}
+\left[
+y_i-(mx_i+c)
+\right]
+$$
+
+### Meaning
+
+This tells us:
+
+> How much the cost function changes when we change the intercept `c`.
+
+---
+
+# 🔄 23. Updating m and c
+
+Once we calculate the gradients, we update the parameters.
+
+### Update slope
+
+$$
+m :=
+m-\alpha
+\frac{\partial J}{\partial m}
+$$
+
+### Update intercept
+
+$$
+c :=
+c-\alpha
+\frac{\partial J}{\partial c}
+$$
+
+Where:
+
+```text
+α = Learning Rate
+```
+
+---
+
+# 🚦 24. What is Learning Rate?
+
+The **learning rate ($\alpha$)** controls how big a step Gradient Descent takes.
+
+```text
+Small learning rate
+→ Small steps
+→ Slow learning
+
+Large learning rate
+→ Large steps
+→ May overshoot the minimum
+```
+
+### Example
+
+```text
+α = 0.001  → very small step
+
+α = 0.01   → moderate step
+
+α = 0.1    → larger step
+```
+
+The correct learning rate helps the algorithm converge efficiently.
+
+---
+
+# 🧠 25. Gradient Descent Intuition
+
+Imagine standing on a hill.
+
+Your goal is to reach the lowest point.
+
+```text
+        ● Start
+       /
+      /
+     /
+    /      ↓
+   /       ↓
+  /         ↓
+ /___________●
+             Minimum
+```
+
+Gradient Descent repeatedly asks:
+
+> "Which direction takes me downhill?"
+
+Then it takes a small step in that direction.
+
+---
+
+# 🔁 26. Gradient Descent Algorithm
+
+```text
+1. Initialize m and c
+        ↓
+2. Calculate predictions
+        ↓
+3. Calculate cost
+        ↓
+4. Calculate gradients
+        ↓
+5. Update m
+        ↓
+6. Update c
+        ↓
+7. Repeat
+        ↓
+8. Cost becomes smaller
+        ↓
+9. Stop when convergence is reached
+```
+
+---
+
+# 🎯 27. What is Convergence?
+
+**Convergence** means the algorithm has reached a point where further updates produce very little improvement.
+
+For example:
+
+```text
+Cost
+
+100
+ ↓
+60
+ ↓
+30
+ ↓
+15
+ ↓
+8
+ ↓
+5
+ ↓
+4.9
+ ↓
+4.89
+ ↓
+4.889
+```
+
+The cost is barely changing.
+
+The algorithm has approximately converged.
+
+---
+
+# 🧪 28. Manual Example
+
+Consider:
+
+| x | y |
+|---:|---:|
+| 1 | 2 |
+| 2 | 4 |
+| 3 | 6 |
+
+We can see that:
+
+```text
+y = 2x
+```
+
+So the ideal parameters are approximately:
+
+```text
+m = 2
+c = 0
+```
+
+Therefore:
+
+$$
+\hat{y}=2x+0
+$$
+
+Predictions:
+
+| x | Actual y | Predicted $\hat{y}$ |
+|---:|---:|---:|
+| 1 | 2 | 2 |
+| 2 | 4 | 4 |
+| 3 | 6 | 6 |
+
+Errors:
+
+```text
+0, 0, 0
+```
+
+Therefore:
+
+$$
+MAE=0
+$$
+
+and:
+
+$$
+MSE=0
+$$
+
+This is a perfect fit for this simple dataset.
+
+---
+
+# 📊 29. Linear Regression Graph
+
+A typical Linear Regression graph contains:
+
+```text
+Y
+│
+│              ●
+│           ●
+│        ●
+│      ●
+│   ●
+│ ●
+│
+└──────────────────── X
+```
+
+The model tries to find a straight line that represents the relationship between `X` and `Y`.
+
+---
+
+# 📌 30. What if the points don't lie exactly on the line?
+
+Real-world data usually contains noise.
+
+```text
+Y
+│
+│             ●
+│          ●
+│       ●
+│     ●
+│        ●
+│  ●
+│
+└──────────────────── X
+```
+
+The line does not need to pass through every point.
+
+Instead, it should provide a good overall fit.
+
+---
+
+# ⚠️ 31. Underfitting
+
+Underfitting occurs when the model is **too simple** to capture the important pattern in the data.
+
+```text
+Actual pattern:
+
+      ╭────╮
+    ╭─╯    ╰─╮
+───╯          ╰───
+
+Model:
+
+──────────────
+```
+
+### Characteristics
+
+```text
+Training performance → Poor
+Testing performance  → Poor
+```
+
+### Solution
+
+```text
+Increase model complexity
+Add useful features
+Use a more suitable algorithm
+Reduce excessive regularization
+```
+
+---
+
+# ⚠️ 32. Overfitting
+
+Overfitting occurs when a model learns the training data **too closely**, including noise.
+
+```text
+Data:
+
+●   ●
+  ●   ●
+    ●
+       ●
+
+Overly complex model:
+
+╭─╮╭─╮
+╯ ╰╯ ╰──
+```
+
+### Characteristics
+
+```text
+Training performance → Very good
+Testing performance  → Poor
+```
+
+The model does not generalize well to unseen data.
+
+---
+
+# 🎯 33. Good Fit
+
+A good model learns the important underlying relationship without memorizing noise.
+
+```text
+Training data
+      ↓
+Learn useful pattern
+      ↓
+Generalize
+      ↓
+Good performance on unseen data
+```
+
+### Main goal
+
+> **Generalization**
+
+---
+
+# 📊 34. Underfitting vs Good Fit vs Overfitting
+
+| Underfitting | Good Fit | Overfitting |
+|---|---|---|
+| Too simple | Appropriate complexity | Too complex |
+| High bias | Balanced | High variance |
+| Poor train performance | Good train performance | Excellent train performance |
+| Poor test performance | Good test performance | Poor test performance |
+
+---
+
+# 🧠 35. Important Terms
+
+### Feature
+
+Input variable used by the model.
+
+Example:
+
+```text
+Experience
+```
+
+### Target
+
+The value we want to predict.
+
+Example:
+
+```text
+Salary
+```
+
+### Prediction
+
+Value produced by the model.
+
+$$
+\hat{y}
+$$
+
+### Residual
+
+Difference between actual and predicted value.
+
+$$
+e=y-\hat{y}
+$$
+
+### Parameter
+
+A value learned by the model.
+
+For SLR:
+
+```text
+m = slope
+c = intercept
+```
+
+### Learning Rate
+
+Controls the step size during Gradient Descent.
+
+$$
+\alpha
+$$
+
+---
+
+# 🐍 36. Simple Linear Regression in Python
+
+## Step 1 — Import Libraries
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.linear_model import LinearRegression
+```
+
+---
+
+## Step 2 — Create Data
+
+```python
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+
+y = np.array([2, 4, 6, 8, 10])
+```
+
+Here:
+
+```text
+X → Input feature
+y → Target
+```
+
+---
+
+## Step 3 — Create Model
+
+```python
+model = LinearRegression()
+```
+
+---
+
+## Step 4 — Train Model
+
+```python
+model.fit(X, y)
+```
+
+The model learns:
+
+```text
+slope
+intercept
+```
+
+---
+
+## Step 5 — Check Coefficients
+
+```python
+print("Slope:", model.coef_[0])
+print("Intercept:", model.intercept_)
+```
+
+Expected approximately:
+
+```text
+Slope: 2
+Intercept: 0
+```
+
+---
+
+# 🔮 37. Make a Prediction
+
+Suppose:
+
+```text
+x = 6
+```
+
+We can predict:
+
+```python
+prediction = model.predict([[6]])
+
+print(prediction)
+```
+
+Expected:
+
+```text
+[12.]
+```
+
+Because:
+
+$$
+y=2(6)+0
+$$
+
+$$
+y=12
+$$
+
+---
+
+# 📈 38. Visualize the Regression Line
+
+```python
+plt.scatter(X, y)
+
+plt.plot(X, model.predict(X))
+
+plt.xlabel("X")
+plt.ylabel("Y")
+
+plt.title("Simple Linear Regression")
+
+plt.show()
+```
+
+The graph shows:
+
+```text
+●  Actual data points
+
+──── Regression line
+```
+
+---
+
+# 🧪 39. Complete Python Example
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.linear_model import LinearRegression
+
+
+# -------------------------
+# 1. Create dataset
+# -------------------------
+
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+
+y = np.array([2, 4, 6, 8, 10])
+
+
+# -------------------------
+# 2. Create model
+# -------------------------
+
+model = LinearRegression()
+
+
+# -------------------------
+# 3. Train model
+# -------------------------
+
+model.fit(X, y)
+
+
+# -------------------------
+# 4. Get parameters
+# -------------------------
+
+print("Slope:", model.coef_[0])
+
+print("Intercept:", model.intercept_)
+
+
+# -------------------------
+# 5. Prediction
+# -------------------------
+
+prediction = model.predict([[6]])
+
+print("Prediction:", prediction[0])
+
+
+# -------------------------
+# 6. Visualization
+# -------------------------
+
+plt.scatter(X, y)
+
+plt.plot(X, model.predict(X))
+
+plt.xlabel("X")
+
+plt.ylabel("Y")
+
+plt.title("Simple Linear Regression")
+
+plt.show()
+```
+
+---
+
+# 📏 40. Model Evaluation
+
+For regression, commonly used metrics include:
+
+```text
+MAE
+MSE
+RMSE
+R²
+```
+
+---
+
+## MAE
+
+$$
+MAE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat{y}_i|
+$$
+
+Lower is better.
+
+---
+
+## MSE
+
+$$
+MSE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+$$
+
+Lower is better.
+
+---
+
+## RMSE
+
+$$
+RMSE=\sqrt{MSE}
+$$
+
+Lower is better.
+
+---
+
+## R² Score
+
+R² measures how much of the variation in the target is explained by the model.
+
+$$
+R^2=
+1-
+\frac{SS_{res}}{SS_{tot}}
+$$
+
+A value closer to `1` generally indicates a better fit.
+
+---
+
+# 🧪 41. Evaluation in Python
+
+```python
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+
+y_pred = model.predict(X)
+
+mae = mean_absolute_error(y, y_pred)
+
+mse = mean_squared_error(y, y_pred)
+
+rmse = np.sqrt(mse)
+
+r2 = r2_score(y, y_pred)
+
+print("MAE :", mae)
+
+print("MSE :", mse)
+
+print("RMSE:", rmse)
+
+print("R²  :", r2)
+```
+
+---
+
+# 🧠 42. Important Difference: MAE vs MSE
+
+Suppose we have two errors:
+
+```text
+Error 1 = 2
+Error 2 = 10
+```
+
+MAE treats them approximately as:
+
+```text
+2
+10
+```
+
+MSE treats them as:
+
+```text
+4
+100
+```
+
+Therefore:
+
+> MSE gives much more importance to large errors.
+
+---
+
+# 🔥 43. Simple Linear Regression vs Multiple Linear Regression
+
+### Simple Linear Regression
+
+Uses **one feature**.
+
+$$
+\hat{y}=mx+c
+$$
+
+Example:
+
+```text
+Experience → Salary
+```
+
+### Multiple Linear Regression
+
+Uses **multiple features**.
+
+$$
+\hat{y}
+=
+\beta_0+
+\beta_1x_1+
+\beta_2x_2+
+\cdots+
+\beta_px_p
+$$
+
+Example:
+
+```text
+Experience
+Education
+Location
+Skills
+      ↓
+    Salary
+```
+
+---
+
+# ⚠️ 44. Important Correction
+
+Do not confuse:
+
+```text
+Linear Regression
+```
+
+with:
+
+```text
+Logistic Regression
+```
+
+### Linear Regression
+
+Used mainly for:
+
+```text
+Continuous numerical prediction
+```
+
+Example:
+
+```text
+Salary = ₹8.5 LPA
+House Price = ₹75 lakh
+```
+
+### Logistic Regression
+
+Used mainly for:
+
+```text
+Classification
+```
+
+Example:
+
+```text
+Spam / Not Spam
+Yes / No
+0 / 1
+```
+
+It uses the **sigmoid function**:
+
+$$
+\sigma(z)=
+\frac{1}{1+e^{-z}}
+$$
+
+The output is between:
+
+$$
+0 \leq \sigma(z) \leq 1
+$$
+
+---
+
+# 🧭 45. Complete Learning Flow
+
+```text
+Machine Learning
+       ↓
+Supervised Learning
+       ↓
+Regression
+       ↓
+Simple Linear Regression
+       ↓
+y = mx + c
+       ↓
+Prediction
+       ↓
+Residual / Error
+       ↓
+MAE / MSE
+       ↓
+Cost Function
+       ↓
+Gradient Descent
+       ↓
+Partial Derivatives
+       ↓
+Update m and c
+       ↓
+Minimize Cost
+       ↓
+Best-Fit Model
+       ↓
+Evaluate Model
+       ↓
+Generalize to New Data
+```
+
+---
+
+# 🎯 46. What You Must Understand
+
+Before moving to Multiple Linear Regression, make sure you understand:
+
+- [ ] What is Regression?
+- [ ] What is Simple Linear Regression?
+- [ ] What is `X`?
+- [ ] What is `y`?
+- [ ] What is predicted $\hat{y}$?
+- [ ] What is slope `m`?
+- [ ] What is intercept `c`?
+- [ ] What is a residual?
+- [ ] What is MAE?
+- [ ] What is MSE?
+- [ ] What is a cost function?
+- [ ] Why do we minimize cost?
+- [ ] What is Gradient Descent?
+- [ ] What is a partial derivative?
+- [ ] What is learning rate?
+- [ ] What is convergence?
+- [ ] What is underfitting?
+- [ ] What is overfitting?
+- [ ] What is generalization?
+- [ ] How to train Linear Regression using Scikit-learn?
+- [ ] How to evaluate a regression model?
+
+---
+
+# 🎤 47. Interview Questions
+
+### Q1. What is Linear Regression?
+
+Linear Regression is a supervised learning algorithm used to predict a continuous numerical target by learning a linear relationship between input features and the target.
+
+---
+
+### Q2. What is Simple Linear Regression?
+
+Simple Linear Regression uses **one independent variable** to predict a continuous dependent variable.
+
+$$
+\hat{y}=mx+c
+$$
+
+---
+
+### Q3. What does the slope represent?
+
+The slope represents how much the predicted target changes for a one-unit change in the input feature.
+
+---
+
+### Q4. What does the intercept represent?
+
+The intercept is the predicted value of the target when the input feature is zero.
+
+---
+
+### Q5. What is a residual?
+
+A residual is the difference between the actual value and predicted value.
+
+$$
+e=y-\hat{y}
+$$
+
+---
+
+### Q6. What is MAE?
+
+MAE is the average absolute difference between actual and predicted values.
+
+$$
+MAE=
+\frac{1}{n}
+\sum|y_i-\hat{y}_i|
+$$
+
+---
+
+### Q7. What is MSE?
+
+MSE is the average squared difference between actual and predicted values.
+
+$$
+MSE=
+\frac{1}{n}
+\sum(y_i-\hat{y}_i)^2
+$$
+
+---
+
+### Q8. Why does MSE penalize large errors?
+
+Because the errors are squared.
+
+For example:
+
+$$
+2^2=4
+$$
+
+but:
+
+$$
+10^2=100
+$$
+
+Therefore, large errors contribute much more to MSE.
+
+---
+
+### Q9. What is Gradient Descent?
+
+Gradient Descent is an optimization algorithm that iteratively updates model parameters in the direction that reduces the cost function.
+
+---
+
+### Q10. What is the learning rate?
+
+The learning rate controls the size of each update made during Gradient Descent.
+
+---
+
+### Q11. What happens if the learning rate is too large?
+
+The algorithm may overshoot the minimum and fail to converge properly.
+
+---
+
+### Q12. What happens if the learning rate is too small?
+
+Training may become very slow because the algorithm takes very small steps.
+
+---
+
+### Q13. What is overfitting?
+
+Overfitting occurs when a model learns the training data and its noise too closely, resulting in poor performance on unseen data.
+
+---
+
+### Q14. What is underfitting?
+
+Underfitting occurs when the model is too simple to capture the underlying pattern in the data.
+
+---
+
+### Q15. What is the main goal of Machine Learning?
+
+The main goal is not simply to memorize training data.
+
+The goal is:
+
+> **Learn useful patterns and generalize well to unseen data.**
+
+---
+
+# 🏆 48. Final Revision
+
+Remember these five things first:
+
+```text
+1️⃣ Regression
+   ↓
+   Predict numerical values
+
+2️⃣ Linear Equation
+   ↓
+   ŷ = mx + c
+
+3️⃣ Error
+   ↓
+   e = y - ŷ
+
+4️⃣ Cost
+   ↓
+   Measure prediction error
+
+5️⃣ Gradient Descent
+   ↓
+   Minimize the cost
+```
+
+### ⭐ Most important formulas
+
+$$
+\boxed{\hat{y}=mx+c}
+$$
+
+$$
+\boxed{e=y-\hat{y}}
+$$
+
+$$
+\boxed{
+MAE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat{y}_i|
+}
+$$
+
+$$
+\boxed{
+MSE=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+}
+$$
+
+$$
+\boxed{
+J(m,c)=
+\frac{1}{n}
+\sum_{i=1}^{n}
+[y_i-(mx_i+c)]^2
+}
+$$
+
+$$
+\boxed{
+m :=
+m-\alpha\frac{\partial J}{\partial m}
+}
+$$
+
+$$
+\boxed{
+c :=
+c-\alpha\frac{\partial J}{\partial c}
+}
+$$
+
+---
+
+# 🚀 Next Chapter
+
+After Simple Linear Regression, continue in this order:
+
+```text
+Chapter 1 → Simple Linear Regression       ✅
+Chapter 2 → Multiple Linear Regression
+Chapter 3 → Loss Functions
+             ├── MAE
+             ├── MSE
+             └── RMSE
+Chapter 4 → Gradient Descent
+Chapter 5 → Underfitting & Overfitting
+Chapter 6 → Train/Test Split
+Chapter 7 → Model Evaluation
+Chapter 8 → Logistic Regression
+Chapter 9 → KNN
+Chapter 10 → Decision Tree
+Chapter 11 → Random Forest
+Chapter 12 → SVM
+Chapter 13 → K-Means
+Chapter 14 → PCA
+Chapter 15 → Gradient Boosting / XGBoost
+```
+
+> 🎯 **Do not rush to the algorithms. First make sure the Linear Regression foundation is strong.**

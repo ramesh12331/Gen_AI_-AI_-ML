@@ -1692,41 +1692,62 @@ REGRESSION CLASSIFICATION CLUSTERING REDUCTION
   RFR
 ```
 
-### ⭐ Core formulas
+### ⭐ Core Formulas with Titles
+
+#### 1. 📈 Simple Linear Regression Equation
+Predicts a numerical output from one input feature.
 
 $$
-\hat{y}=mx+c
+\\hat{y}=mx+c
 $$
 
-$$
-e=y-\hat{y}
-$$
+#### 2. ❌ Residual Error
+Measures the difference between the actual and predicted values.
 
 $$
-MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+e=y-\\hat{y}
 $$
 
-$$
-MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
-$$
+#### 3. 📏 Mean Absolute Error (MAE)
+Calculates the average absolute prediction error.
 
 $$
-J(m,c)=
-\frac{1}{n}
-\sum_{i=1}^{n}
-\left(y_i-(mx_i+c)\right)^2
+MAE=\\frac{1}{n}\\sum_{i=1}^{n}|y_i-\\hat{y}_i|
 $$
 
-$$
-m:=m-\alpha\frac{\partial J}{\partial m}
-$$
+#### 4. 📐 Mean Squared Error (MSE)
+Calculates the average squared prediction error.
 
 $$
-c:=c-\alpha\frac{\partial J}{\partial c}
+MSE=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2
 $$
 
+#### 5. 🎯 Linear Regression Cost Function
+Measures the average squared error for the line defined by $m$ and $c$.
+
 $$
-\sigma(z)=\frac{1}{1+e^{-z}}
+J(m,c)=\\frac{1}{n}\\sum_{i=1}^{n}\\left(y_i-(mx_i+c)\\right)^2
+$$
+
+#### 6. ⛰️ Gradient Descent — Slope Update
+Updates the slope to help reduce the cost.
+
+$$
+m:=m-\\alpha\\frac{\\partial J}{\\partial m}
+$$
+
+#### 7. ⛰️ Gradient Descent — Intercept Update
+Updates the intercept to help reduce the cost.
+
+$$
+c:=c-\\alpha\\frac{\\partial J}{\\partial c}
+$$
+
+#### 8. 🟢 Sigmoid Function
+Maps a real-valued input to a value between 0 and 1; commonly used in Logistic Regression.
+
+$$
+\\sigma(z)=\\frac{1}{1+e^{-z}}
 $$
 
 ---

@@ -852,12 +852,12 @@ For an invertible square matrix:
 
 $$
 \boxed{
-A^{-1}=\frac{\operatorname{adj}(A)}{\det(A)}
+A^{-1}=\frac{\mathrm{adj}(A)}{\det(A)}
 }
 $$
 
 Where:
-- $\operatorname{adj}(A)$ = Adjugate matrix.
+- $\mathrm{adj}(A)$ = Adjugate matrix.
 - $\det(A)$ = Determinant.
 
 This formula is one way to calculate a matrix inverse mathematically.

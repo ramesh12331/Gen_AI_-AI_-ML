@@ -1634,9 +1634,9 @@ $$
 And after fitting the model, we should not look only at one metric. We should consider:
 
 $$
-\boxed{
+
 MAE,\ MSE,\ RMSE,\ R^2,\ Adjusted\ R^2
-}
+
 $$
 
 and also consider:

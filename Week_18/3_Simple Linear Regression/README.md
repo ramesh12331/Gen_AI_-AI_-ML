@@ -680,19 +680,30 @@ This tells us:
 
 ---
 
-# 🧮 22. Partial Derivative with Respect to b
+# 🧮 ## 22. 🧮 Partial Derivative with Respect to b
 
-The derivative is:
+The partial derivative tells us how the cost function changes when the intercept $b$ changes, while keeping the slope $m$ fixed.
+
+### Formula
 
 $$
-\frac{\partial J}{\partial b}
+\\frac{\\partial J}{\\partial b}
 =
--\frac{2}{n}
-\sum_{i=1}^{n}
-\left[
-y_i-(mx_i+b)
-\right]
+-\\frac{2}{n}\\sum_{i=1}^{n}
+\\left[y_i-(mx_i+b)\\right]
 $$
+
+### Explanation
+
+- $\\frac{\\partial J}{\\partial b}$ — How the cost changes when $b$ changes.
+- $J$ — Cost function, which measures prediction error.
+- $n$ — Total number of data points.
+- $y_i$ — Actual value for data point $i$.
+- $mx_i+b$ — Predicted value for data point $i$.
+- $\\sum$ — Add the values across all data points.
+
+**In simple words:** This formula helps determine how to adjust the intercept $b$ to reduce prediction errors during Gradient Descent.
+
 
 ### Meaning
 

@@ -715,7 +715,7 @@ X_T = X.T
 print("Original Matrix:")
 print(X)
 
-print("\nTranspose Matrix:")
+print("X^T Matrix:")
 print(X_T)
 ```
 
@@ -790,7 +790,7 @@ A_inverse = np.linalg.inv(A)
 print("Inverse:")
 print(A_inverse)
 
-print("\nA multiplied by its inverse:")
+print("A multiplied by its inverse:")
 print(A @ A_inverse)
 ```
 
@@ -1009,7 +1009,7 @@ print(beta)
 
 y_predicted = X @ beta
 
-print("\nPredicted Values:")
+print("\hat{y} Values:")
 print(y_predicted)
 ```
 

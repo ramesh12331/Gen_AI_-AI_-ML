@@ -115,7 +115,7 @@ The model tries to find the **best-fit straight line**.
 The basic equation is:
 
 $$
-\hat{y} = mx + c
+\hat{y}=mx+b
 $$
 
 Where:
@@ -126,7 +126,7 @@ Where:
 | $y$ | Actual value |
 | $\hat{y}$ | Predicted value |
 | $m$ | Slope |
-| $c$ | Intercept |
+| $b$ | Intercept |
 
 ---
 
@@ -142,7 +142,7 @@ Here:
 
 ```text
 m = 2
-c = 3
+b = 3
 ```
 
 If:
@@ -208,7 +208,7 @@ So:
 The **slope ($m$)** tells us how much the predicted output changes when the input increases by 1 unit.
 
 $$
-\hat{y} = mx+c
+\hat{y}=mx+b
 $$
 
 Suppose:
@@ -247,17 +247,17 @@ the predicted salary value increases by 2 units in whatever units `y` uses.
 
 # 📍 7. What is Intercept?
 
-The **intercept ($c$)** is the predicted value of `y` when `x = 0`.
+The **intercept ($b$)** is the predicted value of `y` when `x = 0`.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 If:
 
 ```text
 m = 2
-c = 3
+b = 3
 ```
 
 Then when:
@@ -561,21 +561,21 @@ The cost/loss function gives us a numerical measure of error.
 For linear regression, a common objective is based on squared error.
 
 $$
-J(m,c)=
+J(m,b)=
 \frac{1}{n}
 \sum_{i=1}^{n}
-\left(y_i-(mx_i+c)\right)^2
+\left(y_i-(mx_i+b)\right)^2
 $$
 
 The goal is:
 
 $$
-\boxed{\text{Minimize }J(m,c)}
+\text{Minimize } J(m,b)
 $$
 
 In simple words:
 
-> Find values of `m` and `c` that make the prediction error as small as possible.
+> Find values of `m` and `b` that make the prediction error as small as possible.
 
 ---
 
@@ -609,7 +609,7 @@ For Linear Regression, the parameters are:
 
 ```text
 m → slope
-c → intercept
+b → intercept
 ```
 
 The basic idea:
@@ -635,10 +635,10 @@ Reach minimum
 For Simple Linear Regression:
 
 $$
-J(m,c)=
+J(m,b)=
 \frac{1}{n}
 \sum_{i=1}^{n}
-\left[y_i-(mx_i+c)\right]^2
+\left[y_i-(mx_i+b)\right]^2
 $$
 
 We calculate how the cost changes with respect to:
@@ -650,7 +650,7 @@ m
 and:
 
 ```text
-c
+b
 ```
 
 These are called **partial derivatives**.
@@ -668,7 +668,7 @@ $$
 \sum_{i=1}^{n}
 x_i
 \left[
-y_i-(mx_i+c)
+y_i-(mx_i+b)
 \right]
 $$
 
@@ -680,17 +680,17 @@ This tells us:
 
 ---
 
-# 🧮 22. Partial Derivative with Respect to c
+# 🧮 22. Partial Derivative with Respect to b
 
 The derivative is:
 
 $$
-\frac{\partial J}{\partial c}
+\frac{\partial J}{\partial b}
 =
 -\frac{2}{n}
 \sum_{i=1}^{n}
 \left[
-y_i-(mx_i+c)
+y_i-(mx_i+b)
 \right]
 $$
 
@@ -698,11 +698,11 @@ $$
 
 This tells us:
 
-> How much the cost function changes when we change the intercept `c`.
+> How much the cost function changes when we change the intercept `b`.
 
 ---
 
-# 🔄 23. Updating m and c
+# 🔄 23. Updating m and b
 
 Once we calculate the gradients, we update the parameters.
 
@@ -717,9 +717,9 @@ $$
 ### Update intercept
 
 $$
-c :=
-c-\alpha
-\frac{\partial J}{\partial c}
+b :=
+b-\alpha
+\frac{\partial J}{\partial b}
 $$
 
 Where:
@@ -787,7 +787,7 @@ Then it takes a small step in that direction.
 # 🔁 26. Gradient Descent Algorithm
 
 ```text
-1. Initialize m and c
+1. Initialize m and b
         ↓
 2. Calculate predictions
         ↓
@@ -797,7 +797,7 @@ Then it takes a small step in that direction.
         ↓
 5. Update m
         ↓
-6. Update c
+6. Update b
         ↓
 7. Repeat
         ↓
@@ -862,7 +862,7 @@ So the ideal parameters are approximately:
 
 ```text
 m = 2
-c = 0
+b = 0
 ```
 
 Therefore:
@@ -1085,7 +1085,7 @@ For SLR:
 
 ```text
 m = slope
-c = intercept
+b = intercept
 ```
 
 ### Learning Rate
@@ -1424,7 +1424,7 @@ Therefore:
 Uses **one feature**.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 Example:
@@ -1531,7 +1531,7 @@ Regression
        ↓
 Simple Linear Regression
        ↓
-y = mx + c
+y = mx + b
        ↓
 Prediction
        ↓
@@ -1545,7 +1545,7 @@ Gradient Descent
        ↓
 Partial Derivatives
        ↓
-Update m and c
+Update m and b
        ↓
 Minimize Cost
        ↓
@@ -1568,7 +1568,7 @@ Before moving to Multiple Linear Regression, make sure you understand:
 - [ ] What is `y`?
 - [ ] What is predicted $\hat{y}$?
 - [ ] What is slope `m`?
-- [ ] What is intercept `c`?
+- [ ] What is intercept `b`?
 - [ ] What is a residual?
 - [ ] What is MAE?
 - [ ] What is MSE?
@@ -1599,7 +1599,7 @@ Linear Regression is a supervised learning algorithm used to predict a continuou
 Simple Linear Regression uses **one independent variable** to predict a continuous dependent variable.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 ---
@@ -1727,7 +1727,7 @@ Remember these five things first:
 
 2️⃣ Linear Equation
    ↓
-   ŷ = mx + c
+   ŷ = mx + b
 
 3️⃣ Error
    ↓
@@ -1745,7 +1745,7 @@ Remember these five things first:
 ### ⭐ Most important formulas
 
 $$
-\boxed{\hat{y}=mx+c}
+\boxed{\hat{y}=mx+b}
 $$
 
 $$
@@ -1772,10 +1772,10 @@ $$
 
 $$
 \boxed{
-J(m,c)=
+J(m,b)=
 \frac{1}{n}
 \sum_{i=1}^{n}
-[y_i-(mx_i+c)]^2
+[y_i-(mx_i+b)]^2
 }
 $$
 
@@ -1788,8 +1788,8 @@ $$
 
 $$
 \boxed{
-c :=
-c-\alpha\frac{\partial J}{\partial c}
+b :=
+b-\alpha\frac{\partial J}{\partial b}
 }
 $$
 

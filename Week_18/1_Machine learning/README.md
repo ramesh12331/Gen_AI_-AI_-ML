@@ -1286,81 +1286,110 @@ DBSCAN
 
 ---
 
-# 30. 📝 Important Formulas
+# 30. 📝 Important Machine Learning Formulas
 
-## Linear Regression
+These formulas are used in the introductory regression and classification concepts covered in this chapter.
 
-$$
-\hat{y}=mx+c
-$$
+## 30.1 📈 Simple Linear Regression Equation
 
-## Error
+This equation predicts a numerical output using one input feature.
 
 $$
-e=y-\hat{y}
+\\hat{y}=mx+c
 $$
 
-## MAE
+- $\\hat{y}$ = Predicted output
+- $x$ = Input feature
+- $m$ = Slope (change in prediction for a one-unit increase in $x$)
+- $c$ = Intercept (prediction when $x=0$)
+
+## 30.2 ❌ Residual Error
+
+Residual is the difference between the actual value and the predicted value.
 
 $$
-MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+e=y-\\hat{y}
 $$
 
-## MSE
+- $e$ = Residual/error
+- $y$ = Actual value
+- $\\hat{y}$ = Predicted value
+
+## 30.3 📏 Mean Absolute Error (MAE)
+
+MAE calculates the average absolute difference between actual and predicted values.
 
 $$
-MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+MAE=\\frac{1}{n}\\sum_{i=1}^{n}|y_i-\\hat{y}_i|
 $$
 
-## Linear Regression Cost
+A lower MAE indicates smaller average absolute prediction errors when comparing models on the same target scale.
+
+## 30.4 📐 Mean Squared Error (MSE)
+
+MSE calculates the average of the squared prediction errors.
 
 $$
-J(m,c)=
-\frac{1}{n}
-\sum_{i=1}^{n}
-\left(y_i-(mx_i+c)\right)^2
+MSE=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2
 $$
 
-## Partial Derivative with respect to $m$
+Squaring gives larger errors more influence on the result.
+
+## 30.5 🎯 Linear Regression Cost Function
+
+This cost function measures the average squared error for the line defined by slope $m$ and intercept $c$.
 
 $$
-\frac{\partial J}{\partial m}
-=
--\frac{2}{n}
-\sum_{i=1}^{n}
-x_i
-\left[y_i-(mx_i+c)\right]
+J(m,c)=\\frac{1}{n}\\sum_{i=1}^{n}\\left(y_i-(mx_i+c)\\right)^2
 $$
 
-## Partial Derivative with respect to $c$
+The training objective is to find values of $m$ and $c$ that minimize this cost.
+
+## 30.6 ⛰️ Gradient Descent — Slope Update
+
+This rule updates the slope in the direction that reduces the cost.
 
 $$
-\frac{\partial J}{\partial c}
-=
--\frac{2}{n}
-\sum_{i=1}^{n}
-\left[y_i-(mx_i+c)\right]
+m:=m-\\alpha\\frac{\\partial J}{\\partial m}
 $$
 
-## Gradient Descent — $m$
+## 30.7 ⛰️ Gradient Descent — Intercept Update
+
+This rule updates the intercept in the direction that reduces the cost.
 
 $$
-m:=m-\alpha\frac{\partial J}{\partial m}
+c:=c-\\alpha\\frac{\\partial J}{\\partial c}
 $$
 
-## Gradient Descent — $c$
+Here, $\\alpha$ is the learning rate, which controls the update step size.
+
+## 30.8 🟢 Sigmoid Function
+
+The sigmoid function maps a real-valued input to a value between 0 and 1. It is commonly used by Logistic Regression to produce a probability-like score for binary classification.
 
 $$
-c:=c-\alpha\frac{\partial J}{\partial c}
+\\sigma(z)=\\frac{1}{1+e^{-z}}
 $$
 
-## Sigmoid
+> **Note:** Sigmoid is associated with Logistic Regression classification, not ordinary Simple Linear Regression.
+
+## 30.9 🧮 Partial Derivative — Cost with Respect to Slope
+
+For the cost function defined above, this derivative shows how the cost changes as the slope $m$ changes.
 
 $$
-\sigma(z)=\frac{1}{1+e^{-z}}
+\\frac{\\partial J}{\\partial m}
+=-\\frac{2}{n}\\sum_{i=1}^{n}x_i\\left[y_i-(mx_i+c)\\right]
 $$
 
----
+## 30.10 🧮 Partial Derivative — Cost with Respect to Intercept
+
+This derivative shows how the cost changes as the intercept $c$ changes.
+
+$$
+\\frac{\\partial J}{\\partial c}
+=-\\frac{2}{n}\\sum_{i=1}^{n}\\left[y_i-(mx_i+c)\\right]
+$$
 
 # 31. 🎯 Most Important Concepts to Remember
 

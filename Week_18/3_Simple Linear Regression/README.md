@@ -680,27 +680,27 @@ This tells us:
 
 ---
 
-# 🧮 ## 22. 🧮 Partial Derivative with Respect to b
+## 🧮 22. Partial Derivative with Respect to b
 
 The partial derivative tells us how the cost function changes when the intercept $b$ changes, while keeping the slope $m$ fixed.
 
 ### Formula
 
 $$
-\\frac{\\partial J}{\\partial b}
+\frac{\partial J}{\partial b}
 =
--\\frac{2}{n}\\sum_{i=1}^{n}
-\\left[y_i-(mx_i+b)\\right]
+-\frac{2}{n}\sum_{i=1}^{n}
+\left[y_i-(mx_i+b)\right]
 $$
 
 ### Explanation
 
-- $\\frac{\\partial J}{\\partial b}$ — How the cost changes when $b$ changes.
+- $\frac{\partial J}{\partial b}$ — How the cost changes when $b$ changes.
 - $J$ — Cost function, which measures prediction error.
 - $n$ — Total number of data points.
 - $y_i$ — Actual value for data point $i$.
 - $mx_i+b$ — Predicted value for data point $i$.
-- $\\sum$ — Add the values across all data points.
+- $\sum$ — Add the values across all data points.
 
 **In simple words:** This formula helps determine how to adjust the intercept $b$ to reduce prediction errors during Gradient Descent.
 
@@ -1762,7 +1762,7 @@ Use this section to revise the most important formulas. Read the meaning of each
 This equation is used to **predict a numerical value from one input feature**.
 
 $$
-\\hat{y}=mx+b
+\hat{y}=mx+b
 $$
 
 **Meaning of each symbol**
@@ -1770,7 +1770,7 @@ $$
 | Symbol | Meaning |
 |---|---|
 | $x$ | Input value (feature), such as years of experience |
-| $\\hat{y}$ | Predicted output, such as predicted salary |
+| $\hat{y}$ | Predicted output, such as predicted salary |
 | $m$ | Slope: how much the prediction changes when $x$ increases by 1 |
 | $b$ | Intercept: the predicted output when $x=0$ |
 
@@ -1779,13 +1779,13 @@ $$
 Suppose the model is:
 
 $$
-\\hat{y}=2x+3
+\hat{y}=2x+3
 $$
 
 For an input of $x=4$:
 
 $$
-\\hat{y}=2(4)+3=11
+\hat{y}=2(4)+3=11
 $$
 
 So the model predicts **11**.
@@ -1795,11 +1795,11 @@ So the model predicts **11**.
 A residual tells us the difference between the actual value and the value predicted by the model.
 
 $$
-e=y-\\hat{y}
+e=y-\hat{y}
 $$
 
 - $y$ = Actual value
-- $\\hat{y}$ = Predicted value
+- $\hat{y}$ = Predicted value
 - $e$ = Residual (error)
 
 **Example**
@@ -1817,16 +1817,16 @@ The model underpredicted by 3 units. A negative residual means the prediction wa
 MAE measures the **average size of the prediction errors**, ignoring whether an error is positive or negative.
 
 $$
-MAE=\\frac{1}{n}\\sum_{i=1}^{n}|y_i-\\hat{y}_i|
+MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
 $$
 
 | Symbol | Meaning |
 |---|---|
 | $n$ | Total number of observations |
 | $y_i$ | Actual value for observation $i$ |
-| $\\hat{y}_i$ | Predicted value for observation $i$ |
-| $|\\ |$ | Absolute value: make the error non-negative |
-| $\\sum$ | Add the values |
+| $\hat{y}_i$ | Predicted value for observation $i$ |
+| $|\ |$ | Absolute value: make the error non-negative |
+| $\sum$ | Add the values |
 
 **Example**
 
@@ -1837,7 +1837,7 @@ Predictions: $[12,18,33]$
 Absolute errors are $[2,2,3]$:
 
 $$
-MAE=\\frac{2+2+3}{3}=\\frac{7}{3}\\approx2.33
+MAE=\frac{2+2+3}{3}=\frac{7}{3}\approx2.33
 $$
 
 On average, predictions are about **2.33 units away** from the actual values.
@@ -1847,7 +1847,7 @@ On average, predictions are about **2.33 units away** from the actual values.
 MSE measures the **average of the squared prediction errors**. Squaring makes large errors count more heavily.
 
 $$
-MSE=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2
+MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
 $$
 
 **Example**
@@ -1855,7 +1855,7 @@ $$
 Using the same errors $[-2,2,-3]$, the squared errors are $[4,4,9]$:
 
 $$
-MSE=\\frac{4+4+9}{3}=\\frac{17}{3}\\approx5.67
+MSE=\frac{4+4+9}{3}=\frac{17}{3}\approx5.67
 $$
 
 A lower MSE is generally better when comparing models on the same target scale and dataset.
@@ -1865,7 +1865,7 @@ A lower MSE is generally better when comparing models on the same target scale a
 The cost function gives one score for the model's overall squared prediction error. During training, we try to find the slope $m$ and intercept $b$ that make this score small.
 
 $$
-J(m,b)=\\frac{1}{n}\\sum_{i=1}^{n}\\left[y_i-(mx_i+b)\\right]^2
+J(m,b)=\frac{1}{n}\sum_{i=1}^{n}\left[y_i-(mx_i+b)\right]^2
 $$
 
 - $J(m,b)$ = Cost for the current choices of $m$ and $b$
@@ -1881,8 +1881,8 @@ $$
 This formula measures how the cost changes when we change the slope $m$, while keeping the intercept $b$ fixed.
 
 $$
-\\frac{\\partial J}{\\partial m}
-=-\\frac{2}{n}\\sum_{i=1}^{n}x_i\\left[y_i-(mx_i+b)\\right]
+\frac{\partial J}{\partial m}
+=-\frac{2}{n}\sum_{i=1}^{n}x_i\left[y_i-(mx_i+b)\right]
 $$
 
 - A partial derivative is the **sensitivity of the cost** to one parameter.
@@ -1893,8 +1893,8 @@ $$
 This formula measures how the cost changes when we change the intercept $b$, while keeping the slope $m$ fixed.
 
 $$
-\\frac{\\partial J}{\\partial b}
-=-\\frac{2}{n}\\sum_{i=1}^{n}\\left[y_i-(mx_i+b)\\right]
+\frac{\partial J}{\partial b}
+=-\frac{2}{n}\sum_{i=1}^{n}\left[y_i-(mx_i+b)\right]
 $$
 
 The derivative helps us determine how the intercept should be adjusted to reduce the cost.
@@ -1904,7 +1904,7 @@ The derivative helps us determine how the intercept should be adjusted to reduce
 This rule updates the slope using its partial derivative.
 
 $$
-m_{new}=m_{old}-\\alpha\\frac{\\partial J}{\\partial m}
+m_{new}=m_{old}-\alpha\frac{\partial J}{\partial m}
 $$
 
 #### 9. ⛰️ Gradient Descent — Intercept Update
@@ -1912,10 +1912,10 @@ $$
 This rule updates the intercept using its partial derivative.
 
 $$
-b_{new}=b_{old}-\\alpha\\frac{\\partial J}{\\partial b}
+b_{new}=b_{old}-\alpha\frac{\partial J}{\partial b}
 $$
 
-**What is $\\alpha$ (learning rate)?**
+**What is $\alpha$ (learning rate)?**
 
 It controls the size of each update:
 - Very small learning rate: learning can be slow.
@@ -1927,7 +1927,7 @@ It controls the size of each update:
 RMSE is the square root of MSE. It expresses the typical error scale in the **same units as the target**.
 
 $$
-RMSE=\\sqrt{MSE}
+RMSE=\sqrt{MSE}
 $$
 
 #### 11. 📊 R-Squared ($R^2$)
@@ -1935,22 +1935,22 @@ $$
 R-squared compares the model's squared prediction errors with the variation in the actual target values around their mean.
 
 $$
-R^2=1-\\frac{SS_{res}}{SS_{tot}}
+R^2=1-\frac{SS_{res}}{SS_{tot}}
 $$
 
 Where:
 
 $$
-SS_{res}=\\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2
+SS_{res}=\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
 $$
 
 $$
-SS_{tot}=\\sum_{i=1}^{n}(y_i-\\bar{y})^2
+SS_{tot}=\sum_{i=1}^{n}(y_i-\bar{y})^2
 $$
 
 - $SS_{res}$ = Sum of squared residuals (unexplained error)
 - $SS_{tot}$ = Total sum of squares (variation around the actual-value mean)
-- $\\bar{y}$ = Mean of the actual target values
+- $\bar{y}$ = Mean of the actual target values
 
 For the usual test-set interpretation, $R^2=1$ is a perfect prediction, $R^2=0$ is no better than predicting the mean, and $R^2$ can be negative when the model performs worse than that baseline.
 
@@ -1959,7 +1959,7 @@ For the usual test-set interpretation, $R^2=1$ is a perfect prediction, $R^2=0$ 
 Adjusted R-squared modifies $R^2$ to account for how many input features are used. It is mainly used when comparing regression models with different numbers of predictors.
 
 $$
-R^2_{adj}=1-\\frac{(1-R^2)(n-1)}{n-k-1}
+R^2_{adj}=1-\frac{(1-R^2)(n-1)}{n-k-1}
 $$
 
 - $n$ = Number of observations
@@ -1973,7 +1973,7 @@ Adding a feature does not always improve adjusted $R^2$; an unnecessary feature 
 This is the extension of simple linear regression when we use more than one input feature.
 
 $$
-\\hat{y}=b_0+b_1x_1+b_2x_2+\\cdots+b_kx_k
+\hat{y}=b_0+b_1x_1+b_2x_2+\cdots+b_kx_k
 $$
 
 Simple Linear Regression uses one feature; Multiple Linear Regression uses two or more features.
@@ -1983,7 +1983,7 @@ Simple Linear Regression uses one feature; Multiple Linear Regression uses two o
 The sigmoid function maps a number to a value between 0 and 1. It is commonly used in Logistic Regression for classification, **not** as the prediction equation for ordinary Simple Linear Regression.
 
 $$
-\\sigma(z)=\\frac{1}{1+e^{-z}}
+\sigma(z)=\frac{1}{1+e^{-z}}
 $$
 
 **Quick reminder:** Linear Regression predicts a numerical value. Logistic Regression uses the sigmoid function to produce a probability-like score for classification.

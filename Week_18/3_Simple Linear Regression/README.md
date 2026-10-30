@@ -1515,7 +1515,7 @@ $$
 The output is between:
 
 $$
-0 \leq \sigma(z) \leq 1
+0 \le \sigma(z) \le 1
 $$
 
 ---

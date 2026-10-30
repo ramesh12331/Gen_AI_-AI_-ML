@@ -11,11 +11,11 @@
 ## 📚 Chapter contents
 
 This folder includes:
-- \`2.png\` — your existing study image
-- \`class1.py\` and \`class2.py\` — class examples
-- \`RealTime_Example.py\` — practical example
-- \`simpleLR.html\` — visual / interactive example
-- \`handwritten/linear-regression-basics.svg\` — beginner visual summary
+- `2.png` — your existing study image
+- `class1.py` and `class2.py` — class examples
+- `RealTime_Example.py` — practical example
+- `simpleLR.html` — visual / interactive example
+- `handwritten/linear-regression-basics.svg` — beginner visual summary
 
 ## 🧠 What is Linear Regression?
 
@@ -23,9 +23,9 @@ Linear Regression is a supervised machine learning algorithm used to predict a n
 
 Example:
 
-\`\`\`text
+```text
 House Area  →  Linear Regression Model  →  Predicted House Price
-\`\`\`
+```
 
 ## 📐 Straight-line equation
 

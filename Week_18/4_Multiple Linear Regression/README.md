@@ -67,6 +67,19 @@ By the end of these notes, you should be able to:
 - Read basic matrix notation and use NumPy to calculate predictions.
 
 
+## ✍️ Handwritten Notes Image
+
+> A quick visual revision sheet for the core equations and concepts.
+
+<div align="center">
+
+![Handwritten Multiple Linear Regression revision notes](handwritten/multiple-linear-regression-notes.svg)
+
+**[🖼️ Open the full-size handwritten notes](handwritten/multiple-linear-regression-notes.svg)**
+
+</div>
+
+
 ## 📌 Topic 1: What Is Regression?
 
 ### 1.1 Understanding Regression

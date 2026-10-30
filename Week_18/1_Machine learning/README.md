@@ -2,6 +2,19 @@
 
 > 🎯 **Goal:** Understand the basic Machine Learning concepts before learning individual ML algorithms.
 
+
+## ✍️ Handwritten Beginner Notes
+
+Use this visual summary to understand the main idea before moving into the detailed examples and code.
+
+<div align="center">
+
+![Handwritten beginner diagram for Machine Learning fundamentals](handwritten/machine-learning-fundamentals.svg)
+
+[🖼️ Open the full-size handwritten notes](handwritten/machine-learning-fundamentals.svg)
+
+</div>
+
 ---
 
 # 📚 Table of Contents

@@ -107,7 +107,6 @@ This is a **regression problem** because the output is numerical.
 The main goal of Simple Linear Regression is to find the **best-fit line**.
 
 
-
 The best-fit line should be as close as possible to the observed data points.
 
 The equation of the line is:
@@ -292,7 +291,7 @@ We want the line with the **smallest overall error**.
 Therefore:
 
 $$
-\boxed{\text{Best Line} \rightarrow \text{Minimum Cost}}
+\boxed{\text{Best Line} \to \text{Minimum Cost}}
 $$
 
 The goal of Linear Regression is to find the values of:
@@ -1617,17 +1616,17 @@ The complete idea is:
 $$
 \boxed{
 \text{Data}
-\rightarrow
+\to
 \text{Best-Fit Line}
-\rightarrow
+\to
 \text{Prediction}
-\rightarrow
+\to
 \text{Error}
-\rightarrow
+\to
 \text{Cost}
-\rightarrow
+\to
 \text{Gradient Descent}
-\rightarrow
+\to
 \text{Evaluation}
 }
 $$

@@ -2,6 +2,19 @@
 
 > **Goal:** Understand Simple Linear Regression from **zero level → mathematics → graph → error → Gradient Descent → Python → evaluation → interview questions**.
 
+
+## ✍️ Handwritten Beginner Notes
+
+Use this visual summary to understand the main idea before moving into the detailed examples and code.
+
+<div align="center">
+
+![Handwritten beginner diagram for Simple Linear Regression](handwritten/simple-linear-regression.svg)
+
+[🖼️ Open the full-size handwritten notes](handwritten/simple-linear-regression.svg)
+
+</div>
+
 ---
 
 # 🧠 1. What is Regression?

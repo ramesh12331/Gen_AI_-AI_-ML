@@ -686,12 +686,14 @@ The partial derivative tells us how the cost function changes when the intercept
 
 ### Formula
 
-$$
+### Formula
+
+$
 \frac{\partial J}{\partial b}
 =
 -\frac{2}{n}\sum_{i=1}^{n}
 \left[y_i-(mx_i+b)\right]
-$$
+$
 
 ### Explanation
 
@@ -1446,17 +1448,25 @@ Experience → Salary
 
 ### Multiple Linear Regression
 
-Uses **multiple features**.
+Uses **multiple features** to predict one numerical target.
 
-$$
-\hat{y}
-=
-\beta_0+
-\beta_1x_1+
-\beta_2x_2+
-\cdots+
-\beta_px_p
-$$
+**Formula**
+
+$
+\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_px_p
+$
+
+**Meaning of each symbol**
+
+| Symbol | Meaning |
+|---|---|
+| $\hat{y}$ | Predicted output |
+| $\beta_0$ | Intercept |
+| $\beta_1, \beta_2, \ldots, \beta_p$ | Coefficients (weights) learned for each feature |
+| $x_1, x_2, \ldots, x_p$ | Input features |
+| $p$ | Total number of input features |
+
+**Example:** A house price model may use area, number of bedrooms, and age of the property as multiple input features.
 
 Example:
 

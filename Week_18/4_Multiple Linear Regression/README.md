@@ -1,8 +1,73 @@
-Ramesh, let's learn **Multiple Linear Regression (MLR)** in simple English, step by step, based on your screenshots. I'll explain each concept from the basics, including formulas, examples, and Python code for VS Code.
+<!--
+  Multiple Linear Regression — learning notes
+  Math formatting: GitHub-compatible $$...$$ blocks and $...$ inline expressions.
+-->
 
-# 📘 Multiple Linear Regression — Complete Explanation
+<div align="center">
 
-## Topic 1: What Is Regression?
+# 📘 Multiple Linear Regression (MLR)
+
+[![Machine Learning](https://img.shields.io/badge/Subject-Machine%20Learning-2563eb?style=for-the-badge&logo=academia&logoColor=white)](#-learning-roadmap)
+[![Python](https://img.shields.io/badge/Code-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](#topic-14-implementing-the-normal-equation-using-numpy)
+[![NumPy](https://img.shields.io/badge/Library-NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](#topic-14-implementing-the-normal-equation-using-numpy)
+[![Math Formulas](https://img.shields.io/badge/Math-LaTeX%20Enabled-16a34a?style=for-the-badge&logo=wolfram&logoColor=white)](#-formula-cheat-sheet)
+
+**Beginner-friendly notes • Mathematical intuition • Worked examples • Python implementation**
+
+</div>
+
+> [!TIP]
+> **How to use these notes:** Start with Topic 1, follow the clickable roadmap, and use the expandable revision panels to review key formulas. Mathematical expressions use GitHub-compatible LaTeX delimiters.
+
+<details>
+<summary>🧭 <strong>Click to open the interactive table of contents</strong></summary>
+
+- [📌 Topic 1 — What Is Regression?](#topic-1-what-is-regression)
+- [📈 Topic 2 — Simple Linear Regression](#topic-2-simple-linear-regression-slr)
+- [🧠 Topic 3 — Multiple Linear Regression](#topic-3-multiple-linear-regression-mlr)
+- [🎯 Topic 4 — Independent and Dependent Variables](#topic-4-independent-and-dependent-variables)
+- [📊 Topic 5 — 2D, 3D, and Multiple Linear Regression](#topic-5-2d-3d-and-multiple-linear-regression)
+- [📐 Topic 6 — Best-Fit Line and Regression Coefficients](#topic-6-best-fit-line-and-regression-coefficients)
+- [💼 Topic 7 — CGPA, IQ, and LPA Example](#topic-7-the-cgpa-iq-and-lpa-example)
+- [🎯 Topic 8 — Ordinary Least Squares (OLS)](#topic-8-ordinary-least-squares-ols)
+- [🧮 Topic 9 — Matrix Representation](#topic-9-matrix-representation-of-multiple-linear-regression)
+- [🔁 Topic 10 — Matrix Transpose](#topic-10-transpose-of-a-matrix--x-t)
+- [🔄 Topic 11 — Matrix Inverse](#topic-11-matrix-inverse--a-1)
+- [🧩 Topic 12 — Determinant and Adjugate](#topic-12-determinant-and-adjugate)
+- [⭐ Topic 13 — Normal Equation](#topic-13-normal-equation--the-most-important-formula)
+- [🐍 Topic 14 — Normal Equation with NumPy](#topic-14-implementing-the-normal-equation-using-numpy)
+- [📝 Final Revision](#final-revision-multiple-linear-regression)
+- [🗺️ Learning Roadmap](#-learning-roadmap)
+
+</details>
+
+<details>
+<summary>⚡ <strong>Formula cheat sheet — click to expand</strong></summary>
+
+| Concept | Formula |
+|---|---|
+| Simple Linear Regression | $$\hat{y}=\beta_0+\beta_1x$$ |
+| Multiple Linear Regression | $$\hat{y}=\beta_0+\beta_1x_1+\cdots+\beta_nx_n$$ |
+| Residual | $$e_i=y_i-\hat{y}_i$$ |
+| Sum of Squared Errors | $$SSE=\sum_{i=1}^{n}(y_i-\hat{y}_i)^2$$ |
+| Matrix prediction | $$\hat{y}=X\hat{\beta}$$ |
+| Normal Equation | $$\hat{\beta}=(X^TX)^{-1}X^Ty$$ |
+
+</details>
+
+---
+
+## 🎓 Learning Objectives
+
+By the end of these notes, you should be able to:
+
+- Explain the difference between Simple and Multiple Linear Regression.
+- Identify features, targets, coefficients, and residuals.
+- Understand Ordinary Least Squares and the Normal Equation.
+- Read basic matrix notation and use NumPy to calculate predictions.
+
+
+## 📌 Topic 1: What Is Regression?
 
 ### 1.1 Understanding Regression
 
@@ -30,7 +95,7 @@ Here, the model learns the relationship between study hours and marks from histo
 
 ---
 
-## Topic 2: Simple Linear Regression (SLR)
+## 📈 Topic 2: Simple Linear Regression (SLR)
 
 **Simple Linear Regression uses one independent variable to predict one dependent variable.**
 
@@ -52,30 +117,30 @@ We want to predict marks using study hours.
 
 ### Simple Linear Regression Equation
 
-\[
+$$
 \boxed{\hat{Y}=\beta_0+\beta_1X}
-\]
+$$
 
 This is equivalent to the familiar equation:
 
-\[
+$$
 Y=mX+b
-\]
+$$
 
 Where:
 
 | Symbol | Meaning |
 |---|---|
-| \(\hat{Y}\) | Predicted output |
-| \(X\) | Independent variable |
-| \(\beta_0\) | Intercept |
-| \(\beta_1\) | Regression coefficient or slope |
+| $\hat{Y}$ | Predicted output |
+| $X$ | Independent variable |
+| $\beta_0$ | Intercept |
+| $\beta_1$ | Regression coefficient or slope |
 
 **Remember:** Simple Linear Regression uses one independent variable.
 
 ---
 
-# Topic 3: Multiple Linear Regression (MLR)
+# 🧠 Topic 3: Multiple Linear Regression (MLR)
 
 This is the main topic in your first screenshot.
 
@@ -108,34 +173,34 @@ All these variables are inputs to the model, and salary is the output we want to
 
 The general equation is:
 
-\[
+$$
 \boxed{
 \hat{Y}=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_nX_n
 }
-\]
+$$
 
 Where:
 
-- \(\hat{Y}\) = Predicted output.
-- \(\beta_0\) = Intercept.
-- \(\beta_1\) = Coefficient of the first feature.
-- \(\beta_2\) = Coefficient of the second feature.
-- \(X_1\) = First independent variable.
-- \(X_2\) = Second independent variable.
-- \(n\) = Number of independent variables.
+- $\hat{Y}$ = Predicted output.
+- $\beta_0$ = Intercept.
+- $\beta_1$ = Coefficient of the first feature.
+- $\beta_2$ = Coefficient of the second feature.
+- $X_1$ = First independent variable.
+- $X_2$ = Second independent variable.
+- $n$ = Number of independent variables.
 
 ### 3.2 Practical Example
 
 Suppose a model predicts salary using two features:
 
-- \(X_1\) = Years of experience.
-- \(X_2\) = Skills score.
+- $X_1$ = Years of experience.
+- $X_2$ = Skills score.
 
 Assume the model has learned this equation:
 
-\[
+$$
 \hat{Y}=10000+5000X_1+200X_2
-\]
+$$
 
 An employee has:
 - Experience = 3 years.
@@ -143,21 +208,21 @@ An employee has:
 
 Substitute these values into the equation:
 
-\[
+$$
 \hat{Y}=10000+5000(3)+200(80)
-\]
+$$
 
 Calculate each term:
 
-\[
+$$
 =10000+15000+16000
-\]
+$$
 
 Therefore:
 
-\[
+$$
 \boxed{\hat{Y}=41000}
-\]
+$$
 
 The model predicts a salary of **₹41,000**.
 
@@ -165,7 +230,7 @@ These coefficients are hypothetical values used for learning. In a real project,
 
 ---
 
-# Topic 4: Independent and Dependent Variables
+# 🎯 Topic 4: Independent and Dependent Variables
 
 Your first screenshot mentions:
 
@@ -228,7 +293,7 @@ Notice that `X` contains three columns, while `y` contains the target values.
 
 ---
 
-# Topic 5: 2D, 3D, and Multiple Linear Regression
+# 📊 Topic 5: 2D, 3D, and Multiple Linear Regression
 
 Your second screenshot contains 2D and 3D diagrams.
 
@@ -303,13 +368,13 @@ However, the regression model can still use all five features to make prediction
 
 ---
 
-# Topic 6: Best-Fit Line and Regression Coefficients
+# 📐 Topic 6: Best-Fit Line and Regression Coefficients
 
 Your third screenshot contains:
 
 - Best-fit line.
-- \(m,b\).
-- \(y=mx+b\).
+- $m,b$.
+- $y=mx+b$.
 - Multiple regression coefficients.
 
 Let's understand them.
@@ -318,49 +383,49 @@ Let's understand them.
 
 The equation is:
 
-\[
+$$
 y=mx+b
-\]
+$$
 
 Where:
 
-- \(m\) = Slope.
-- \(b\) = Intercept.
+- $m$ = Slope.
+- $b$ = Intercept.
 
 In machine learning notation, we write:
 
-\[
+$$
 \hat{y}=\beta_0+\beta_1x
-\]
+$$
 
 Here:
 
-\[
+$$
 \beta_0=b
-\]
+$$
 
-\[
+$$
 \beta_1=m
-\]
+$$
 
 ### 6.2 Multiple Linear Regression
 
 When we have two independent variables:
 
-\[
+$$
 \boxed{\hat{y}=\beta_0+\beta_1x_1+\beta_2x_2}
-\]
+$$
 
 Where:
-- \(\beta_0\) = Intercept.
-- \(\beta_1\) = Coefficient of feature 1.
-- \(\beta_2\) = Coefficient of feature 2.
+- $\beta_0$ = Intercept.
+- $\beta_1$ = Coefficient of feature 1.
+- $\beta_2$ = Coefficient of feature 2.
 
 Consider this example:
 
-\[
+$$
 \text{Marks}=10+5(\text{Study Hours})+2(\text{Practice Tests})
-\]
+$$
 
 Interpretation:
 
@@ -371,7 +436,7 @@ This interpretation assumes that the model's linear relationship is appropriate 
 
 ---
 
-# Topic 7: The CGPA, IQ, and LPA Example
+# 💼 Topic 7: The CGPA, IQ, and LPA Example
 
 Your fourth screenshot contains three columns:
 
@@ -396,18 +461,18 @@ We want to predict LPA using CGPA and IQ.
 
 The equation is:
 
-\[
+$$
 \boxed{
 \widehat{\text{LPA}}=
 \beta_0+\beta_1(\text{CGPA})+\beta_2(\text{IQ})
 }
-\]
+$$
 
 The model needs to estimate three parameters:
 
-\[
+$$
 \boxed{\beta_0,\beta_1,\beta_2}
-\]
+$$
 
 These represent:
 1. Intercept.
@@ -420,7 +485,7 @@ That brings us to Ordinary Least Squares.
 
 ---
 
-# Topic 8: Ordinary Least Squares (OLS)
+# 🎯 Topic 8: Ordinary Least Squares (OLS)
 
 Your screenshot mentions OLS.
 
@@ -432,13 +497,13 @@ It is a method used to estimate regression coefficients by minimizing the sum of
 
 A residual is the difference between an actual value and the model's predicted value.
 
-\[
+$$
 \boxed{\text{Residual}=y-\hat{y}}
-\]
+$$
 
 Where:
-- \(y\) = Actual value.
-- \(\hat{y}\) = Predicted value.
+- $y$ = Actual value.
+- $\hat{y}$ = Predicted value.
 
 For example:
 
@@ -450,25 +515,25 @@ For example:
 
 The residuals are:
 
-\[
+$$
 50-48=2
-\]
+$$
 
-\[
+$$
 60-63=-3
-\]
+$$
 
-\[
+$$
 70-68=2
-\]
+$$
 
 ### 8.2 Sum of Squared Errors
 
 OLS minimizes the sum of squared residuals.
 
-\[
+$$
 \boxed{SSE=\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
-\]
+$$
 
 Squaring the residuals has two important effects:
 
@@ -481,14 +546,14 @@ The goal is to find the coefficients that produce the smallest possible SSE.
 
 ---
 
-# Topic 9: Matrix Representation of Multiple Linear Regression
+# 🧮 Topic 9: Matrix Representation of Multiple Linear Regression
 
 Your next screenshots introduce matrices, including:
 
-- \(X\)
-- \(X^T\)
-- \(y\)
-- \(\beta\)
+- $X$
+- $X^T$
+- $y$
+- $\beta$
 
 These are the mathematical foundations of Multiple Linear Regression.
 
@@ -508,7 +573,7 @@ These values are illustrative.
 
 To include the intercept, we add a column containing ones.
 
-\[
+$$
 \boxed{
 X=
 \begin{bmatrix}
@@ -517,7 +582,7 @@ X=
 1&3&6
 \end{bmatrix}
 }
-\]
+$$
 
 The columns represent:
 
@@ -533,7 +598,7 @@ There are three columns because we have two features plus the intercept.
 
 Our actual target values are:
 
-\[
+$$
 \boxed{
 y=
 \begin{bmatrix}
@@ -542,7 +607,7 @@ y=
 8
 \end{bmatrix}
 }
-\]
+$$
 
 This vector contains the values we want the model to predict.
 
@@ -550,7 +615,7 @@ This vector contains the values we want the model to predict.
 
 The coefficient vector is:
 
-\[
+$$
 \boxed{
 \beta=
 \begin{bmatrix}
@@ -559,7 +624,7 @@ The coefficient vector is:
 \beta_2
 \end{bmatrix}
 }
-\]
+$$
 
 It contains the parameters that the model must estimate.
 
@@ -569,45 +634,45 @@ Instead of writing the regression equation separately for each observation, we c
 
 The familiar equation is:
 
-\[
+$$
 \hat{y}=\beta_0+\beta_1x_1+\beta_2x_2
-\]
+$$
 
 In matrix form:
 
-\[
+$$
 \boxed{\hat{y}=X\beta}
-\]
+$$
 
 Where:
-- \(X\) = Input matrix.
-- \(\beta\) = Coefficient vector.
-- \(\hat{y}\) = Predicted output vector.
+- $X$ = Input matrix.
+- $\beta$ = Coefficient vector.
+- $\hat{y}$ = Predicted output vector.
 
 This representation makes it easier to perform regression calculations for many observations at once.
 
 ---
 
-# Topic 10: Transpose of a Matrix — \(X^T\)
+# 🔁 Topic 10: Transpose of a Matrix — $X^T$
 
-Your screenshots show the expression \(X^T\).
+Your screenshots show the expression $X^T$.
 
 The transpose of a matrix is obtained by converting its rows into columns and its columns into rows.
 
 Consider:
 
-\[
+$$
 X=
 \begin{bmatrix}
 1&1&3\\
 1&2&2\\
 1&3&6
 \end{bmatrix}
-\]
+$$
 
 Its transpose is:
 
-\[
+$$
 \boxed{
 X^T=
 \begin{bmatrix}
@@ -616,9 +681,9 @@ X^T=
 3&2&6
 \end{bmatrix}
 }
-\]
+$$
 
-Notice that the first row of \(X\), which is \([1,1,3]\), becomes the first column of \(X^T\).
+Notice that the first row of $X$, which is $[1,1,3]$, becomes the first column of $X^T$.
 
 ### Python Example
 
@@ -659,41 +724,41 @@ Transpose Matrix:
 
 ---
 
-# Topic 11: Matrix Inverse — \(A^{-1}\)
+# 🔄 Topic 11: Matrix Inverse — $A^{-1}$
 
 Your screenshot contains:
 
-\[
+$$
 (X^TX)^{-1}
-\]
+$$
 
-The exponent \(-1\) represents the matrix inverse, not a negative number.
+The exponent $-1$ represents the matrix inverse, not a negative number.
 
 ### 11.1 Understanding Matrix Inverse
 
 For ordinary numbers:
 
-\[
+$$
 5\times\frac{1}{5}=1
-\]
+$$
 
-Similarly, for an invertible square matrix \(A\):
+Similarly, for an invertible square matrix $A$:
 
-\[
+$$
 \boxed{AA^{-1}=I}
-\]
+$$
 
-Here, \(I\) is the identity matrix.
+Here, $I$ is the identity matrix.
 
 For example:
 
-\[
+$$
 I=
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
-\]
+$$
 
 Multiplying a matrix by its inverse produces the identity matrix.
 
@@ -729,7 +794,7 @@ Tiny floating-point differences may occur.
 
 ---
 
-# Topic 12: Determinant and Adjugate
+# 🧩 Topic 12: Determinant and Adjugate
 
 Your screenshots also introduce determinants and adjugate matrices.
 
@@ -737,47 +802,47 @@ These concepts help explain how matrix inverses can be calculated.
 
 ## 12.1 Determinant
 
-Consider a \(2\times2\) matrix:
+Consider a $2\times2$ matrix:
 
-\[
+$$
 A=
 \begin{bmatrix}
 a&b\\
 c&d
 \end{bmatrix}
-\]
+$$
 
 Its determinant is:
 
-\[
+$$
 \boxed{\det(A)=ad-bc}
-\]
+$$
 
 For example:
 
-\[
+$$
 A=
 \begin{bmatrix}
 2&1\\
 1&2
 \end{bmatrix}
-\]
+$$
 
 Calculate the determinant:
 
-\[
+$$
 \det(A)=(2\times2)-(1\times1)
-\]
+$$
 
-\[
+$$
 =4-1
-\]
+$$
 
 Therefore:
 
-\[
+$$
 \boxed{\det(A)=3}
-\]
+$$
 
 Because the determinant is nonzero, this matrix has an inverse.
 
@@ -785,15 +850,15 @@ Because the determinant is nonzero, this matrix has an inverse.
 
 For an invertible square matrix:
 
-\[
+$$
 \boxed{
 A^{-1}=\frac{\operatorname{adj}(A)}{\det(A)}
 }
-\]
+$$
 
 Where:
-- \(\operatorname{adj}(A)\) = Adjugate matrix.
-- \(\det(A)\) = Determinant.
+- $\operatorname{adj}(A)$ = Adjugate matrix.
+- $\det(A)$ = Determinant.
 
 This formula is one way to calculate a matrix inverse mathematically.
 
@@ -801,15 +866,15 @@ In practical machine learning, you generally do not need to calculate the determ
 
 ---
 
-# Topic 13: Normal Equation — The Most Important Formula
+# ⭐ Topic 13: Normal Equation — The Most Important Formula
 
 Now let's understand the main formula shown in your screenshots.
 
-\[
+$$
 \boxed{
 \hat{\beta}=(X^TX)^{-1}X^Ty
 }
-\]
+$$
 
 This is called the **Normal Equation**.
 
@@ -819,12 +884,12 @@ It provides a closed-form solution for estimating coefficients in ordinary least
 
 | Expression | Meaning |
 |---|---|
-| \(X\) | Input feature matrix |
-| \(X^T\) | Transpose of the input matrix |
-| \(X^TX\) | Matrix multiplication of \(X^T\) and \(X\) |
-| \((X^TX)^{-1}\) | Inverse of \(X^TX\) |
-| \(y\) | Actual target values |
-| \(\hat{\beta}\) | Estimated regression coefficients |
+| $X$ | Input feature matrix |
+| $X^T$ | Transpose of the input matrix |
+| $X^TX$ | Matrix multiplication of $X^T$ and $X$ |
+| $(X^TX)^{-1}$ | Inverse of $X^TX$ |
+| $y$ | Actual target values |
+| $\hat{\beta}$ | Estimated regression coefficients |
 
 ### 13.2 Why Do We Use This Formula?
 
@@ -851,7 +916,7 @@ Predicted Values (ŷ)
 
 ### Important Limitation
 
-The formula requires \(X^TX\) to be invertible.
+The formula requires $X^TX$ to be invertible.
 
 If the features have perfect multicollinearity, or the data does not contain enough independent information, the inverse may not exist.
 
@@ -861,7 +926,7 @@ For larger datasets, numerical solvers are generally preferable to explicitly ca
 
 ---
 
-# Topic 14: Implementing the Normal Equation Using NumPy
+# 🐍 Topic 14: Implementing the Normal Equation Using NumPy
 
 Let's implement the mathematical formula in Python.
 
@@ -951,7 +1016,7 @@ For example:
 XTX = X.T @ X
 ```
 
-This calculates \(X^TX\).
+This calculates $X^TX$.
 
 **`np.linalg.solve()`**
 
@@ -959,11 +1024,11 @@ Solves a system of linear equations.
 
 Here, it solves:
 
-\[
+$$
 (X^TX)\hat{\beta}=X^Ty
-\]
+$$
 
-This is mathematically equivalent to the Normal Equation when \(X^TX\) is invertible.
+This is mathematically equivalent to the Normal Equation when $X^TX$ is invertible.
 
 **`X @ beta`**
 
@@ -973,9 +1038,9 @@ Uses the estimated coefficients to calculate predictions.
 
 The important relationship is:
 
-\[
+$$
 \boxed{\hat{y}=X\hat{\beta}}
-\]
+$$
 
 First, we estimate the coefficients. Then, we use those coefficients to make predictions.
 
@@ -983,7 +1048,7 @@ This small example is useful for understanding the mathematics, but a model that
 
 ---
 
-# Final Revision: Multiple Linear Regression
+# 📝 Final Revision: Multiple Linear Regression
 
 | Concept | What You Should Remember |
 |---|---|
@@ -991,18 +1056,18 @@ This small example is useful for understanding the mathematics, but a model that
 | Multiple Linear Regression | Uses two or more independent variables |
 | Independent Variables | Input features |
 | Dependent Variable | Target to predict |
-| Regression Equation | \(\hat{y}=\beta_0+\beta_1x_1+\cdots+\beta_nx_n\) |
+| Regression Equation | $\hat{y}=\beta_0+\beta_1x_1+\cdots+\beta_nx_n$ |
 | Regression Coefficients | Values learned from training data |
 | Residual | Actual value minus predicted value |
 | OLS | Estimates coefficients by minimizing squared residuals |
-| Design Matrix | \(X\) |
-| Target Vector | \(y\) |
-| Coefficient Vector | \(\beta\) |
-| Transpose | \(X^T\) |
-| Matrix Inverse | \(A^{-1}\) |
+| Design Matrix | $X$ |
+| Target Vector | $y$ |
+| Coefficient Vector | $\beta$ |
+| Transpose | $X^T$ |
+| Matrix Inverse | $A^{-1}$ |
 | Determinant | Helps determine whether a square matrix is invertible |
-| Normal Equation | \(\hat{\beta}=(X^TX)^{-1}X^Ty\) |
-| Prediction Equation | \(\hat{y}=X\hat{\beta}\) |
+| Normal Equation | $\hat{\beta}=(X^TX)^{-1}X^Ty$ |
+| Prediction Equation | $\hat{y}=X\hat{\beta}$ |
 
 ## Recommended Learning Order
 
@@ -1015,6 +1080,33 @@ To build a strong understanding of Multiple Linear Regression, study these topic
 5. Matrix Operations.
 6. Normal Equation derivation.
 7. Multiple Linear Regression using Scikit-learn.
-8. Model evaluation using MAE, MSE, RMSE, and \(R^2\).
+8. Model evaluation using MAE, MSE, RMSE, and $R^2$.
+
+## 🗺️ Learning Roadmap
+
+Use this sequence to build your skills step by step:
+
+- [ ] 📘 Understand Simple Linear Regression.
+- [ ] 📈 Understand Multiple Linear Regression.
+- [ ] 🎯 Learn the cost function and Mean Squared Error.
+- [ ] 🧮 Practise matrix operations and matrix dimensions.
+- [ ] ⭐ Understand Ordinary Least Squares and the Normal Equation.
+- [ ] 🐍 Implement regression with NumPy.
+- [ ] 🤖 Train a model using scikit-learn.
+- [ ] 📊 Evaluate models using MAE, MSE, RMSE, and $R^2$.
+- [ ] 🧪 Practise with a real-world dataset.
+
+<details>
+<summary>💡 <strong>Quick self-check — click to expand</strong></summary>
+
+1. How many input features does Multiple Linear Regression use?
+2. What is the difference between the actual value and predicted value called?
+3. What does the intercept represent?
+4. What objective does Ordinary Least Squares minimize?
+5. What does the matrix equation $\hat{y}=X\hat{\beta}$ calculate?
+
+</details>
+
+---
 
 **Your main takeaway:** Multiple Linear Regression predicts a numerical output using multiple input features. OLS finds coefficients that minimize squared prediction errors, and the Normal Equation provides a mathematical method for calculating those coefficients.

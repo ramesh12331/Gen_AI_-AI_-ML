@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
+ <defs><pattern id="lines" width="1200" height="42" patternUnits="userSpaceOnUse"><line x1="0" y1="41" x2="1200" y2="41" stroke="#d4e2ef" stroke-width="1.5"/></pattern></defs>
+ <rect width="1200" height="1500" rx="25" fill="#fffdf6"/><rect width="1200" height="1500" rx="25" fill="url(#lines)"/>
+ <line x1="52" y1="0" x2="52" y2="1500" stroke="#e9a6aa" stroke-width="3"/>
+ <text x="88" y="95" font-family="Comic Sans MS,Segoe Print,cursive" font-size="48" font-weight="700" fill="#1e365a">Simple Linear Regression</text>
+ <path d="M90 116 Q450 130 1030 112" stroke="#315e9b" stroke-width="6" fill="none" stroke-linecap="round"/>
+ <text x="92" y="165" font-family="Comic Sans MS,Segoe Print,cursive" font-size="25" fill="#7b4a52">One input feature • One predicted numerical output</text>
+ <g font-family="Comic Sans MS,Segoe Print,cursive"><g><rect x="72" y="205" width="1056" height="210" rx="24" fill="#fff8df" stroke="#315e9b" stroke-opacity=".5" stroke-width="2"/>
+  <text x="112" y="260" font-size="34" font-weight="700" fill="#315e9b">1. Meaning of Simple Linear Regression</text><text x="122" y="311" font-size="27" fill="#27364b">Uses exactly ONE input feature (X) to predict ONE numerical target (Y).</text><text x="122" y="353" font-size="27" fill="#27364b">Example: study hours → exam marks.</text></g><g><rect x="72" y="439" width="1056" height="245" rx="24" fill="#eaf5ff" stroke="#315e9b" stroke-opacity=".5" stroke-width="2"/>
+  <text x="112" y="494" font-size="34" font-weight="700" fill="#315e9b">2. Equation</text><text x="122" y="545" font-size="27" fill="#27364b">ŷ = β₀ + β₁X   (also written ŷ = mX + c)</text><text x="122" y="587" font-size="27" fill="#27364b">β₀ / c = intercept • β₁ / m = slope.</text></g><g><rect x="72" y="708" width="1056" height="210" rx="24" fill="#eff9ed" stroke="#315e9b" stroke-opacity=".5" stroke-width="2"/>
+  <text x="112" y="763" font-size="34" font-weight="700" fill="#315e9b">3. Worked example</text><text x="122" y="814" font-size="27" fill="#27364b">Assume a learned model: ŷ = 10 + 12X.</text><text x="122" y="856" font-size="27" fill="#27364b">For X = 4 study hours: ŷ = 10 + 12 × 4 = 58 predicted marks.</text></g><g><rect x="72" y="942" width="1056" height="210" rx="24" fill="#fff0f2" stroke="#315e9b" stroke-opacity=".5" stroke-width="2"/>
+  <text x="112" y="997" font-size="34" font-weight="700" fill="#315e9b">4. Actual vs predicted</text><text x="122" y="1048" font-size="27" fill="#27364b">Residual = actual y − predicted ŷ.</text><text x="122" y="1090" font-size="27" fill="#27364b">The best-fit line minimizes the sum of squared residuals (OLS).</text></g></g>
+ <text x="90" y="1460" font-family="Comic Sans MS,Segoe Print,cursive" font-size="22" fill="#64748b">Beginner revision sheet • Read the chapter for full explanations and Python practice</text>
+ </svg>

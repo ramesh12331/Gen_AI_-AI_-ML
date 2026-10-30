@@ -2,6 +2,19 @@
 
 > **Goal:** Understand Simple Linear Regression from **zero level → mathematics → graph → error → Gradient Descent → Python → evaluation → interview questions**.
 
+
+## ✍️ Handwritten Beginner Notes
+
+Use this visual summary to understand the main idea before moving into the detailed examples and code.
+
+<div align="center">
+
+![Handwritten beginner diagram for Simple Linear Regression](handwritten/simple-linear-regression.svg)
+
+[🖼️ Open the full-size handwritten notes](handwritten/simple-linear-regression.svg)
+
+</div>
+
 ---
 
 # 🧠 1. What is Regression?
@@ -102,7 +115,7 @@ The model tries to find the **best-fit straight line**.
 The basic equation is:
 
 $$
-\hat{y} = mx + c
+\hat{y}=mx+b
 $$
 
 Where:
@@ -113,7 +126,7 @@ Where:
 | $y$ | Actual value |
 | $\hat{y}$ | Predicted value |
 | $m$ | Slope |
-| $c$ | Intercept |
+| $b$ | Intercept |
 
 ---
 
@@ -129,7 +142,7 @@ Here:
 
 ```text
 m = 2
-c = 3
+b = 3
 ```
 
 If:
@@ -195,7 +208,7 @@ So:
 The **slope ($m$)** tells us how much the predicted output changes when the input increases by 1 unit.
 
 $$
-\hat{y} = mx+c
+\hat{y}=mx+b
 $$
 
 Suppose:
@@ -234,17 +247,17 @@ the predicted salary value increases by 2 units in whatever units `y` uses.
 
 # 📍 7. What is Intercept?
 
-The **intercept ($c$)** is the predicted value of `y` when `x = 0`.
+The **intercept ($b$)** is the predicted value of `y` when `x = 0`.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 If:
 
 ```text
 m = 2
-c = 3
+b = 3
 ```
 
 Then when:
@@ -548,21 +561,21 @@ The cost/loss function gives us a numerical measure of error.
 For linear regression, a common objective is based on squared error.
 
 $$
-J(m,c)=
+J(m,b)=
 \frac{1}{n}
 \sum_{i=1}^{n}
-\left(y_i-(mx_i+c)\right)^2
+\left(y_i-(mx_i+b)\right)^2
 $$
 
 The goal is:
 
 $$
-\boxed{\text{Minimize }J(m,c)}
+\text{Minimize } J(m,b)
 $$
 
 In simple words:
 
-> Find values of `m` and `c` that make the prediction error as small as possible.
+> Find values of `m` and `b` that make the prediction error as small as possible.
 
 ---
 
@@ -596,7 +609,7 @@ For Linear Regression, the parameters are:
 
 ```text
 m → slope
-c → intercept
+b → intercept
 ```
 
 The basic idea:
@@ -622,10 +635,10 @@ Reach minimum
 For Simple Linear Regression:
 
 $$
-J(m,c)=
+J(m,b)=
 \frac{1}{n}
 \sum_{i=1}^{n}
-\left[y_i-(mx_i+c)\right]^2
+\left[y_i-(mx_i+b)\right]^2
 $$
 
 We calculate how the cost changes with respect to:
@@ -637,7 +650,7 @@ m
 and:
 
 ```text
-c
+b
 ```
 
 These are called **partial derivatives**.
@@ -655,7 +668,7 @@ $$
 \sum_{i=1}^{n}
 x_i
 \left[
-y_i-(mx_i+c)
+y_i-(mx_i+b)
 \right]
 $$
 
@@ -667,29 +680,42 @@ This tells us:
 
 ---
 
-# 🧮 22. Partial Derivative with Respect to c
+## 🧮 22. Partial Derivative with Respect to b
 
-The derivative is:
+The partial derivative tells us how the cost function changes when the intercept $b$ changes, while keeping the slope $m$ fixed.
 
-$$
-\frac{\partial J}{\partial c}
+### Formula
+
+### Formula
+
+$
+\frac{\partial J}{\partial b}
 =
--\frac{2}{n}
-\sum_{i=1}^{n}
-\left[
-y_i-(mx_i+c)
-\right]
-$$
+-\frac{2}{n}\sum_{i=1}^{n}
+\left[y_i-(mx_i+b)\right]
+$
+
+### Explanation
+
+- $\frac{\partial J}{\partial b}$ — How the cost changes when $b$ changes.
+- $J$ — Cost function, which measures prediction error.
+- $n$ — Total number of data points.
+- $y_i$ — Actual value for data point $i$.
+- $mx_i+b$ — Predicted value for data point $i$.
+- $\sum$ — Add the values across all data points.
+
+**In simple words:** This formula helps determine how to adjust the intercept $b$ to reduce prediction errors during Gradient Descent.
+
 
 ### Meaning
 
 This tells us:
 
-> How much the cost function changes when we change the intercept `c`.
+> How much the cost function changes when we change the intercept `b`.
 
 ---
 
-# 🔄 23. Updating m and c
+# 🔄 23. Updating m and b
 
 Once we calculate the gradients, we update the parameters.
 
@@ -704,9 +730,9 @@ $$
 ### Update intercept
 
 $$
-c :=
-c-\alpha
-\frac{\partial J}{\partial c}
+b :=
+b-\alpha
+\frac{\partial J}{\partial b}
 $$
 
 Where:
@@ -774,7 +800,7 @@ Then it takes a small step in that direction.
 # 🔁 26. Gradient Descent Algorithm
 
 ```text
-1. Initialize m and c
+1. Initialize m and b
         ↓
 2. Calculate predictions
         ↓
@@ -784,7 +810,7 @@ Then it takes a small step in that direction.
         ↓
 5. Update m
         ↓
-6. Update c
+6. Update b
         ↓
 7. Repeat
         ↓
@@ -849,7 +875,7 @@ So the ideal parameters are approximately:
 
 ```text
 m = 2
-c = 0
+b = 0
 ```
 
 Therefore:
@@ -1072,7 +1098,7 @@ For SLR:
 
 ```text
 m = slope
-c = intercept
+b = intercept
 ```
 
 ### Learning Rate
@@ -1411,7 +1437,7 @@ Therefore:
 Uses **one feature**.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 Example:
@@ -1422,17 +1448,25 @@ Experience → Salary
 
 ### Multiple Linear Regression
 
-Uses **multiple features**.
+Uses **multiple features** to predict one numerical target.
 
-$$
-\hat{y}
-=
-\beta_0+
-\beta_1x_1+
-\beta_2x_2+
-\cdots+
-\beta_px_p
-$$
+**Formula**
+
+$
+\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_px_p
+$
+
+**Meaning of each symbol**
+
+| Symbol | Meaning |
+|---|---|
+| $\hat{y}$ | Predicted output |
+| $\beta_0$ | Intercept |
+| $\beta_1, \beta_2, \ldots, \beta_p$ | Coefficients (weights) learned for each feature |
+| $x_1, x_2, \ldots, x_p$ | Input features |
+| $p$ | Total number of input features |
+
+**Example:** A house price model may use area, number of bedrooms, and age of the property as multiple input features.
 
 Example:
 
@@ -1502,7 +1536,7 @@ $$
 The output is between:
 
 $$
-0 \leq \sigma(z) \leq 1
+0 \le \sigma(z) \le 1
 $$
 
 ---
@@ -1518,7 +1552,7 @@ Regression
        ↓
 Simple Linear Regression
        ↓
-y = mx + c
+y = mx + b
        ↓
 Prediction
        ↓
@@ -1532,7 +1566,7 @@ Gradient Descent
        ↓
 Partial Derivatives
        ↓
-Update m and c
+Update m and b
        ↓
 Minimize Cost
        ↓
@@ -1555,7 +1589,7 @@ Before moving to Multiple Linear Regression, make sure you understand:
 - [ ] What is `y`?
 - [ ] What is predicted $\hat{y}$?
 - [ ] What is slope `m`?
-- [ ] What is intercept `c`?
+- [ ] What is intercept `b`?
 - [ ] What is a residual?
 - [ ] What is MAE?
 - [ ] What is MSE?
@@ -1586,7 +1620,7 @@ Linear Regression is a supervised learning algorithm used to predict a continuou
 Simple Linear Regression uses **one independent variable** to predict a continuous dependent variable.
 
 $$
-\hat{y}=mx+c
+\hat{y}=mx+b
 $$
 
 ---
@@ -1714,7 +1748,7 @@ Remember these five things first:
 
 2️⃣ Linear Equation
    ↓
-   ŷ = mx + c
+   ŷ = mx + b
 
 3️⃣ Error
    ↓
@@ -1729,56 +1763,241 @@ Remember these five things first:
    Minimize the cost
 ```
 
-### ⭐ Most important formulas
+### ⭐ Core Formulas — Beginner-Friendly Revision
+
+Use this section to revise the most important formulas. Read the meaning of each symbol before trying to memorize the equation.
+
+#### 1. 📈 Simple Linear Regression Equation
+
+This equation is used to **predict a numerical value from one input feature**.
 
 $$
-\boxed{\hat{y}=mx+c}
+\hat{y}=mx+b
+$$
+
+**Meaning of each symbol**
+
+| Symbol | Meaning |
+|---|---|
+| $x$ | Input value (feature), such as years of experience |
+| $\hat{y}$ | Predicted output, such as predicted salary |
+| $m$ | Slope: how much the prediction changes when $x$ increases by 1 |
+| $b$ | Intercept: the predicted output when $x=0$ |
+
+**Example**
+
+Suppose the model is:
+
+$$
+\hat{y}=2x+3
+$$
+
+For an input of $x=4$:
+
+$$
+\hat{y}=2(4)+3=11
+$$
+
+So the model predicts **11**.
+
+#### 2. ❌ Residual / Prediction Error
+
+A residual tells us the difference between the actual value and the value predicted by the model.
+
+$$
+e=y-\hat{y}
+$$
+
+- $y$ = Actual value
+- $\hat{y}$ = Predicted value
+- $e$ = Residual (error)
+
+**Example**
+
+Actual value is 15 and predicted value is 12:
+
+$$
+e=15-12=3
+$$
+
+The model underpredicted by 3 units. A negative residual means the prediction was greater than the actual value.
+
+#### 3. 📏 Mean Absolute Error (MAE)
+
+MAE measures the **average size of the prediction errors**, ignoring whether an error is positive or negative.
+
+$$
+MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+$$
+
+| Symbol | Meaning |
+|---|---|
+| $n$ | Total number of observations |
+| $y_i$ | Actual value for observation $i$ |
+| $\hat{y}_i$ | Predicted value for observation $i$ |
+| $|\ |$ | Absolute value: make the error non-negative |
+| $\sum$ | Add the values |
+
+**Example**
+
+Actual values: $[10,20,30]$
+
+Predictions: $[12,18,33]$
+
+Absolute errors are $[2,2,3]$:
+
+$$
+MAE=\frac{2+2+3}{3}=\frac{7}{3}\approx2.33
+$$
+
+On average, predictions are about **2.33 units away** from the actual values.
+
+#### 4. 📐 Mean Squared Error (MSE)
+
+MSE measures the **average of the squared prediction errors**. Squaring makes large errors count more heavily.
+
+$$
+MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
+$$
+
+**Example**
+
+Using the same errors $[-2,2,-3]$, the squared errors are $[4,4,9]$:
+
+$$
+MSE=\frac{4+4+9}{3}=\frac{17}{3}\approx5.67
+$$
+
+A lower MSE is generally better when comparing models on the same target scale and dataset.
+
+#### 5. 🎯 Linear Regression Cost Function
+
+The cost function gives one score for the model's overall squared prediction error. During training, we try to find the slope $m$ and intercept $b$ that make this score small.
+
+$$
+J(m,b)=\frac{1}{n}\sum_{i=1}^{n}\left[y_i-(mx_i+b)\right]^2
+$$
+
+- $J(m,b)$ = Cost for the current choices of $m$ and $b$
+- $x_i$ = Input for observation $i$
+- $y_i$ = Actual output for observation $i$
+- $mx_i+b$ = Model's prediction for observation $i$
+- $n$ = Number of observations
+
+**Remember:** The expression inside the square brackets is the residual. We square each residual and average them.
+
+#### 6. 🧭 Partial Derivative with Respect to Slope ($m$)
+
+This formula measures how the cost changes when we change the slope $m$, while keeping the intercept $b$ fixed.
+
+$$
+\frac{\partial J}{\partial m}
+=-\frac{2}{n}\sum_{i=1}^{n}x_i\left[y_i-(mx_i+b)\right]
+$$
+
+- A partial derivative is the **sensitivity of the cost** to one parameter.
+- The factor $x_i$ appears because changing the slope has a larger effect for larger input values.
+
+#### 7. 🧭 Partial Derivative with Respect to Intercept ($b$)
+
+This formula measures how the cost changes when we change the intercept $b$, while keeping the slope $m$ fixed.
+
+$$
+\frac{\partial J}{\partial b}
+=-\frac{2}{n}\sum_{i=1}^{n}\left[y_i-(mx_i+b)\right]
+$$
+
+The derivative helps us determine how the intercept should be adjusted to reduce the cost.
+
+#### 8. ⛰️ Gradient Descent — Slope Update
+
+This rule updates the slope using its partial derivative.
+
+$$
+m_{new}=m_{old}-\alpha\frac{\partial J}{\partial m}
+$$
+
+#### 9. ⛰️ Gradient Descent — Intercept Update
+
+This rule updates the intercept using its partial derivative.
+
+$$
+b_{new}=b_{old}-\alpha\frac{\partial J}{\partial b}
+$$
+
+**What is $\alpha$ (learning rate)?**
+
+It controls the size of each update:
+- Very small learning rate: learning can be slow.
+- Very large learning rate: updates may jump past the minimum.
+- A suitable learning rate helps the cost decrease steadily.
+
+#### 10. 📉 Root Mean Squared Error (RMSE)
+
+RMSE is the square root of MSE. It expresses the typical error scale in the **same units as the target**.
+
+$$
+RMSE=\sqrt{MSE}
+$$
+
+#### 11. 📊 R-Squared ($R^2$)
+
+R-squared compares the model's squared prediction errors with the variation in the actual target values around their mean.
+
+$$
+R^2=1-\frac{SS_{res}}{SS_{tot}}
+$$
+
+Where:
+
+$$
+SS_{res}=\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
 $$
 
 $$
-\boxed{e=y-\hat{y}}
+SS_{tot}=\sum_{i=1}^{n}(y_i-\bar{y})^2
 $$
 
-$$
-\boxed{
-MAE=
-\frac{1}{n}
-\sum_{i=1}^{n}
-|y_i-\hat{y}_i|
-}
-$$
+- $SS_{res}$ = Sum of squared residuals (unexplained error)
+- $SS_{tot}$ = Total sum of squares (variation around the actual-value mean)
+- $\bar{y}$ = Mean of the actual target values
+
+For the usual test-set interpretation, $R^2=1$ is a perfect prediction, $R^2=0$ is no better than predicting the mean, and $R^2$ can be negative when the model performs worse than that baseline.
+
+#### 12. 🧮 Adjusted R-Squared
+
+Adjusted R-squared modifies $R^2$ to account for how many input features are used. It is mainly used when comparing regression models with different numbers of predictors.
 
 $$
-\boxed{
-MSE=
-\frac{1}{n}
-\sum_{i=1}^{n}
-(y_i-\hat{y}_i)^2
-}
+R^2_{adj}=1-\frac{(1-R^2)(n-1)}{n-k-1}
 $$
 
-$$
-\boxed{
-J(m,c)=
-\frac{1}{n}
-\sum_{i=1}^{n}
-[y_i-(mx_i+c)]^2
-}
-$$
+- $n$ = Number of observations
+- $k$ = Number of independent variables (features)
+- $R^2$ = R-squared score
+
+Adding a feature does not always improve adjusted $R^2$; an unnecessary feature can make it decrease.
+
+#### 13. 🔗 Multiple Linear Regression Equation — Preview
+
+This is the extension of simple linear regression when we use more than one input feature.
 
 $$
-\boxed{
-m :=
-m-\alpha\frac{\partial J}{\partial m}
-}
+\hat{y}=b_0+b_1x_1+b_2x_2+\cdots+b_kx_k
 $$
 
+Simple Linear Regression uses one feature; Multiple Linear Regression uses two or more features.
+
+#### 14. 🟢 Sigmoid Function — Classification Preview
+
+The sigmoid function maps a number to a value between 0 and 1. It is commonly used in Logistic Regression for classification, **not** as the prediction equation for ordinary Simple Linear Regression.
+
 $$
-\boxed{
-c :=
-c-\alpha\frac{\partial J}{\partial c}
-}
+\sigma(z)=\frac{1}{1+e^{-z}}
 $$
+
+**Quick reminder:** Linear Regression predicts a numerical value. Logistic Regression uses the sigmoid function to produce a probability-like score for classification.
+
 
 ---
 

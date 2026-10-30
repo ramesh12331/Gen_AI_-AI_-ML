@@ -1017,4 +1017,4 @@ To build a strong understanding of Multiple Linear Regression, study these topic
 7. Multiple Linear Regression using Scikit-learn.
 8. Model evaluation using MAE, MSE, RMSE, and \(R^2\).
 
-**Your main takeaway:** Multiple Linear Regression predicts a numerical output using multiple input features. OLS finds coefficients that minimize squared prediction errors, and the Normal Equation provides a mathematical method for calculating those coefficients.
+**Your main takeaway:** Multiple Linear Regression predicts a numerical output using multiple input features. OLS finds coefficients that minimize squared prediction errors, and the Normal Equation provides a mathematical method for calculating those coefficients. 
